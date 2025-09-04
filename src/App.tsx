@@ -1,6 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
-type LinkSet = { repo?: string; demo?: string; writeup?: string; slides?: string };
+type LinkSet = {
+  repo?: string;
+  demo?: string;
+  writeup?: string;
+  slides?: string;
+  report?: string; // added report here
+};
+
 type Project = {
   id: string;
   title: string;
@@ -89,7 +96,7 @@ const projects: Project[] = [
       "Backtesting engine for micro-futures + FX with risk controls (max drawdown, 40% day rule sim), report exports.",
     impact: ["Event-driven engine, slippage model", "Walk-forward optimization", "Sharpe / Sortino reports"],
     tags: ["Trading", "Python", "Backtesting"],
-    links: { repo: "#", report: "#" as any }, // keep shape consistent
+    links: { repo: "#", report: "#" }, // report included properly
     thumbnail:
       "https://images.unsplash.com/photo-1640340434868-52949e8cbf3a?q=80&w=1200&auto=format&fit=crop",
   },
@@ -214,6 +221,7 @@ export default function App() {
                     {p.links?.demo && <a href={p.links.demo} target="_blank">Demo</a>}
                     {p.links?.writeup && <a href={p.links.writeup} target="_blank">Write-up</a>}
                     {p.links?.slides && <a href={p.links.slides} target="_blank">Slides</a>}
+                    {p.links?.report && <a href={p.links.report} target="_blank">Report</a>}
                     <button className="btn small" onClick={() => setOpen(p)}>Details</button>
                   </div>
                 </div>
@@ -313,6 +321,7 @@ export default function App() {
                 {open.links?.demo && <a href={open.links.demo} target="_blank">Demo</a>}
                 {open.links?.writeup && <a href={open.links.writeup} target="_blank">Write-up</a>}
                 {open.links?.slides && <a href={open.links.slides} target="_blank">Slides</a>}
+                {open.links?.report && <a href={open.links.report} target="_blank">Report</a>}
               </div>
             </div>
           </div>
