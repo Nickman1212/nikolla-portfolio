@@ -89,7 +89,7 @@ const projects: Project[] = [
       "Backtesting engine for micro-futures + FX with risk controls (max drawdown, 40% day rule sim), report exports.",
     impact: ["Event-driven engine, slippage model", "Walk-forward optimization", "Sharpe / Sortino reports"],
     tags: ["Trading", "Python", "Backtesting"],
-    links: { repo: "#", report: "#" as any },
+    links: { repo: "#" },
     thumbnail:
       "https://images.unsplash.com/photo-1640340434868-52949e8cbf3a?q=80&w=1200&auto=format&fit=crop",
   },
