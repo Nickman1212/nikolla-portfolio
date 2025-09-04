@@ -5,7 +5,6 @@ type LinkSet = {
   demo?: string;
   writeup?: string;
   slides?: string;
-  report?: string; // added report here
 };
 
 type Project = {
@@ -21,7 +20,7 @@ type Project = {
 
 const profile = {
   name: "Nikolla Nickolov",
-  tagline: "Cybersecurity • Systems • Applied Data • Trading Systems",
+  tagline: "Cybersecurity • Systems • Applied Data",
   location: "Tampa Bay, FL",
   email: "nikolla@example.com",
   linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
@@ -76,30 +75,6 @@ const projects: Project[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
   },
-  {
-    id: "log4j-lab",
-    title: "Log4Shell Exploit Lab (Education)",
-    year: 2024,
-    blurb:
-      "Educational lab simulating CVE-2021-44228 with safe containers to demonstrate exploit path + mitigations.",
-    impact: ["Reverse shell demo (sanitized)", "WAF rules + versioned patching", "Attack path diagram"],
-    tags: ["AppSec", "Education", "Containers"],
-    links: { repo: "#", slides: "#" },
-    thumbnail:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "algo-trading",
-    title: "Intraday Strategy Backtester (Futures / FX)",
-    year: 2025,
-    blurb:
-      "Backtesting engine for micro-futures + FX with risk controls (max drawdown, 40% day rule sim), report exports.",
-    impact: ["Event-driven engine, slippage model", "Walk-forward optimization", "Sharpe / Sortino reports"],
-    tags: ["Trading", "Python", "Backtesting"],
-    links: { repo: "#", report: "#" }, // report included properly
-    thumbnail:
-      "https://images.unsplash.com/photo-1640340434868-52949e8cbf3a?q=80&w=1200&auto=format&fit=crop",
-  },
 ];
 
 const categories = [
@@ -107,7 +82,6 @@ const categories = [
   { key: "Cybersecurity", label: "Cybersecurity" },
   { key: "Python", label: "Python" },
   { key: "Machine Learning", label: "Machine Learning" },
-  { key: "Trading", label: "Trading" },
 ] as const;
 
 export default function App() {
@@ -165,7 +139,7 @@ export default function App() {
         <h1>Building secure systems and pragmatic automation — then telling the story clearly.</h1>
         <p className="lead">
           I combine hands-on cybersecurity labs, incident-style documentation, and applied Python to ship small tools
-          that make teams faster and safer. I also prototype trading systems with strict risk controls.
+          that make teams faster and safer.
         </p>
         <div className="cta">
           <a className="btn primary" href="#projects">View Projects</a>
@@ -221,7 +195,6 @@ export default function App() {
                     {p.links?.demo && <a href={p.links.demo} target="_blank">Demo</a>}
                     {p.links?.writeup && <a href={p.links.writeup} target="_blank">Write-up</a>}
                     {p.links?.slides && <a href={p.links.slides} target="_blank">Slides</a>}
-                    {p.links?.report && <a href={p.links.report} target="_blank">Report</a>}
                     <button className="btn small" onClick={() => setOpen(p)}>Details</button>
                   </div>
                 </div>
@@ -272,10 +245,6 @@ export default function App() {
             <h4>Software & Data</h4>
             <p className="muted">Python, Flask, SQL (T-SQL, SQLite), Pandas, scripting/automation, Docker, Linux.</p>
           </div>
-          <div className="panel">
-            <h4>Finance & Ops</h4>
-            <p className="muted">Backtesting, risk rules (max drawdown, day caps), reporting, documentation, stakeholder updates.</p>
-          </div>
         </div>
       </section>
 
@@ -321,7 +290,6 @@ export default function App() {
                 {open.links?.demo && <a href={open.links.demo} target="_blank">Demo</a>}
                 {open.links?.writeup && <a href={open.links.writeup} target="_blank">Write-up</a>}
                 {open.links?.slides && <a href={open.links.slides} target="_blank">Slides</a>}
-                {open.links?.report && <a href={open.links.report} target="_blank">Report</a>}
               </div>
             </div>
           </div>
