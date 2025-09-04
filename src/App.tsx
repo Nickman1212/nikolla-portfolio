@@ -24,7 +24,7 @@ const profile = {
   email: "Nickman477@gmail.com",
   phone: "727-307-8538",
   linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
-  resumeUrl: "/NIKOLLA_NICKOLOV.pdf", // your uploaded resume
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf", // must be inside /public
   headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
 };
@@ -42,10 +42,7 @@ const projects: Project[] = [
       "Playbooks for triage + incident notes",
     ],
     tags: ["Cybersecurity", "Detection", "Networking", "Linux"],
-    links: {
-      code: "/NIKOLLA_NICKOLOV.pdf#page=2", // jumps to resume skills/projects
-      writeup: "/NIKOLLA_NICKOLOV.pdf#page=2",
-    },
+    links: { code: "/NIKOLLA_NICKOLOV.pdf", writeup: "/NIKOLLA_NICKOLOV.pdf" },
     thumbnail:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
   },
@@ -61,10 +58,7 @@ const projects: Project[] = [
       "Export to CSV + JSON for SIEM enrichment",
     ],
     tags: ["Python", "Automation", "Threat Intel"],
-    links: {
-      code: "/NIKOLLA_NICKOLOV.pdf#page=2",
-      demo: "/NIKOLLA_NICKOLOV.pdf#page=2",
-    },
+    links: { code: "/NIKOLLA_NICKOLOV.pdf", demo: "/NIKOLLA_NICKOLOV.pdf" },
     thumbnail:
       "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
   },
@@ -76,10 +70,7 @@ const projects: Project[] = [
       "TF-IDF + logistic regression to classify emails; exposes REST endpoint + small web UI.",
     impact: ["ROC-AUC 0.96 on validation", "Feature explainability", "Dockerized for quick deploy"],
     tags: ["Machine Learning", "Python", "Flask"],
-    links: {
-      code: "/NIKOLLA_NICKOLOV.pdf#page=2",
-      demo: "/NIKOLLA_NICKOLOV.pdf#page=2",
-    },
+    links: { code: "/NIKOLLA_NICKOLOV.pdf", demo: "/NIKOLLA_NICKOLOV.pdf" },
     thumbnail:
       "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
   },
@@ -130,8 +121,8 @@ export default function App() {
           <a href="#projects">Projects</a>
           <a href="#experience">Experience</a>
           <a href="#skills">Skills</a>
+          <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
-          <a className="btn" href={profile.resumeUrl}>Resume</a>
         </nav>
         <button className="btn ghost" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
@@ -151,8 +142,8 @@ export default function App() {
         </p>
         <div className="cta">
           <a className="btn primary" href="#projects">View Projects</a>
+          <a className="btn" href="#resume">Resume</a>
           <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
-          <a className="btn" href={profile.resumeUrl} target="_blank">Resume</a>
         </div>
       </section>
 
@@ -211,17 +202,26 @@ export default function App() {
         )}
       </section>
 
+      {/* Resume Embedded */}
+      <section id="resume" className="section">
+        <h2>Resume</h2>
+        <embed
+          src={profile.resumeUrl}
+          type="application/pdf"
+          width="100%"
+          height="800px"
+        />
+      </section>
+
       {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
-          <p className="muted">The fastest way to reach me is via email, phone, or LinkedIn.</p>
-          <div className="cta">
-            <a className="btn" href={`mailto:${profile.email}`}>Email</a>
-            <a className="btn" href={`tel:${profile.phone}`}>Call</a>
-            <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
-            <a className="btn" href={profile.resumeUrl} target="_blank">Download Resume</a>
-          </div>
+          <p className="muted">
+            Email: {profile.email} <br />
+            Phone: {profile.phone} <br />
+            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
+          </p>
         </div>
       </section>
 
