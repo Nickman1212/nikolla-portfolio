@@ -202,14 +202,12 @@ export default function App() {
         )}
       </section>
 
-      {/* Resume Embedded */}
+      {/* Resume Embedded Clean */}
       <section id="resume" className="section">
         <h2>Resume</h2>
-        <embed
+        <iframe
           src={profile.resumeUrl}
-          type="application/pdf"
-          width="100%"
-          height="800px"
+          style={{ width: "100%", height: "1000px", border: "none" }}
         />
       </section>
 
