@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 
 type LinkSet = {
-  repo?: string;
+  code?: string;
   demo?: string;
   writeup?: string;
-  slides?: string;
 };
 
 type Project = {
@@ -22,10 +21,10 @@ const profile = {
   name: "Nikolla Nickolov",
   tagline: "Cybersecurity • Systems • Applied Data",
   location: "Tampa Bay, FL",
-  email: "nikolla@example.com",
+  email: "Nickman477@gmail.com",
+  phone: "727-307-8538",
   linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
-  github: "https://github.com/your-github",
-  resumeUrl: "/Nikolla_Nickolov_Resume.pdf",
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf", // your uploaded resume
   headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
 };
@@ -43,7 +42,10 @@ const projects: Project[] = [
       "Playbooks for triage + incident notes",
     ],
     tags: ["Cybersecurity", "Detection", "Networking", "Linux"],
-    links: { repo: "#" },
+    links: {
+      code: "/NIKOLLA_NICKOLOV.pdf#page=2", // jumps to resume skills/projects
+      writeup: "/NIKOLLA_NICKOLOV.pdf#page=2",
+    },
     thumbnail:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
   },
@@ -59,7 +61,10 @@ const projects: Project[] = [
       "Export to CSV + JSON for SIEM enrichment",
     ],
     tags: ["Python", "Automation", "Threat Intel"],
-    links: { repo: "#", writeup: "#" },
+    links: {
+      code: "/NIKOLLA_NICKOLOV.pdf#page=2",
+      demo: "/NIKOLLA_NICKOLOV.pdf#page=2",
+    },
     thumbnail:
       "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
   },
@@ -71,7 +76,10 @@ const projects: Project[] = [
       "TF-IDF + logistic regression to classify emails; exposes REST endpoint + small web UI.",
     impact: ["ROC-AUC 0.96 on validation", "Feature explainability", "Dockerized for quick deploy"],
     tags: ["Machine Learning", "Python", "Flask"],
-    links: { repo: "#", demo: "#" },
+    links: {
+      code: "/NIKOLLA_NICKOLOV.pdf#page=2",
+      demo: "/NIKOLLA_NICKOLOV.pdf#page=2",
+    },
     thumbnail:
       "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
   },
@@ -144,7 +152,7 @@ export default function App() {
         <div className="cta">
           <a className="btn primary" href="#projects">View Projects</a>
           <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
-          <a className="btn" href={profile.github} target="_blank">GitHub</a>
+          <a className="btn" href={profile.resumeUrl} target="_blank">Resume</a>
         </div>
       </section>
 
@@ -191,10 +199,9 @@ export default function App() {
                     ))}
                   </div>
                   <div className="links">
-                    {p.links?.repo && <a href={p.links.repo} target="_blank">Code</a>}
+                    {p.links?.code && <a href={p.links.code} target="_blank">Code</a>}
                     {p.links?.demo && <a href={p.links.demo} target="_blank">Demo</a>}
                     {p.links?.writeup && <a href={p.links.writeup} target="_blank">Write-up</a>}
-                    {p.links?.slides && <a href={p.links.slides} target="_blank">Slides</a>}
                     <button className="btn small" onClick={() => setOpen(p)}>Details</button>
                   </div>
                 </div>
@@ -204,63 +211,16 @@ export default function App() {
         )}
       </section>
 
-      {/* Experience */}
-      <section id="experience" className="section">
-        <h2>Experience</h2>
-        <div className="cols">
-          <div className="panel">
-            <div className="panel-head">
-              <h3>Valet Driver — Various Locations</h3>
-              <span className="year">Customer Service • 2022–2024</span>
-            </div>
-            <ul>
-              <li>Handled high-volume client interactions with secure payment handling and PII awareness.</li>
-              <li>Built quick issue-resolution habits (radio comms, incident notes, escalation paths).</li>
-              <li>Introduced simple SOPs for credit card process checks and device hardening basics.</li>
-            </ul>
-          </div>
-          <div className="panel">
-            <div className="panel-head">
-              <h3>Lifeguard — Aquatics Facilities</h3>
-              <span className="year">Safety • 2020–2022</span>
-            </div>
-            <ul>
-              <li>Maintained vigilant situational awareness; logged incidents with clear, time-boxed reporting.</li>
-              <li>Led shift drills; enforced safety policy with calm, clear communication.</li>
-              <li>Demonstrated reliability and rapid decision-making under pressure.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section id="skills" className="section">
-        <h2>Skills</h2>
-        <div className="cols">
-          <div className="panel">
-            <h4>Security & Networking</h4>
-            <p className="muted">Suricata, Wireshark, Nmap, Snort, Burp (basics), OPNsense, Graylog, SIEM pipelines, TLS/PKI, VPNs.</p>
-          </div>
-          <div className="panel">
-            <h4>Software & Data</h4>
-            <p className="muted">Python, Flask, SQL (T-SQL, SQLite), Pandas, scripting/automation, Docker, Linux.</p>
-          </div>
-        </div>
-      </section>
-
       {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
-          <p className="muted">
-            The fastest way to reach me is via email or LinkedIn. I’m happy to share code, walkthroughs, or a quick demo
-            recording for any project.
-          </p>
+          <p className="muted">The fastest way to reach me is via email, phone, or LinkedIn.</p>
           <div className="cta">
             <a className="btn" href={`mailto:${profile.email}`}>Email</a>
+            <a className="btn" href={`tel:${profile.phone}`}>Call</a>
             <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
-            <a className="btn" href={profile.github} target="_blank">GitHub</a>
-            <a className="btn" href={profile.resumeUrl}>Download Resume (PDF)</a>
+            <a className="btn" href={profile.resumeUrl} target="_blank">Download Resume</a>
           </div>
         </div>
       </section>
@@ -286,10 +246,9 @@ export default function App() {
               </ul>
               <div className="tags">{open.tags.map((t) => (<span key={t} className="badge">{t}</span>))}</div>
               <div className="links">
-                {open.links?.repo && <a href={open.links.repo} target="_blank">Code</a>}
+                {open.links?.code && <a href={open.links.code} target="_blank">Code</a>}
                 {open.links?.demo && <a href={open.links.demo} target="_blank">Demo</a>}
                 {open.links?.writeup && <a href={open.links.writeup} target="_blank">Write-up</a>}
-                {open.links?.slides && <a href={open.links.slides} target="_blank">Slides</a>}
               </div>
             </div>
           </div>
