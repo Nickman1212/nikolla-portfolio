@@ -2,7 +2,6 @@ import { useState } from "react";
 import honeypotProof from "./assets/honeypot.jpg";
 
 export default function App() {
-  const [selectedProject, setSelectedProject] = useState("honeypot");
   const [selectedSection, setSelectedSection] = useState("readme");
 
   const renderSection = () => {
@@ -39,9 +38,10 @@ export default function App() {
         return (
           <div className="space-y-2 mt-4">
             <ul className="list-disc list-inside text-gray-300">
-              <li>🏹 T-Pot 2304 with containers: Cowrie, Dionaea, Heralding, ELK stack, and more</li>
-              <li>🪤 Cowrie SSH honeypot simulates full shell interaction & file downloads</li>
-              <li>🧲 Dionaea emulates SMB, HTTP, FTP for malware capture</li>
+              <li>🌹 T-Pot 2304 with containers: Cowrie, Dionaea, Heralding, ELK stack, and more
+              </li>
+              <li>🩤 Cowrie SSH honeypot simulates full shell interaction & file downloads</li>
+              <li>🪂 Dionaea emulates SMB, HTTP, FTP for malware capture</li>
               <li>📊 Real-time event visualization via Kibana dashboards</li>
               <li>🌍 Integrated GeoIP & abuse.ch threat intel enrichment</li>
               <li>🧠 ATT&CK mapping and lifecycle visibility for attacker behavior</li>
@@ -59,7 +59,8 @@ export default function App() {
 
       <div className="max-w-4xl mx-auto bg-zinc-900 p-6 rounded-lg shadow-lg space-y-6">
         <div>
-          <h2 className="text-2xl font-semibold mb-4">📡 Honeypot-Based Intrusion Detection System</h2>
+          <h2 className="text-2xl font-semibold mb-4">📡 Honeypot-Based Intrusion Detection System
+          </h2>
           <div className="flex space-x-4 mb-4">
             <button
               className={`px-4 py-2 rounded ${
@@ -90,6 +91,11 @@ export default function App() {
           {renderSection()}
         </div>
       </div>
+
+      <footer className="mt-12 text-center text-sm text-gray-400">
+        <p>Connect with me: <a href="https://www.linkedin.com/in/nikolla-nickolov-1a46a2290" target="_blank" className="underline">LinkedIn</a></p>
+        <p>Skills: Suricata, T-Pot, Cowrie, Dionaea, ELK Stack, Kibana, MITRE ATT&CK, Threat Hunting, Incident Response</p>
+      </footer>
     </div>
   );
 }
