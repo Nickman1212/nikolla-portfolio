@@ -51,12 +51,11 @@ export default function App() {
           <span className="badge">{profile.availability}</span>
         </div>
         <h1>
-          Cybersecurity enthusiast focused on building resilient systems and practical automation to keep data and teams safe.
+          Cybersecurity solutions with clarity, automation, and resilience.
         </h1>
         <p className="lead">
-          I combine hands-on cybersecurity labs, incident-style documentation,
-          and applied Python to ship small tools that make teams faster and
-          safer.
+          Hands-on cybersecurity projects, clear technical documentation, and
+          smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
           <a className="btn primary" href="#skills">
@@ -88,7 +87,6 @@ export default function App() {
             <li>☁️ Cloud & Virtualization: VMware, VirtualBox</li>
             <li>📊 Databases: Microsoft SQL, SQLite</li>
             <li>🛡️ Security Concepts: PKI, Certificates, Key Exchange</li>
-            <li>📈 Trading/Finance Tools: Futures, Forex (personal projects)</li>
           </ul>
         </div>
       </section>
