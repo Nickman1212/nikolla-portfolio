@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import maliciousImg from "./assets/malicious-url-scan.jpg";
-import youtubeImg from "./assets/youtube-safe-url-scan.jpg";
+import maliciousUrlImg from "./assets/malicious_url_scan.jpg";
+import youtubeUrlImg from "./assets/youtube_safe_url_scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -23,12 +23,8 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
-  const openProject = (project: string) => {
-    setActiveProject(project);
-  };
-
-  const closeProject = () => {
-    setActiveProject(null);
+  const toggleProject = (project: string) => {
+    setActiveProject((prev) => (prev === project ? null : project));
   };
 
   return (
@@ -71,17 +67,13 @@ export default function App() {
       <section id="projects" className="section">
         <h2>Projects</h2>
 
-        {/* Honeypot IDS Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
-          <p>
-            Full-stack deployment of deceptive high-interaction honeypots (Cowrie, Dionaea) with centralized SIEM analytics via the ELK Stack.
-          </p>
+          <p>Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.</p>
           <div className="project-buttons">
-            {activeProject !== "honeypot" ? (
-              <button onClick={() => openProject("honeypot")}>View Details</button>
-            ) : (
-              <button onClick={closeProject}>Close</button>
+            <button onClick={() => toggleProject("honeypot")}>View Details</button>
+            {activeProject === "honeypot" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
             )}
           </div>
 
@@ -89,53 +81,46 @@ export default function App() {
             <div className="project-details">
               <img src={honeypotImg} alt="Honeypot Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
               <p className="muted">
-                <strong>Project Overview:</strong> This high-interaction Honeypot IDS emulates vulnerable services using Cowrie (SSH) and Dionaea (SMB/HTTP) to lure real-world attackers. Attacker telemetry is captured, normalized, and ingested into a centralized ELK stack (Elasticsearch, Logstash, Kibana) for real-time forensic analysis and visualization.
+                <strong>Project Summary:</strong> Developed a high-fidelity deception environment using T-Pot and deployed interactive honeypots including Cowrie and Dionaea. Designed to attract real-world attackers and record their behavior.
               </p>
               <p className="muted">
-                <strong>Deployment Workflow:</strong> 
-                1. Configured Ubuntu Server with Docker Compose and T-Pot Framework. 
-                2. Deployed Cowrie & Dionaea containers on isolated network bridge. 
-                3. Set up centralized ELK logging (Logstash parsers, Kibana dashboards).
-                4. Captured attacker TTPs (IP, username/password combos, malware payloads).
-                5. Enriched threat intelligence via custom Suricata rules and GeoIP tagging.
+                <strong>Implementation Steps:</strong> Set up T-Pot on an Ubuntu VM. Enabled multiple honeypots (SSH, SMB, HTTP), forwarded logs to ELK stack. Captured and analyzed SSH brute-force attempts, malware droppers, and shell commands.
               </p>
               <p className="muted">
-                <strong>Skills Demonstrated:</strong> Blue Team defense, Network Threat Monitoring, Log Analysis, Security Automation, Docker Networking, MITRE ATT&CK Alignment.
+                <strong>Security Value:</strong> Enabled real-time incident detection, IoC extraction, and threat intelligence. Integrated with MITRE ATT&CK framework to map adversarial behavior. Demonstrated skills in SIEM setup, log parsing, and adversary emulation.
+              </p>
+              <p className="muted">
+                <strong>Technologies Used:</strong> Cowrie, Dionaea, Suricata, ELK Stack (Elasticsearch, Logstash, Kibana), Ubuntu Server, iptables.
               </p>
             </div>
           )}
         </div>
 
-        {/* Secure URL Scanner (Combined Project) */}
         <div className="panel">
-          <h3>Secure URL Scanner (Malicious + YouTube Safe URL Tool)</h3>
-          <p>
-            Command-line and Flask-based tools to analyze and classify URLs for malicious indicators using the VirusTotal API and YouTube Data API.
-          </p>
+          <h3>Advanced Threat Intelligence URL Scanner</h3>
+          <p>Combined malicious URL detection + YouTube safety scanner with VirusTotal API and threat classification logic.</p>
           <div className="project-buttons">
-            {activeProject !== "urlscanner" ? (
-              <button onClick={() => openProject("urlscanner")}>View Details</button>
-            ) : (
-              <button onClick={closeProject}>Close</button>
+            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
+            {activeProject === "urlscanner" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
             )}
           </div>
 
           {activeProject === "urlscanner" && (
             <div className="project-details">
-              <img src={maliciousImg} alt="Malicious URL Scan" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
-              <img src={youtubeImg} alt="YouTube Safe URL Scan" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
+              <img src={maliciousUrlImg} alt="Malicious URL Scan Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "1rem" }} />
+              <img src={youtubeUrlImg} alt="YouTube Safe URL Scan Screenshot" style={{ maxWidth: "100%", borderRadius: "8px" }} />
               <p className="muted">
-                <strong>Project Overview:</strong> This toolset detects malicious or deceptive URLs in real-time by integrating VirusTotal threat intelligence and YouTube content validation. It includes a CLI and Flask web interface for broader accessibility.
+                <strong>Project Summary:</strong> Engineered a Python-based tool leveraging the VirusTotal API to programmatically analyze and classify URLs as malicious, suspicious, or safe. Expanded functionality to detect unsafe content on YouTube links based on embedded metadata and categorization.
               </p>
               <p className="muted">
-                <strong>Implementation Details:</strong> 
-                1. Developed Python scripts to call VirusTotal API and analyze threat scores across multiple AV engines. 
-                2. Integrated YouTube Data API to validate channel authenticity, keyword usage, and spammy patterns. 
-                3. Constructed Flask front-end with dynamic URL scanning capability and threat score outputs. 
-                4. Added error handling, input sanitization, and response caching.
+                <strong>Implementation Steps:</strong> Built Python script with URL validation, error handling, and RESTful API integration. Submitted user inputs to VirusTotal for real-time threat scoring. Added conditional logic to scan YouTube metadata and check domain reputation.
               </p>
               <p className="muted">
-                <strong>Skills Demonstrated:</strong> Secure API integration, Threat Intelligence Automation, Flask development, JSON parsing, URL sanitization, Cyber Threat Intelligence (CTI), Security Tooling.
+                <strong>Security Value:</strong> Demonstrates understanding of threat intelligence feeds, API-based security tooling, safe browsing concepts, and detection engineering. Use case aligns with malware prevention, phishing link validation, and content-based risk assessment.
+              </p>
+              <p className="muted">
+                <strong>Technologies Used:</strong> Python, VirusTotal API, Threat Intelligence Feeds, REST APIs, JSON parsing, CLI UX design.
               </p>
             </div>
           )}
