@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import maliciousUrlScanImg from "./assets/malicious-url-scan.jpg";
-import youtubeSafeUrlScanImg from "./assets/youtube-safe-url-scan.jpg";
+import urlScanImg1 from "./assets/malicious-url-scan.jpg";
+import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -64,9 +64,15 @@ export default function App() {
           smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#skills">View Skills</a>
-          <a className="btn" href="#resume">Resume</a>
-          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
         </div>
       </section>
 
@@ -77,13 +83,15 @@ export default function App() {
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            Enterprise-grade honeypot solution simulating vulnerable environments to attract and log malicious traffic. Full-stack deployment leveraging MITRE ATT&CK for behavioral mapping.
+            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot), Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash, Kibana) on an Ubuntu VM.
+            Configured Suricata rules for advanced network-based detection and integrated firewall hardening for east-west and north-south traffic inspection.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("honeypot")}>View Details</button>
-            {activeProject === "honeypot" && <button onClick={() => setActiveProject(null)}>Close</button>}
+            {activeProject === "honeypot" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
           </div>
-
           {activeProject === "honeypot" && (
             <div className="project-details">
               <img
@@ -92,81 +100,53 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Architecture:</strong> Utilized T-Pot platform with Cowrie (SSH/telnet) and Dionaea (malware collection) honeypots hosted on Ubuntu Server. Configured Suricata IDS for deep packet inspection and integrated Kibana dashboards for real-time attack visibility.
+                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ, set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads. Logged attacker TTPs (Tactics, Techniques, Procedures) aligned with MITRE ATT&CK.
               </p>
               <p className="muted">
-                <strong>Key Features:</strong> Captured attacker IPs, brute-force login attempts, and malware payloads. Leveraged Elasticsearch and Logstash for log indexing and correlation.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
               </p>
               <p className="muted">
-                <strong>Outcomes:</strong> Gained insights into adversary TTPs (Tactics, Techniques, and Procedures), validated firewall efficacy, and visualized intrusion patterns. Mapped results to MITRE ATT&CK matrix.
-              </p>
-              <p className="muted">
-                <strong>Security Concepts:</strong> Network Forensics • Threat Intelligence • SIEM • IDS/IPS • Behavioral Analysis
+                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized log correlation via ELK, actionable SIEM alerts, and detection of lateral movement or privilege escalation patterns.
               </p>
             </div>
           )}
         </div>
 
-        {/* Malicious URL Scanner */}
+        {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>Malicious URL Detection Tool (VirusTotal API)</h3>
+          <h3>Secure URL Scanner – Malicious URL + YouTube Threat Detection Tool</h3>
           <p>
-            CLI-based Python utility to scan URLs in real-time against VirusTotal threat intelligence feeds. Designed for proactive URL screening and phishing site detection.
+            Engineered a Python CLI application that integrates with the VirusTotal API and YouTube Data API v3 to validate URL legitimacy and classify URLs as safe, suspicious, or malicious.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("malicious")}>View Details</button>
-            {activeProject === "malicious" && <button onClick={() => setActiveProject(null)}>Close</button>}
+            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
+            {activeProject === "urlscanner" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
           </div>
-
-          {activeProject === "malicious" && (
+          {activeProject === "urlscanner" && (
             <div className="project-details">
               <img
-                src={maliciousUrlScanImg}
-                alt="Malicious URL Detection Tool Screenshot"
+                src={urlScanImg1}
+                alt="Malicious URL Detection"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
+              <img
+                src={urlScanImg2}
+                alt="YouTube Safe URL Scan"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Tool Functionality:</strong> Accepts user-submitted URLs, queries VirusTotal API, parses JSON response, and flags results if known malicious activity is detected.
+                <strong>Key Features:</strong> Parses user-provided URLs, cross-references them with VirusTotal’s multi-engine antivirus scans, applies regex validation, and utilizes YouTube’s API to flag suspicious descriptions, keywords, or metadata abuse.
               </p>
               <p className="muted">
-                <strong>Engineering Stack:</strong> Python, requests library, dotenv for API key management. Implemented error handling for HTTP response codes and malformed inputs.
+                <strong>Security Techniques:</strong> Implements secure API token storage, rate-limiting, error handling, and API key rotation logic. Emphasizes threat intelligence enrichment and real-time phishing detection capabilities.
               </p>
               <p className="muted">
-                <strong>Cybersecurity Relevance:</strong> Demonstrates safe browsing initiatives, external threat validation, and automation of Open Threat Intelligence (OTI) integration. Supports principles of Zero Trust URL access.
+                <strong>Technologies Used:</strong> Python, VirusTotal API, YouTube API, JSON, Requests, Regex, OSINT methodologies.
               </p>
               <p className="muted">
-                <strong>Security Concepts:</strong> Phishing Detection • Threat Feeds • API Security • Secure Coding • Python Scripting
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Safe YouTube Scanner */}
-        <div className="panel">
-          <h3>YouTube Safe URL Checker</h3>
-          <p>
-            Python script to assess safety and legitimacy of YouTube URLs, checking against known redirects and suspicious domains. Implements user input sanitation and response validation.
-          </p>
-          <div className="project-buttons">
-            <button onClick={() => toggleProject("youtube")}>View Details</button>
-            {activeProject === "youtube" && <button onClick={() => setActiveProject(null)}>Close</button>}
-          </div>
-
-          {activeProject === "youtube" && (
-            <div className="project-details">
-              <img
-                src={youtubeSafeUrlScanImg}
-                alt="YouTube Safe URL Scanner Screenshot"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
-              />
-              <p className="muted">
-                <strong>Functionality:</strong> Parses YouTube links, removes tracking parameters, and ensures redirection domains are valid. Designed for users consuming content in enterprise environments.
-              </p>
-              <p className="muted">
-                <strong>Security Utility:</strong> Prevents shadow redirect abuse and misleading embedded content. Excellent candidate for browser automation or endpoint protection enhancement.
-              </p>
-              <p className="muted">
-                <strong>Security Concepts:</strong> Content Filtering • URL Validation • Input Sanitization • Python • Privacy by Design
+                <strong>Purpose:</strong> Enables blue teams and SOC analysts to proactively scan inbound URLs for malicious indicators before incident escalation.
               </p>
             </div>
           )}
