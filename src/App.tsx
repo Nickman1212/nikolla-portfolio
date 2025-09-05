@@ -1,5 +1,3 @@
-// Updated TSX code to include honeypot project with linked demo files
-
 import { useEffect, useState } from "react";
 
 const profile = {
@@ -16,6 +14,7 @@ const profile = {
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [selectedProject, setSelectedProject] = useState("none");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -23,7 +22,6 @@ export default function App() {
 
   return (
     <div className="wrap">
-      {/* Top Bar */}
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
@@ -46,7 +44,6 @@ export default function App() {
         </button>
       </header>
 
-      {/* Hero */}
       <section className="hero">
         <div className="badges">
           <span className="badge">Based in {profile.location}</span>
@@ -72,35 +69,82 @@ export default function App() {
         </div>
       </section>
 
-      {/* Projects */}
       <section id="projects" className="section">
         <h2>Projects</h2>
-        <div className="panel">
-          <h4>Honeypot Intrusion Detection System</h4>
-          <p>
-            Designed and deployed a <strong>Dockerized Cowrie SSH Honeypot</strong> to detect and log attacker behavior in a controlled lab environment. The honeypot was run inside a container, mapped to host ports <code>2222</code> and <code>2223</code>, and configured to simulate an interactive shell environment for threat actors.
-          </p>
-          <ul>
-            <li>Captured attacker keystrokes, commands, login attempts, and payloads</li>
-            <li>Mapped events to <strong>MITRE ATT&CK framework</strong> and <strong>Cyber Kill Chain</strong> lifecycle</li>
-            <li>Logged data to <code>cowrie.json</code> for ingestion via ELK stack and analysis</li>
-            <li>Used <strong>SSH to connect</strong> to the honeypot and validated the deception environment</li>
-          </ul>
-          <p>
-            <a href="/cowrie-honeypot-report.pdf" target="_blank" className="btn">
-              📄 View Report
-            </a>
-            <a href="/cowrie-config-example.vcfg" target="_blank" className="btn">
-              ⚙️ Config File
-            </a>
-            <a href="https://github.com/yourusername/cowrie-honeypot" target="_blank" className="btn">
-              🔗 GitHub Repo
-            </a>
-          </p>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="project"
+              value="none"
+              checked={selectedProject === "none"}
+              onChange={() => setSelectedProject("none")}
+            />
+            None
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="project"
+              value="honeypot"
+              checked={selectedProject === "honeypot"}
+              onChange={() => setSelectedProject("honeypot")}
+            />
+            Honeypot IDS
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="project"
+              value="future"
+              checked={selectedProject === "future"}
+              onChange={() => setSelectedProject("future")}
+            />
+            Other Project
+          </label>
         </div>
+
+        {selectedProject === "none" && (
+          <p className="muted">Select a project to view more details.</p>
+        )}
+
+        {selectedProject === "honeypot" && (
+          <div className="panel">
+            <h3>Honeypot Intrusion Detection System (IDS)</h3>
+            <p>
+              Deployed a Dockerized <strong>Cowrie SSH honeypot</strong> on Kali Linux
+              with real-time attacker monitoring and command logging.
+            </p>
+            <ul>
+              <li>Mapped attacker behavior using the MITRE ATT&CK framework</li>
+              <li>Documented techniques across the cyber kill chain lifecycle</li>
+              <li>Captured and analyzed malicious commands via Cowrie logs</li>
+              <li>Demonstrated fake SSH access with full session control</li>
+            </ul>
+            <p className="muted">Supporting files:</p>
+            <ul>
+              <li>
+                <a href="/cowrie-honeypot-report.pdf" download>
+                  📄 View PDF Report
+                </a>
+              </li>
+              <li>
+                <a href="/cowrie-config-example.vcfg" download>
+                  ⚙️ View Sample Config File
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {selectedProject === "future" && (
+          <div className="panel">
+            <h3>Placeholder Project</h3>
+            <p>Future project content coming soon...</p>
+          </div>
+        )}
       </section>
 
-      {/* Skills */}
       <section id="skills" className="section">
         <h2>Skills</h2>
         <div className="panel">
@@ -114,7 +158,6 @@ export default function App() {
             <li>Metasploit, Hydra, SQLMap (exploitation)</li>
             <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
           </ul>
-
           <h4>Programming & Automation</h4>
           <ul>
             <li>Python, Flask (automation & web apps)</li>
@@ -122,7 +165,6 @@ export default function App() {
             <li>Bash, PowerShell scripting</li>
             <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
           </ul>
-
           <h4>Systems & Platforms</h4>
           <ul>
             <li>Linux: Kali, Parrot OS, Ubuntu</li>
@@ -130,7 +172,6 @@ export default function App() {
             <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
             <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
           </ul>
-
           <h4>Security Concepts</h4>
           <ul>
             <li>PKI, TLS/SSL, Key Exchange</li>
@@ -142,7 +183,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Resume Embedded */}
       <section id="resume" className="section">
         <h2>Resume</h2>
         <iframe
@@ -151,7 +191,6 @@ export default function App() {
         />
       </section>
 
-      {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
