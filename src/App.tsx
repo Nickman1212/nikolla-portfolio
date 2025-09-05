@@ -24,7 +24,7 @@ const profile = {
   email: "Nickman477@gmail.com",
   phone: "727-307-8538",
   linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
-  resumeUrl: "/NIKOLLA_NICKOLOV.pdf", // must be inside /public
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf",
   headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
 };
@@ -203,10 +203,7 @@ export default function App() {
                     ))}
                   </div>
                   <div className="links">
-                    {p.links?.code && <a href={p.links.code} target="_blank">Code</a>}
-                    {p.links?.demo && <a href={p.links.demo} target="_blank">Demo</a>}
-                    {p.links?.writeup && <a href={p.links.writeup} target="_blank">Write-up</a>}
-                    <button className="btn small" onClick={() => setOpen(p)}>Details</button>
+                    <button className="btn small" onClick={() => setOpen(p)}>View Details</button>
                   </div>
                 </div>
               </li>
@@ -256,11 +253,34 @@ export default function App() {
                 {open.impact.map((i, idx) => (<li key={idx}>{i}</li>))}
               </ul>
               <div className="tags">{open.tags.map((t) => (<span key={t} className="badge">{t}</span>))}</div>
-              <div className="links">
-                {open.links?.code && <a href={open.links.code} target="_blank">Code</a>}
-                {open.links?.demo && <a href={open.links.demo} target="_blank">Demo</a>}
-                {open.links?.writeup && <a href={open.links.writeup} target="_blank">Write-up</a>}
-              </div>
+
+              {/* Inline viewers for code, demo, writeups */}
+              {open.links?.code && (
+                <>
+                  <h4>Code</h4>
+                  <iframe
+                    src={open.links.code}
+                    style={{ width: "100%", height: "400px", border: "1px solid var(--border)" }}
+                    title="Code Viewer"
+                  />
+                </>
+              )}
+              {open.links?.demo && (
+                <>
+                  <h4>Demo</h4>
+                  <img src={open.links.demo} alt="Demo" style={{ width: "100%", marginTop: "12px" }} />
+                </>
+              )}
+              {open.links?.writeup && (
+                <>
+                  <h4>Write-up</h4>
+                  <iframe
+                    src={open.links.writeup}
+                    style={{ width: "100%", height: "500px", border: "1px solid var(--border)", marginTop: "12px" }}
+                    title="Writeup Viewer"
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>
