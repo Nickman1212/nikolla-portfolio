@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import urlScan1 from "./assets/malicious-url-scan.jpg";
-import urlScan2 from "./assets/youtube-safe-url-scan.jpg";
+import maliciousUrlScanImg from "./assets/malicious-url-scan.jpg";
+import youtubeSafeUrlScanImg from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -29,7 +29,6 @@ export default function App() {
 
   return (
     <div className="wrap">
-      {/* Top Bar */}
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
@@ -52,7 +51,6 @@ export default function App() {
         </button>
       </header>
 
-      {/* Hero */}
       <section className="hero">
         <div className="badges">
           <span className="badge">Based in {profile.location}</span>
@@ -66,33 +64,24 @@ export default function App() {
           smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#skills">
-            View Skills
-          </a>
-          <a className="btn" href="#resume">
-            Resume
-          </a>
-          <a className="btn" href={profile.linkedin} target="_blank">
-            LinkedIn
-          </a>
+          <a className="btn primary" href="#skills">View Skills</a>
+          <a className="btn" href="#resume">Resume</a>
+          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
         </div>
       </section>
 
-      {/* Projects */}
       <section id="projects" className="section">
         <h2>Projects</h2>
 
-        {/* Honeypot Project */}
+        {/* Honeypot IDS */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.
+            Enterprise-grade honeypot solution simulating vulnerable environments to attract and log malicious traffic. Full-stack deployment leveraging MITRE ATT&CK for behavioral mapping.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("honeypot")}>View Details</button>
-            {activeProject === "honeypot" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
-            )}
+            {activeProject === "honeypot" && <button onClick={() => setActiveProject(null)}>Close</button>}
           </div>
 
           {activeProject === "honeypot" && (
@@ -103,70 +92,87 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Project Summary:</strong> Deployed a honeypot system using T-Pot
-                (Cowrie, Dionaea), monitored attacker interactions, and visualized logs in
-                real-time using the ELK stack. Captured attacker IPs, SSH brute force attempts,
-                and malware payloads.
+                <strong>Architecture:</strong> Utilized T-Pot platform with Cowrie (SSH/telnet) and Dionaea (malware collection) honeypots hosted on Ubuntu Server. Configured Suricata IDS for deep packet inspection and integrated Kibana dashboards for real-time attack visibility.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, Elasticsearch, Kibana,
-                Logstash, Ubuntu Server.
+                <strong>Key Features:</strong> Captured attacker IPs, brute-force login attempts, and malware payloads. Leveraged Elasticsearch and Logstash for log indexing and correlation.
               </p>
               <p className="muted">
-                <strong>Purpose:</strong> Demonstrate incident detection, threat intelligence, and
-                log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
-                framework.
+                <strong>Outcomes:</strong> Gained insights into adversary TTPs (Tactics, Techniques, and Procedures), validated firewall efficacy, and visualized intrusion patterns. Mapped results to MITRE ATT&CK matrix.
+              </p>
+              <p className="muted">
+                <strong>Security Concepts:</strong> Network Forensics • Threat Intelligence • SIEM • IDS/IPS • Behavioral Analysis
               </p>
             </div>
           )}
         </div>
 
-        {/* Malicious URL Detector Project */}
+        {/* Malicious URL Scanner */}
         <div className="panel">
-          <h3>Malicious URL Detection with VirusTotal API</h3>
+          <h3>Malicious URL Detection Tool (VirusTotal API)</h3>
           <p>
-            Python-based URL scanner that leverages the VirusTotal API to assess URL safety using threat intelligence.
+            CLI-based Python utility to scan URLs in real-time against VirusTotal threat intelligence feeds. Designed for proactive URL screening and phishing site detection.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("urlscan")}>View Details</button>
-            {activeProject === "urlscan" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
-            )}
+            <button onClick={() => toggleProject("malicious")}>View Details</button>
+            {activeProject === "malicious" && <button onClick={() => setActiveProject(null)}>Close</button>}
           </div>
 
-          {activeProject === "urlscan" && (
+          {activeProject === "malicious" && (
             <div className="project-details">
               <img
-                src={urlScan1}
-                alt="Malicious URL Scan Screenshot"
+                src={maliciousUrlScanImg}
+                alt="Malicious URL Detection Tool Screenshot"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
+              <p className="muted">
+                <strong>Tool Functionality:</strong> Accepts user-submitted URLs, queries VirusTotal API, parses JSON response, and flags results if known malicious activity is detected.
+              </p>
+              <p className="muted">
+                <strong>Engineering Stack:</strong> Python, requests library, dotenv for API key management. Implemented error handling for HTTP response codes and malformed inputs.
+              </p>
+              <p className="muted">
+                <strong>Cybersecurity Relevance:</strong> Demonstrates safe browsing initiatives, external threat validation, and automation of Open Threat Intelligence (OTI) integration. Supports principles of Zero Trust URL access.
+              </p>
+              <p className="muted">
+                <strong>Security Concepts:</strong> Phishing Detection • Threat Feeds • API Security • Secure Coding • Python Scripting
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Safe YouTube Scanner */}
+        <div className="panel">
+          <h3>YouTube Safe URL Checker</h3>
+          <p>
+            Python script to assess safety and legitimacy of YouTube URLs, checking against known redirects and suspicious domains. Implements user input sanitation and response validation.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => toggleProject("youtube")}>View Details</button>
+            {activeProject === "youtube" && <button onClick={() => setActiveProject(null)}>Close</button>}
+          </div>
+
+          {activeProject === "youtube" && (
+            <div className="project-details">
               <img
-                src={urlScan2}
-                alt="YouTube Safe URL Scan Screenshot"
+                src={youtubeSafeUrlScanImg}
+                alt="YouTube Safe URL Scanner Screenshot"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Project Summary:</strong> Built a Python application that integrates with
-                the VirusTotal API to analyze the threat level of user-submitted URLs.
-                Developed detailed logic to extract and parse detection engines’ results, classify
-                URLs as malicious/safe, and provide user feedback.
+                <strong>Functionality:</strong> Parses YouTube links, removes tracking parameters, and ensures redirection domains are valid. Designed for users consuming content in enterprise environments.
               </p>
               <p className="muted">
-                <strong>Security Focus:</strong> This scanner supports URL reputation analysis,
-                blacklisting intelligence, and integrates threat enrichment practices used in
-                modern SOCs. Demonstrates Python automation, API handling, and secure I/O logic.
+                <strong>Security Utility:</strong> Prevents shadow redirect abuse and misleading embedded content. Excellent candidate for browser automation or endpoint protection enhancement.
               </p>
               <p className="muted">
-                <strong>Buzzwords:</strong> Threat Intelligence, VirusTotal API, Python Automation,
-                URL Reputation, Open Source Intelligence (OSINT), InfoSec Scripting, API Security.
+                <strong>Security Concepts:</strong> Content Filtering • URL Validation • Input Sanitization • Python • Privacy by Design
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Skills */}
       <section id="skills" className="section">
         <h2>Skills</h2>
         <div className="panel">
@@ -208,7 +214,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Resume Embedded */}
       <section id="resume" className="section">
         <h2>Resume</h2>
         <iframe
@@ -217,7 +222,6 @@ export default function App() {
         />
       </section>
 
-      {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
