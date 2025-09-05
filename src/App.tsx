@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import maliciousScanImg from "./assets/Malicious URL Scan.JPG";
-import youtubeScanImg from "./assets/YouTube Safe URL Scan.JPG";
+import maliciousUrlScan from "./assets/malicious-url-scan.jpg";
+import youtubeSafeScan from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -82,7 +82,6 @@ export default function App() {
       <section id="projects" className="section">
         <h2>Projects</h2>
 
-        {/* Honeypot Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
@@ -118,11 +117,10 @@ export default function App() {
           )}
         </div>
 
-        {/* URL Scanner Project */}
         <div className="panel">
-          <h3>Malicious URL Scanner</h3>
+          <h3>Malicious URL Detector (VirusTotal API)</h3>
           <p>
-            A Python-based threat intelligence tool using VirusTotal API to identify malicious links.
+            Python-based CLI scanner that checks URLs against VirusTotal’s threat intelligence engine.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("urlscanner")}>View Details</button>
@@ -131,24 +129,25 @@ export default function App() {
           {activeProject === "urlscanner" && (
             <div className="project-details">
               <img
-                src={maliciousScanImg}
-                alt="Malicious URL Detection Screenshot"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "1rem" }}
+                src={maliciousUrlScan}
+                alt="Malicious URL Scan Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <img
-                src={youtubeScanImg}
-                alt="YouTube Safe URL Scan Screenshot"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "1rem" }}
+                src={youtubeSafeScan}
+                alt="Safe URL Scan Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Project Summary:</strong> Built a Python-based tool that scans and classifies URLs using VirusTotal. Outputs real-time results from 70+ AV engines and logs forensic-ready JSON reports.
+                <strong>Project Summary:</strong> Built a command-line tool in Python that takes
+                in user-submitted URLs and uses the VirusTotal API to determine malicious or suspicious behavior.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, REST API, VirusTotal, Base64, dotenv, JSON
+                <strong>Tools Used:</strong> Python, VirusTotal API, JSON, CLI, VS Code.
               </p>
-              <a className="btn" href="/url-scanner.py" download>
-                ⬇️ Download Python Script
-              </a>
+              <p className="muted">
+                <strong>Purpose:</strong> Identify phishing links and track down unsafe domains using threat intel.
+              </p>
             </div>
           )}
         </div>
