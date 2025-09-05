@@ -1,14 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-
-type Project = {
-  id: string;
-  title: string;
-  year: number | string;
-  blurb: string;
-  impact: string[];
-  tags: string[];
-  thumbnail: string;
-};
+import { useEffect, useState } from "react";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -22,12 +12,8 @@ const profile = {
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
 };
 
-// No projects for now
-const projects: Project[] = [];
-
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [query, setQuery] = useState("");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -89,9 +75,7 @@ export default function App() {
       {/* Projects (empty for now) */}
       <section id="projects" className="section">
         <h2>Projects</h2>
-        <p className="muted">
-          Projects will be added here soon — stay tuned.
-        </p>
+        <p className="muted">Projects will be added here soon — stay tuned.</p>
       </section>
 
       {/* Skills */}
