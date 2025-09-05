@@ -70,10 +70,19 @@ export default function App() {
         </div>
       </section>
 
-      {/* Projects (empty for now) */}
+      {/* Projects */}
       <section id="projects" className="section">
         <h2>Projects</h2>
-        <p className="muted">Projects will be added here soon — stay tuned.</p>
+        <div className="panel">
+          <h4>🔐 Cowrie SSH Honeypot Deployment</h4>
+          <p>
+            Deployed a high-interaction honeypot using Docker and Cowrie on Kali Linux to simulate vulnerable SSH services.
+            Captured attacker behavior in real time and logged malicious activity using Cowrie's JSON logging module.
+            Integrated MITRE ATT&CK techniques and aligned detection events to the Cyber Kill Chain lifecycle.
+            Analyzed attacker TTPs, built custom alerts, and monitored suspicious SSH interaction patterns for incident response readiness.
+          </p>
+        </div>
+        <p className="muted">More projects will be added soon — stay tuned.</p>
       </section>
 
       {/* Skills */}
