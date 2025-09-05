@@ -1,130 +1,75 @@
-// src/App.tsx
-import React from "react";
-import honeypotProof from "./assets/Honeypot.JPG";
+import React, { useState } from "react";
 import "./App.css";
+import honeypotImg from "./assets/Honeypot.JPG";
 
 function App() {
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+  const renderProjectDetails = () => {
+    switch (selectedProject) {
+      case "suricata":
+        return (
+          <div className="project-details">
+            <h2>Suricata IDS Deployment</h2>
+            <p>
+              Deployed and configured Suricata IDS in a controlled home lab
+environment to actively monitor and analyze live network traffic. Developed
+custom Suricata rules to detect malware, port scans, brute-force attacks,
+and suspicious activity. Utilized tcpdump and Suricata logs for threat
+detection and forensic investigation.
+            </p>
+          </div>
+        );
+      case "phishing":
+        return (
+          <div className="project-details">
+            <h2>Phishing Email Detector</h2>
+            <p>
+              Built a Python-Flask web app that detects phishing emails using
+TF-IDF and logistic regression. Integrated scikit-learn for training
+phishing vs. legitimate email classifiers. Designed a web interface for
+real-time classification and analysis.
+            </p>
+          </div>
+        );
+      case "honeypot":
+        return (
+          <div className="project-details">
+            <h2>Honeypot-based Intrusion Detection System</h2>
+            <p>
+              Developed a honeypot environment using T-Pot (Dionaea, Cowrie) to
+analyze attacker behavior. Captured attack vectors and C2 communication
+using high-interaction honeypots. Visualized real-time log data using the
+ELK Stack (Elasticsearch, Logstash, Kibana). Simulated brute-force SSH
+attacks and malware dropper activity for analysis.
+            </p>
+            <img src={honeypotImg} alt="Honeypot Screenshot" className="project-img" />
+            <h3>README for Recruiters:</h3>
+            <p>
+              This project was created in a virtualized lab environment using
+VirtualBox and Ubuntu. It demonstrates my understanding of honeypot
+architectures, attacker engagement, and real-time logging with the ELK
+stack. If you’d like access to the raw log data or VM configuration
+instructions, feel free to reach out via LinkedIn or email.
+            </p>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Nikolla's Honeypot Detection Project</h1>
-        <p>
-          This project involved setting up a honeypot using <strong>Cowrie</strong> and
-          monitoring unauthorized access attempts in a virtual lab environment.
-        </p>
-        <img
-          src={honeypotProof}
-          alt="Cowrie honeypot detection proof screenshot"
-          className="honeypot-image"
-        />
-      </header>
+      <h1>Nikolla Nickolov's Cybersecurity Projects</h1>
+      <div className="button-group">
+        <button onClick={() => setSelectedProject("suricata")}>Suricata IDS</button>
+        <button onClick={() => setSelectedProject("phishing")}>Phishing Detector</button>
+        <button onClick={() => setSelectedProject("honeypot")}>Honeypot IDS</button>
+      </div>
+      <div className="project-container">{renderProjectDetails()}</div>
     </div>
   );
 }
 
 export default App;
-
-
-/* src/App.css */
-.App {
-  text-align: center;
-  font-family: sans-serif;
-  padding: 2rem;
-  background-color: #1e1e1e;
-  color: white;
-  min-height: 100vh;
-}
-
-.App-header {
-  margin-top: 1rem;
-}
-
-.honeypot-image {
-  margin-top: 2rem;
-  max-width: 90%;
-  height: auto;
-  border: 2px solid #4caf50;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 255, 100, 0.5);
-}
-
-
-// src/main.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
-
-
-/* src/index.css */
-/* Basic reset and styling */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-  margin: 0 auto;
-}
-
-
-// vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-});
-
-
-// tsconfig.json
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
-
-
-// tsconfig.node.json
-{
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["vite.config.ts"]
-}
