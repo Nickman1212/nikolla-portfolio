@@ -14,7 +14,7 @@ const profile = {
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [selectedProject, setSelectedProject] = useState("none");
+  const [activeProject, setActiveProject] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -22,6 +22,7 @@ export default function App() {
 
   return (
     <div className="wrap">
+      {/* Top Bar */}
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
@@ -44,6 +45,7 @@ export default function App() {
         </button>
       </header>
 
+      {/* Hero */}
       <section className="hero">
         <div className="badges">
           <span className="badge">Based in {profile.location}</span>
@@ -69,82 +71,62 @@ export default function App() {
         </div>
       </section>
 
+      {/* Projects */}
       <section id="projects" className="section">
         <h2>Projects</h2>
-        <div>
+        <p className="muted">
+          Select a project below to view detailed documentation directly.
+        </p>
+        <div className="panel">
           <label>
             <input
               type="radio"
               name="project"
-              value="none"
-              checked={selectedProject === "none"}
-              onChange={() => setSelectedProject("none")}
+              onChange={() => setActiveProject("honeypot")}
+              checked={activeProject === "honeypot"}
             />
-            None
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="project"
-              value="honeypot"
-              checked={selectedProject === "honeypot"}
-              onChange={() => setSelectedProject("honeypot")}
-            />
-            Honeypot IDS
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="project"
-              value="future"
-              checked={selectedProject === "future"}
-              onChange={() => setSelectedProject("future")}
-            />
-            Other Project
+            Honeypot-Based IDS (Cowrie + Docker + MITRE ATT&CK)
           </label>
         </div>
 
-        {selectedProject === "none" && (
-          <p className="muted">Select a project to view more details.</p>
-        )}
-
-        {selectedProject === "honeypot" && (
-          <div className="panel">
-            <h3>Honeypot Intrusion Detection System (IDS)</h3>
+        {activeProject === "honeypot" && (
+          <div className="project-details">
+            <h3>🛡️ Honeypot-Based Intrusion Detection System</h3>
             <p>
-              Deployed a Dockerized <strong>Cowrie SSH honeypot</strong> on Kali Linux
-              with real-time attacker monitoring and command logging.
+              This project demonstrates the deployment of a high-interaction SSH honeypot using <strong>Cowrie</strong> inside a Docker container on Kali Linux.
+              Logs were collected to analyze attacker behavior and mapped to MITRE ATT&CK tactics such as <em>Initial Access</em>, <em>Execution</em>, and <em>Persistence</em>.
             </p>
+            <h4>Key Features:</h4>
             <ul>
-              <li>Mapped attacker behavior using the MITRE ATT&CK framework</li>
-              <li>Documented techniques across the cyber kill chain lifecycle</li>
-              <li>Captured and analyzed malicious commands via Cowrie logs</li>
-              <li>Demonstrated fake SSH access with full session control</li>
+              <li>Dockerized Cowrie honeypot exposed on ports 2222/2223</li>
+              <li>Captured attacker sessions with simulated filesystem interaction</li>
+              <li>Mapped adversary techniques to MITRE ATT&CK Matrix</li>
+              <li>Integrated with Cyber Kill Chain lifecycle for strategic defense insights</li>
             </ul>
-            <p className="muted">Supporting files:</p>
+            <h4>MITRE ATT&CK Tactics Observed:</h4>
             <ul>
-              <li>
-                <a href="/cowrie-honeypot-report.pdf" download>
-                  📄 View PDF Report
-                </a>
-              </li>
-              <li>
-                <a href="/cowrie-config-example.vcfg" download>
-                  ⚙️ View Sample Config File
-                </a>
-              </li>
+              <li><strong>Initial Access</strong> - T1190: Exploit Public-Facing Application</li>
+              <li><strong>Execution</strong> - T1059: Command and Scripting Interpreter</li>
+              <li><strong>Persistence</strong> - T1547: Boot or Logon Autostart Execution</li>
             </ul>
-          </div>
-        )}
-
-        {selectedProject === "future" && (
-          <div className="panel">
-            <h3>Placeholder Project</h3>
-            <p>Future project content coming soon...</p>
+            <h4>Kill Chain Mapping:</h4>
+            <ol>
+              <li>Reconnaissance: Nmap/Masscan scan detected</li>
+              <li>Weaponization & Delivery: SSH brute force login attempts</li>
+              <li>Exploitation: Commands executed in fake shell</li>
+              <li>Installation: Simulated malware upload blocked</li>
+              <li>Command & Control: Attempts at remote connection logged</li>
+            </ol>
+            <h4>Read Me (For Recruiters):</h4>
+            <p className="muted">
+              This honeypot project was deployed and verified locally in a secure home-lab setup. All attacker interactions are fake and isolated within a sandboxed environment. It demonstrates my practical skills with Docker, Linux, IDS systems, and threat intelligence mapping frameworks such as MITRE ATT&CK and Cyber Kill Chain.
+              If you’d like to see the full code, deployment steps, or sample logs, please reach out by email or LinkedIn!
+            </p>
           </div>
         )}
       </section>
 
+      {/* Skills */}
       <section id="skills" className="section">
         <h2>Skills</h2>
         <div className="panel">
@@ -158,6 +140,7 @@ export default function App() {
             <li>Metasploit, Hydra, SQLMap (exploitation)</li>
             <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
           </ul>
+
           <h4>Programming & Automation</h4>
           <ul>
             <li>Python, Flask (automation & web apps)</li>
@@ -165,6 +148,7 @@ export default function App() {
             <li>Bash, PowerShell scripting</li>
             <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
           </ul>
+
           <h4>Systems & Platforms</h4>
           <ul>
             <li>Linux: Kali, Parrot OS, Ubuntu</li>
@@ -172,6 +156,7 @@ export default function App() {
             <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
             <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
           </ul>
+
           <h4>Security Concepts</h4>
           <ul>
             <li>PKI, TLS/SSL, Key Exchange</li>
@@ -183,6 +168,7 @@ export default function App() {
         </div>
       </section>
 
+      {/* Resume Embedded */}
       <section id="resume" className="section">
         <h2>Resume</h2>
         <iframe
@@ -191,6 +177,7 @@ export default function App() {
         />
       </section>
 
+      {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
