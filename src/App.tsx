@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import maliciousUrlImg from "./assets/malicious_url_scan.jpg";
-import youtubeUrlImg from "./assets/youtube_safe_url_scan.jpg";
+import maliciousUrlImg from "./assets/malicious-url-scan.jpg";
+import youtubeUrlImg from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -24,7 +24,9 @@ export default function App() {
   }, [theme]);
 
   const toggleProject = (project: string) => {
-    setActiveProject((prev) => (prev === project ? null : project));
+    if (activeProject === null) {
+      setActiveProject(project);
+    }
   };
 
   return (
