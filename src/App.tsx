@@ -114,7 +114,7 @@ export default function App() {
 
         {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>Secure URL Scanner – Malicious URL + YouTube Threat Detection Tool</h3>
+          <h3>Advanced Threat Intelligence URL Scanne</h3>
           <p>
             Engineered a Python CLI application that integrates with the VirusTotal API and YouTube Data API v3 to validate URL legitimacy and classify URLs as safe, suspicious, or malicious.
           </p>
