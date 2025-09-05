@@ -18,6 +18,7 @@ const profile = {
 export default function App() {
   const [activeProject, setActiveProject] = useState<null | string>(null);
 
+  // Force dark mode once on page load
   useEffect(() => {
     document.documentElement.dataset.theme = "dark";
   }, []);
@@ -42,6 +43,7 @@ export default function App() {
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
+        {/* Light/Dark toggle removed */}
       </header>
 
       <section className="hero">
@@ -76,8 +78,11 @@ export default function App() {
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot), Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash, Kibana) on an Ubuntu VM.
-            Configured Suricata rules for advanced network-based detection and integrated firewall hardening for east-west and north-south traffic inspection.
+            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot),
+            Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash,
+            Kibana) on an Ubuntu VM. Configured Suricata rules for advanced
+            network-based detection and integrated firewall hardening for
+            east-west and north-south traffic inspection.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("honeypot")}>View Details</button>
@@ -93,23 +98,33 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ, set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads. Logged attacker TTPs (Tactics, Techniques, Procedures) aligned with MITRE ATT&CK.
+                <strong>Technical Execution:</strong> Configured Docker-based
+                honeypots inside a DMZ, set up port mirroring, captured SSH
+                brute-force attempts, malware hashes, and payloads. Logged
+                attacker TTPs (Tactics, Techniques, Procedures) aligned with
+                MITRE ATT&CK.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense,
+                Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized log correlation via ELK, actionable SIEM alerts, and detection of lateral movement or privilege escalation patterns.
+                <strong>Objective:</strong> Real-time visibility into adversary
+                behavior, centralized log correlation via ELK, actionable SIEM
+                alerts, and detection of lateral movement or privilege escalation
+                patterns.
               </p>
             </div>
           )}
         </div>
 
-        {/* Malicious URL + YouTube Scan Project */}
+        {/* Unified URL Scanner */}
         <div className="panel">
           <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
           <p>
-            Engineered a Python CLI application that integrates with the VirusTotal API and YouTube Data API v3 to validate URL legitimacy and classify URLs as safe, suspicious, or malicious.
+            Engineered a Python CLI application that integrates with the
+            VirusTotal API and YouTube Data API v3 to validate URL legitimacy and
+            classify URLs as safe, suspicious, or malicious.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("urlscanner")}>View Details</button>
@@ -130,16 +145,25 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Key Features:</strong> Parses user-provided URLs, cross-references them with VirusTotal’s multi-engine antivirus scans, applies regex validation, and utilizes YouTube’s API to flag suspicious descriptions, keywords, or metadata abuse.
+                <strong>Key Features:</strong> Parses user-provided URLs,
+                cross-references them with VirusTotal’s multi-engine antivirus
+                scans, applies regex validation, and utilizes YouTube’s API to
+                flag suspicious descriptions, keywords, or metadata abuse.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Implements secure API token storage, rate-limiting, error handling, and API key rotation logic. Emphasizes threat intelligence enrichment and real-time phishing detection capabilities.
+                <strong>Security Techniques:</strong> Implements secure API token
+                storage, rate-limiting, error handling, and API key rotation
+                logic. Emphasizes threat intelligence enrichment and real-time
+                phishing detection capabilities.
               </p>
               <p className="muted">
-                <strong>Technologies Used:</strong> Python, VirusTotal API, YouTube API, JSON, Requests, Regex, OSINT methodologies.
+                <strong>Technologies Used:</strong> Python, VirusTotal API,
+                YouTube API, JSON, Requests, Regex, OSINT methodologies.
               </p>
               <p className="muted">
-                <strong>Purpose:</strong> Enables blue teams and SOC analysts to proactively scan inbound URLs for malicious indicators before incident escalation.
+                <strong>Purpose:</strong> Enables blue teams and SOC analysts to
+                proactively scan inbound URLs for malicious indicators before
+                incident escalation.
               </p>
             </div>
           )}
