@@ -1,60 +1,51 @@
 import { useState } from "react";
-import suricataProof from "./assets/suricata_proof.png";
-import phishingProof from "./assets/phishing_proof.png";
-import honeypotProof from "./assets/honeypot.jpg"; // Corrected file path and extension
+import honeypotProof from "./assets/Honeypot.JPG";
 
-function App() {
-  const [selectedProject, setSelectedProject] = useState<string | null>("suricata");
+export default function App() {
+  const [selectedProject, setSelectedProject] = useState("honeypot");
+  const [selectedSection, setSelectedSection] = useState("readme");
 
-  const renderProjectDetails = () => {
-    switch (selectedProject) {
-      case "suricata":
+  const renderSection = () => {
+    switch (selectedSection) {
+      case "readme":
         return (
-          <div className="mt-4">
-            <h2 className="text-2xl font-bold">Suricata IDS Project</h2>
-            <p className="mt-2">\              Designed and deployed a Suricata-based Intrusion Detection System (IDS) in a controlled home lab to monitor and analyze live network traffic. Configured custom Suricata rules to detect malware, port scans, brute-force attempts, and suspicious traffic patterns. Leveraged Wireshark and tcpdump for packet capture and forensic investigation.
+          <div className="space-y-2">
+            <p>
+              This Honeypot-Based IDS project leverages the T-Pot distribution to deploy high-interaction honeypots
+              such as Cowrie and Dionaea across multiple containers.
             </p>
-            <img src={suricataProof} alt="Suricata Proof Screenshot" className="mt-4 rounded shadow-md w-full max-w-2xl" />
+            <p>
+              These honeypots emulate vulnerable services and are integrated with the ELK Stack to monitor and
+              analyze attacker behavior in real time. Logs are enriched with GeoIP and threat intelligence sources.
+            </p>
+            <p>
+              Ideal for practicing threat hunting, understanding attacker TTPs, and demonstrating detection engineering
+              skills mapped to the MITRE ATT&CK Framework and cyber kill chain.
+            </p>
           </div>
         );
-      case "phishing":
+      case "proof":
         return (
           <div className="mt-4">
-            <h2 className="text-2xl font-bold">Phishing Detection Project</h2>
-            <p className="mt-2">
-              Developed a Python Flask web application to detect phishing URLs using VirusTotal API. Integrated client-side URL input validation and back-end threat intelligence scoring. Automated URL submissions and rendered real-time response classifications (malicious, suspicious, harmless) for educational awareness.
-            </p>
-            <img src={phishingProof} alt="Phishing Detection Screenshot" className="mt-4 rounded shadow-md w-full max-w-2xl" />
+            <img
+              src={honeypotProof}
+              alt="Screenshot showing honeypot project"
+              className="rounded-lg shadow-md w-full"
+            />
+            <p className="text-sm mt-2 text-gray-400">Screenshot of the working honeypot system.</p>
           </div>
         );
-      case "honeypot":
+      case "details":
         return (
-          <div className="mt-4">
-            <h2 className="text-2xl font-bold">Honeypot-Based Intrusion Detection</h2>
-            <p className="mt-2">
-              Deployed a honeypot system using Cowrie and T-Pot to simulate vulnerable services and capture attacker behavior. Integrated the setup with an ELK stack to visualize logs, SSH brute-force attempts, and shell interaction events in real-time dashboards. Collected indicators of compromise and mapped adversarial techniques using the MITRE ATT&CK framework.
-            </p>
-
-            <div className="mt-4">
-              <h3 className="text-xl font-semibold">README</h3>
-              <p className="mt-1">\                This project replicates a real-world server to lure attackers, logs their actions, and allows defensive tuning through observed patterns. The ELK dashboard shows real-time hits, attacker IPs, login attempts, and commands used during interaction.
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <h3 className="text-xl font-semibold">Screenshot Proof</h3>
-              <img src={honeypotProof} alt="Honeypot Proof Screenshot" className="mt-2 rounded shadow-md w-full max-w-2xl" />
-            </div>
-
-            <div className="mt-4">
-              <h3 className="text-xl font-semibold">Technical Details</h3>
-              <ul className="list-disc ml-6 mt-1 space-y-1">
-                <li>Tools used: T-Pot, Cowrie, Dionaea, ELK Stack</li>
-                <li>Monitoring SSH & Telnet interactions</li>
-                <li>Log parsing and dashboard visualization with Kibana</li>
-                <li>System hosted on Ubuntu VPS with port forwarding</li>
-              </ul>
-            </div>
+          <div className="space-y-2 mt-4">
+            <ul className="list-disc list-inside text-gray-300">
+              <li>🏹 T-Pot 2304 with containers: Cowrie, Dionaea, Heralding, ELK stack, and more</li>
+              <li>🪤 Cowrie SSH honeypot simulates full shell interaction & file downloads</li>
+              <li>🧲 Dionaea emulates SMB, HTTP, FTP for malware capture</li>
+              <li>📊 Real-time event visualization via Kibana dashboards</li>
+              <li>🌍 Integrated GeoIP & abuse.ch threat intel enrichment</li>
+              <li>🧠 ATT&CK mapping and lifecycle visibility for attacker behavior</li>
+            </ul>
           </div>
         );
       default:
@@ -63,39 +54,42 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 p-6">
-      <h1 className="text-4xl font-bold mb-6">Nikolla Nickolov – Cybersecurity Portfolio</h1>
+    <div className="min-h-screen bg-zinc-950 text-white font-sans p-6">
+      <h1 className="text-4xl font-bold text-center mb-8">Nikolla Nickolov – Cybersecurity Portfolio</h1>
 
-      <div className="space-x-4 mb-6">
-        <button
-          className={`px-4 py-2 rounded-md shadow-md ${
-            selectedProject === "suricata" ? "bg-blue-600 text-white" : "bg-white text-blue-600 border border-blue-600"
-          }`}
-          onClick={() => setSelectedProject("suricata")}
-        >
-          Suricata IDS
-        </button>
-        <button
-          className={`px-4 py-2 rounded-md shadow-md ${
-            selectedProject === "phishing" ? "bg-blue-600 text-white" : "bg-white text-blue-600 border border-blue-600"
-          }`}
-          onClick={() => setSelectedProject("phishing")}
-        >
-          Phishing Detector
-        </button>
-        <button
-          className={`px-4 py-2 rounded-md shadow-md ${
-            selectedProject === "honeypot" ? "bg-blue-600 text-white" : "bg-white text-blue-600 border border-blue-600"
-          }`}
-          onClick={() => setSelectedProject("honeypot")}
-        >
-          Honeypot IDS
-        </button>
+      <div className="max-w-4xl mx-auto bg-zinc-900 p-6 rounded-lg shadow-lg space-y-6">
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">📡 Honeypot-Based Intrusion Detection System</h2>
+          <div className="flex space-x-4 mb-4">
+            <button
+              className={`px-4 py-2 rounded ${
+                selectedSection === "readme" ? "bg-white text-black" : "bg-zinc-800"
+              }`}
+              onClick={() => setSelectedSection("readme")}
+            >
+              README
+            </button>
+            <button
+              className={`px-4 py-2 rounded ${
+                selectedSection === "proof" ? "bg-white text-black" : "bg-zinc-800"
+              }`}
+              onClick={() => setSelectedSection("proof")}
+            >
+              Screenshot
+            </button>
+            <button
+              className={`px-4 py-2 rounded ${
+                selectedSection === "details" ? "bg-white text-black" : "bg-zinc-800"
+              }`}
+              onClick={() => setSelectedSection("details")}
+            >
+              Technical Details
+            </button>
+          </div>
+
+          {renderSection()}
+        </div>
       </div>
-
-      {renderProjectDetails()}
     </div>
   );
 }
-
-export default App;
