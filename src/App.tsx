@@ -80,13 +80,40 @@ export default function App() {
       <section id="skills" className="section">
         <h2>Skills</h2>
         <div className="panel">
+          <h4>Cybersecurity & Networking</h4>
           <ul>
-            <li>🔐 Cybersecurity: Nmap, Wireshark, Snort, Suricata, Metasploit</li>
-            <li>💻 Programming: Python, C, C#, JavaScript, SQL</li>
-            <li>⚙️ Systems: Linux (Parrot, Kali), Windows Server, OPNsense</li>
-            <li>☁️ Cloud & Virtualization: VMware, VirtualBox</li>
-            <li>📊 Databases: Microsoft SQL, SQLite</li>
-            <li>🛡️ Security Concepts: PKI, Certificates, Key Exchange</li>
+            <li>Nmap, Masscan (network scanning)</li>
+            <li>Wireshark, tcpdump (packet analysis)</li>
+            <li>Suricata, Snort (IDS/IPS)</li>
+            <li>OPNsense, pfSense, iptables (firewalls)</li>
+            <li>Nessus, OpenVAS (vulnerability scanning)</li>
+            <li>Metasploit, Hydra, SQLMap (exploitation)</li>
+            <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
+          </ul>
+
+          <h4>Programming & Automation</h4>
+          <ul>
+            <li>Python, Flask (automation & web apps)</li>
+            <li>C, C#, JavaScript / Node.js</li>
+            <li>Bash, PowerShell scripting</li>
+            <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
+          </ul>
+
+          <h4>Systems & Platforms</h4>
+          <ul>
+            <li>Linux: Kali, Parrot OS, Ubuntu</li>
+            <li>Windows Server: AD, DHCP, DNS, Group Policy</li>
+            <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
+            <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
+          </ul>
+
+          <h4>Security Concepts</h4>
+          <ul>
+            <li>PKI, TLS/SSL, Key Exchange</li>
+            <li>Kerberos, LDAP, MFA</li>
+            <li>Graylog, ELK Stack (SIEM & logging)</li>
+            <li>Incident Response workflows</li>
+            <li>Encryption: AES, RSA, MD5/SHA hashing</li>
           </ul>
         </div>
       </section>
