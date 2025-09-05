@@ -51,8 +51,7 @@ export default function App() {
           <span className="badge">{profile.availability}</span>
         </div>
         <h1>
-          Building secure systems and pragmatic automation — then telling the
-          story clearly.
+          Cybersecurity enthusiast focused on building resilient systems and practical automation to keep data and teams safe.
         </h1>
         <p className="lead">
           I combine hands-on cybersecurity labs, incident-style documentation,
