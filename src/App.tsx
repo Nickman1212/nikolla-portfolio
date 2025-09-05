@@ -1,94 +1,73 @@
 import { useState } from "react";
+import suricataImage from "./assets/suricata_proof.png";
+import phishingImage from "./assets/phishing_proof.png";
+import honeypotImage from "./assets/Honepot.JPG";
 import "./App.css";
-import honeypotImage from "./assets/honeypot_proof.png";
 
 function App() {
-  const [selectedProject, setSelectedProject] = useState<
-    "suricata" | "phishing" | "honeypot" | null
-  >(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>("suricata");
 
   const renderProjectDetails = () => {
     switch (selectedProject) {
       case "suricata":
         return (
-          <div>
-            <h2>Suricata IDS Project</h2>
+          <div className="project-details">
+            <h2>Suricata IDS Deployment</h2>
             <p>
-              Designed and deployed a Suricata-based Intrusion Detection System in a home lab
-              environment. Customized Suricata rules to detect malware, brute-force attempts, and port
-              scans.
+              Designed and deployed a Suricata-based Intrusion Detection System (IDS) in a home lab to monitor and analyze live network traffic.
+              Configured custom rules for threat detection including malware signatures, port scans, and brute-force attempts.
+              Analyzed logs using <code>eve.json</code> and <code>tcpdump</code> to detect security incidents.
             </p>
-            <ul>
-              <li>🔍 Real-time packet analysis using Suricata logs</li>
-              <li>📜 Custom rule scripting and signature creation</li>
-              <li>📡 Monitored multiple interfaces using `af-packet`</li>
-            </ul>
+            <img src={suricataImage} alt="Suricata Screenshot" />
           </div>
         );
       case "phishing":
         return (
-          <div>
-            <h2>Phishing Email Detector (Python + Flask)</h2>
+          <div className="project-details">
+            <h2>Phishing Email Detector</h2>
             <p>
-              Engineered a machine learning web app to classify phishing emails. Integrated TF-IDF vectorization with a
-              logistic regression model.
+              Built a Flask web app using Python and Scikit-learn to detect phishing emails.
+              Implemented TF-IDF vectorization and trained a logistic regression classifier.
+              The app accepts email body input and outputs prediction scores for phishing likelihood.
             </p>
-            <ul>
-              <li>📬 Live email classification using Flask backend</li>
-              <li>📊 TF-IDF feature extraction with Scikit-learn</li>
-              <li>🧪 Trained and tested on real-world phishing datasets</li>
-            </ul>
+            <img src={phishingImage} alt="Phishing Detector Screenshot" />
           </div>
         );
       case "honeypot":
         return (
-          <div>
-            <h2>Honeypot-based Intrusion Detection System</h2>
+          <div className="project-details">
+            <h2>Cowrie Honeypot Deployment</h2>
             <p>
-              Deployed Cowrie Honeypot on Docker to monitor SSH/Telnet brute force attempts. Captured
-              attacker behavior, generated logs, and analyzed threat patterns.
+              Deployed a Cowrie SSH honeypot using Docker to monitor attacker behavior.
+              Mapped ports 2222 and 2223 to simulate realistic services, allowing attacker interaction logging.
+              Parsed and analyzed logs to observe attack patterns, brute-force attempts, and command execution.
+              Mapped observed techniques to MITRE ATT&CK and Cyber Kill Chain phases for threat intelligence reporting.
             </p>
-            <ul>
-              <li>🐍 Cowrie running inside Docker container</li>
-              <li>🪝 Simulated SSH service on port 2222</li>
-              <li>📁 Logs reviewed via `cowrie.json` for threat intelligence</li>
-            </ul>
-
-            <h3>📸 Proof of Work:</h3>
-            <img
-              src={honeypotImage}
-              alt="Cowrie Honeypot Proof Screenshot"
-              style={{ maxWidth: "100%", border: "2px solid #ccc", borderRadius: "10px" }}
-            />
-
-            <h3>📘 README Section</h3>
-            <p>
-              This screenshot shows Cowrie Honeypot running on port 2222 inside a Docker container on
-              Kali Linux. The logs are accessed through the command line, verifying that the
-              honeypot is capturing interaction attempts from malicious users.
-            </p>
-            <p>
-              I use this setup to collect behavioral data from attackers in a simulated environment,
-              which helps improve my incident response and log analysis skills.
-            </p>
+            <img src={honeypotImage} alt="Cowrie Honeypot Screenshot" />
+            <div className="readme">
+              <h3>README</h3>
+              <p>
+                This project demonstrates my ability to deploy and analyze high-interaction honeypots using Cowrie. 
+                It showcases real-world attacker engagement and integrates findings with cybersecurity frameworks. 
+                Logs were captured from attacker interactions over SSH and analyzed for security intelligence.
+              </p>
+            </div>
           </div>
         );
       default:
-        return <p>Select a project above to view its details.</p>;
+        return null;
     }
   };
 
   return (
     <div className="App">
-      <h1>📁 Nikolla Nickolov – Cybersecurity Projects</h1>
-
+      <h1>Nikolla's Cybersecurity Portfolio</h1>
       <div className="button-group">
         <button onClick={() => setSelectedProject("suricata")}>Suricata IDS</button>
         <button onClick={() => setSelectedProject("phishing")}>Phishing Detector</button>
-        <button onClick={() => setSelectedProject("honeypot")}>Honeypot IDS</button>
+        <button onClick={() => setSelectedProject("honeypot")}>Honeypot Project</button>
       </div>
-
-      <div className="project-details">{renderProjectDetails()}</div>
+      {renderProjectDetails()}
     </div>
   );
 }
