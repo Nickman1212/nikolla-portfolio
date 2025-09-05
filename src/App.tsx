@@ -1,3 +1,5 @@
+// Updated TSX code to include honeypot project with linked demo files
+
 import { useEffect, useState } from "react";
 
 const profile = {
@@ -74,15 +76,28 @@ export default function App() {
       <section id="projects" className="section">
         <h2>Projects</h2>
         <div className="panel">
-          <h4>🔐 Cowrie SSH Honeypot Deployment</h4>
+          <h4>Honeypot Intrusion Detection System</h4>
           <p>
-            Deployed a high-interaction honeypot using Docker and Cowrie on Kali Linux to simulate vulnerable SSH services.
-            Captured attacker behavior in real time and logged malicious activity using Cowrie's JSON logging module.
-            Integrated MITRE ATT&CK techniques and aligned detection events to the Cyber Kill Chain lifecycle.
-            Analyzed attacker TTPs, built custom alerts, and monitored suspicious SSH interaction patterns for incident response readiness.
+            Designed and deployed a <strong>Dockerized Cowrie SSH Honeypot</strong> to detect and log attacker behavior in a controlled lab environment. The honeypot was run inside a container, mapped to host ports <code>2222</code> and <code>2223</code>, and configured to simulate an interactive shell environment for threat actors.
+          </p>
+          <ul>
+            <li>Captured attacker keystrokes, commands, login attempts, and payloads</li>
+            <li>Mapped events to <strong>MITRE ATT&CK framework</strong> and <strong>Cyber Kill Chain</strong> lifecycle</li>
+            <li>Logged data to <code>cowrie.json</code> for ingestion via ELK stack and analysis</li>
+            <li>Used <strong>SSH to connect</strong> to the honeypot and validated the deception environment</li>
+          </ul>
+          <p>
+            <a href="/cowrie-honeypot-report.pdf" target="_blank" className="btn">
+              📄 View Report
+            </a>
+            <a href="/cowrie-config-example.vcfg" target="_blank" className="btn">
+              ⚙️ Config File
+            </a>
+            <a href="https://github.com/yourusername/cowrie-honeypot" target="_blank" className="btn">
+              🔗 GitHub Repo
+            </a>
           </p>
         </div>
-        <p className="muted">More projects will be added soon — stay tuned.</p>
       </section>
 
       {/* Skills */}
@@ -143,10 +158,7 @@ export default function App() {
           <p className="muted">
             Email: {profile.email} <br />
             Phone: {profile.phone} <br />
-            LinkedIn:{" "}
-            <a href={profile.linkedin} target="_blank">
-              {profile.linkedin}
-            </a>
+            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
           </p>
         </div>
       </section>
