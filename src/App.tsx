@@ -1,5 +1,5 @@
 import { useState } from "react";
-import honeypotProof from "./assets/Honeypot.JPG";
+import honeypotProof from "./assets/honeypot.jpg";
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState("honeypot");
