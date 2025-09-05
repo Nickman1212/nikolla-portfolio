@@ -42,9 +42,12 @@ const projects: Project[] = [
       "Playbooks for triage + incident notes",
     ],
     tags: ["Cybersecurity", "Detection", "Networking", "Linux"],
-    links: { code: "/NIKOLLA_NICKOLOV.pdf", writeup: "/NIKOLLA_NICKOLOV.pdf" },
-    thumbnail:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+    links: { 
+      code: "/suricata-rules.conf", 
+      writeup: "/suricata-report.pdf", 
+      demo: "/suricata-demo.png" 
+    },
+    thumbnail: "/suricata-demo.png",
   },
   {
     id: "malicious-url-detector",
@@ -58,9 +61,12 @@ const projects: Project[] = [
       "Export to CSV + JSON for SIEM enrichment",
     ],
     tags: ["Python", "Automation", "Threat Intel"],
-    links: { code: "/NIKOLLA_NICKOLOV.pdf", demo: "/NIKOLLA_NICKOLOV.pdf" },
-    thumbnail:
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop",
+    links: { 
+      code: "/url-scanner.py", 
+      writeup: "/url-report.pdf", 
+      demo: "/url-demo.png" 
+    },
+    thumbnail: "/url-demo.png",
   },
   {
     id: "phishing-detector",
@@ -68,11 +74,18 @@ const projects: Project[] = [
     year: 2024,
     blurb:
       "TF-IDF + logistic regression to classify emails; exposes REST endpoint + small web UI.",
-    impact: ["ROC-AUC 0.96 on validation", "Feature explainability", "Dockerized for quick deploy"],
+    impact: [
+      "ROC-AUC 0.96 on validation",
+      "Feature explainability",
+      "Dockerized for quick deploy"
+    ],
     tags: ["Machine Learning", "Python", "Flask"],
-    links: { code: "/NIKOLLA_NICKOLOV.pdf", demo: "/NIKOLLA_NICKOLOV.pdf" },
-    thumbnail:
-      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
+    links: { 
+      code: "/phishing-app.py", 
+      writeup: "/phishing-report.pdf", 
+      demo: "/phishing-demo.png" 
+    },
+    thumbnail: "/phishing-demo.png",
   },
 ];
 
