@@ -1,11 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 
-type LinkSet = {
-  code?: string;
-  demo?: string;
-  writeup?: string;
-};
-
 type Project = {
   id: string;
   title: string;
@@ -13,7 +7,6 @@ type Project = {
   blurb: string;
   impact: string[];
   tags: string[];
-  links?: LinkSet;
   thumbnail: string;
 };
 
@@ -29,95 +22,16 @@ const profile = {
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
 };
 
-const projects: Project[] = [
-  {
-    id: "suricata-ids",
-    title: "Suricata IDS Home Lab",
-    year: 2024,
-    blurb:
-      "Designed and deployed a Suricata-based IDS; authored custom rules to detect port scans, brute force, and malware C2.",
-    impact: [
-      "Built rules for SYN scan + SSH brute detection",
-      "Parsed PCAPs with tcpdump and Suricata logs",
-      "Playbooks for triage + incident notes",
-    ],
-    tags: ["Cybersecurity", "Detection", "Networking", "Linux"],
-    links: { 
-      code: "/suricata-rules.conf", 
-      writeup: "/suricata-report.pdf", 
-      demo: "/suricata-demo.png" 
-    },
-    thumbnail: "/suricata-demo.png",
-  },
-  {
-    id: "malicious-url-detector",
-    title: "Malicious URL Detector (Python + VirusTotal)",
-    year: 2024,
-    blurb:
-      "CLI scanner that scores URLs via VirusTotal + heuristics; flags phishing and malware patterns.",
-    impact: [
-      "Batch analysis with rate-limit aware queue",
-      "Caching to cut API calls by ~70%",
-      "Export to CSV + JSON for SIEM enrichment",
-    ],
-    tags: ["Python", "Automation", "Threat Intel"],
-    links: { 
-      code: "/url-scanner.py", 
-      writeup: "/url-report.pdf", 
-      demo: "/url-demo.png" 
-    },
-    thumbnail: "/url-demo.png",
-  },
-  {
-    id: "phishing-detector",
-    title: "Phishing Email Detector (Flask + ML)",
-    year: 2024,
-    blurb:
-      "TF-IDF + logistic regression to classify emails; exposes REST endpoint + small web UI.",
-    impact: [
-      "ROC-AUC 0.96 on validation",
-      "Feature explainability",
-      "Dockerized for quick deploy"
-    ],
-    tags: ["Machine Learning", "Python", "Flask"],
-    links: { 
-      code: "/phishing-app.py", 
-      writeup: "/phishing-report.pdf", 
-      demo: "/phishing-demo.png" 
-    },
-    thumbnail: "/phishing-demo.png",
-  },
-];
-
-const categories = [
-  { key: "all", label: "All" },
-  { key: "Cybersecurity", label: "Cybersecurity" },
-  { key: "Python", label: "Python" },
-  { key: "Machine Learning", label: "Machine Learning" },
-] as const;
+// No projects for now
+const projects: Project[] = [];
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [activeCat, setActiveCat] = useState<(typeof categories)[number]["key"]>("all");
   const [query, setQuery] = useState("");
-  const [open, setOpen] = useState<Project | null>(null);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return projects.filter((p) => {
-      const inCat = activeCat === "all" || p.tags.includes(activeCat);
-      const inQuery =
-        !q ||
-        p.title.toLowerCase().includes(q) ||
-        p.blurb.toLowerCase().includes(q) ||
-        p.tags.join(" ").toLowerCase().includes(q);
-      return inCat && inQuery;
-    });
-  }, [activeCat, query]);
 
   return (
     <div className="wrap">
@@ -132,12 +46,14 @@ export default function App() {
         </div>
         <nav className="nav">
           <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
           <a href="#skills">Skills</a>
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
-        <button className="btn ghost" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+        <button
+          className="btn ghost"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
         </button>
       </header>
@@ -148,71 +64,53 @@ export default function App() {
           <span className="badge">Based in {profile.location}</span>
           <span className="badge">{profile.availability}</span>
         </div>
-        <h1>Building secure systems and pragmatic automation — then telling the story clearly.</h1>
+        <h1>
+          Building secure systems and pragmatic automation — then telling the
+          story clearly.
+        </h1>
         <p className="lead">
-          I combine hands-on cybersecurity labs, incident-style documentation, and applied Python to ship small tools
-          that make teams faster and safer.
+          I combine hands-on cybersecurity labs, incident-style documentation,
+          and applied Python to ship small tools that make teams faster and
+          safer.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#projects">View Projects</a>
-          <a className="btn" href="#resume">Resume</a>
-          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
         </div>
       </section>
 
-      {/* Projects */}
+      {/* Projects (empty for now) */}
       <section id="projects" className="section">
-        <div className="section-head">
-          <h2>Selected Projects</h2>
-          <input
-            className="search"
-            placeholder="Search projects…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
-
-        <div className="pills">
-          {categories.map((c) => (
-            <button
-              key={c.key}
-              className={`pill ${activeCat === c.key ? "active" : ""}`}
-              onClick={() => setActiveCat(c.key)}
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-
-        {filtered.length === 0 ? (
-          <div className="muted">No projects match your filters.</div>
-        ) : (
-          <ul className="grid">
-            {filtered.map((p) => (
-              <li key={p.id} className="card">
-                <div className="thumb"><img src={p.thumbnail} alt={p.title} /></div>
-                <div className="card-body">
-                  <div className="card-title">
-                    <h3>{p.title}</h3>
-                    <span className="year">{p.year}</span>
-                  </div>
-                  <p className="muted">{p.blurb}</p>
-                  <div className="tags">
-                    {p.tags.map((t) => (
-                      <span key={t} className="badge">{t}</span>
-                    ))}
-                  </div>
-                  <div className="links">
-                    <button className="btn small" onClick={() => setOpen(p)}>View Details</button>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+        <h2>Projects</h2>
+        <p className="muted">
+          Projects will be added here soon — stay tuned.
+        </p>
       </section>
 
-      {/* Resume Embedded Clean */}
+      {/* Skills */}
+      <section id="skills" className="section">
+        <h2>Skills</h2>
+        <div className="panel">
+          <ul>
+            <li>🔐 Cybersecurity: Nmap, Wireshark, Snort, Suricata, Metasploit</li>
+            <li>💻 Programming: Python, C, C#, JavaScript, SQL</li>
+            <li>⚙️ Systems: Linux (Parrot, Kali), Windows Server, OPNsense</li>
+            <li>☁️ Cloud & Virtualization: VMware, VirtualBox</li>
+            <li>📊 Databases: Microsoft SQL, SQLite</li>
+            <li>🛡️ Security Concepts: PKI, Certificates, Key Exchange</li>
+            <li>📈 Trading/Finance Tools: Futures, Forex (personal projects)</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Resume Embedded */}
       <section id="resume" className="section">
         <h2>Resume</h2>
         <iframe
@@ -228,82 +126,17 @@ export default function App() {
           <p className="muted">
             Email: {profile.email} <br />
             Phone: {profile.phone} <br />
-            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
+            LinkedIn:{" "}
+            <a href={profile.linkedin} target="_blank">
+              {profile.linkedin}
+            </a>
           </p>
         </div>
       </section>
 
-      <footer className="footer">© {new Date().getFullYear()} {profile.name}. Built with React + Vite.</footer>
-
-      {/* Modal */}
-      {open && (
-        <div className="modal" onClick={() => setOpen(null)}>
-          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-            <div className="thumb"><img src={open.thumbnail} alt={open.title} /></div>
-            <div className="modal-body">
-              <div className="modal-head">
-                <div>
-                  <h3>{open.title}</h3>
-                  <div className="year">{open.year}</div>
-                </div>
-                <button className="btn" onClick={() => setOpen(null)}>Close</button>
-              </div>
-              <p className="muted">{open.blurb}</p>
-              <ul>
-                {open.impact.map((i, idx) => (<li key={idx}>{i}</li>))}
-              </ul>
-              <div className="tags">{open.tags.map((t) => (<span key={t} className="badge">{t}</span>))}</div>
-
-              {/* Inline viewers */}
-              {open.links?.code && <CodeViewer file={open.links.code} />}
-              {open.links?.demo && (
-                <>
-                  <h4>Demo</h4>
-                  <img src={open.links.demo} alt="Demo" style={{ width: "100%", marginTop: "12px" }} />
-                </>
-              )}
-              {open.links?.writeup && (
-                <>
-                  <h4>Write-up</h4>
-                  <iframe
-                    src={open.links.writeup}
-                    style={{ width: "100%", height: "500px", border: "1px solid var(--border)", marginTop: "12px" }}
-                    title="Writeup Viewer"
-                  />
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* Helper component to load and display code */
-function CodeViewer({ file }: { file: string }) {
-  const [content, setContent] = useState<string>("Loading code...");
-
-  useEffect(() => {
-    fetch(file)
-      .then(res => res.text())
-      .then(setContent)
-      .catch(() => setContent("Error loading code."));
-  }, [file]);
-
-  return (
-    <div style={{ marginTop: "16px" }}>
-      <h4>Code</h4>
-      <pre style={{
-        background: "#0f1420",
-        color: "#e6edf3",
-        padding: "12px",
-        borderRadius: "8px",
-        overflowX: "auto",
-        maxHeight: "400px"
-      }}>
-        <code>{content}</code>
-      </pre>
+      <footer className="footer">
+        © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
+      </footer>
     </div>
   );
 }
