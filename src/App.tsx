@@ -254,17 +254,8 @@ export default function App() {
               </ul>
               <div className="tags">{open.tags.map((t) => (<span key={t} className="badge">{t}</span>))}</div>
 
-              {/* Inline viewers for code, demo, writeups */}
-              {open.links?.code && (
-                <>
-                  <h4>Code</h4>
-                  <iframe
-                    src={open.links.code}
-                    style={{ width: "100%", height: "400px", border: "1px solid var(--border)" }}
-                    title="Code Viewer"
-                  />
-                </>
-              )}
+              {/* Inline viewers */}
+              {open.links?.code && <CodeViewer file={open.links.code} />}
               {open.links?.demo && (
                 <>
                   <h4>Demo</h4>
@@ -285,6 +276,34 @@ export default function App() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+/* Helper component to load and display code */
+function CodeViewer({ file }: { file: string }) {
+  const [content, setContent] = useState<string>("Loading code...");
+
+  useEffect(() => {
+    fetch(file)
+      .then(res => res.text())
+      .then(setContent)
+      .catch(() => setContent("Error loading code."));
+  }, [file]);
+
+  return (
+    <div style={{ marginTop: "16px" }}>
+      <h4>Code</h4>
+      <pre style={{
+        background: "#0f1420",
+        color: "#e6edf3",
+        padding: "12px",
+        borderRadius: "8px",
+        overflowX: "auto",
+        maxHeight: "400px"
+      }}>
+        <code>{content}</code>
+      </pre>
     </div>
   );
 }
