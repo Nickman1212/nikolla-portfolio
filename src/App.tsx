@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import urlScan1 from "./assets/malicious_url_scan.jpg";
-import urlScan2 from "./assets/youtube_safe_url_scan.jpg";
+import urlScan1 from "./assets/malicious-url-scan.jpg";
+import urlScan2 from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -27,10 +27,9 @@ export default function App() {
     setActiveProject((prev) => (prev === project ? null : project));
   };
 
-  const closeProject = () => setActiveProject(null);
-
   return (
     <div className="wrap">
+      {/* Top Bar */}
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
@@ -53,85 +52,121 @@ export default function App() {
         </button>
       </header>
 
+      {/* Hero */}
       <section className="hero">
         <div className="badges">
           <span className="badge">Based in {profile.location}</span>
           <span className="badge">{profile.availability}</span>
         </div>
-        <h1>Cybersecurity solutions with clarity, automation, and resilience.</h1>
+        <h1>
+          Cybersecurity solutions with clarity, automation, and resilience.
+        </h1>
         <p className="lead">
           Hands-on cybersecurity projects, clear technical documentation, and
           smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#skills">View Skills</a>
-          <a className="btn" href="#resume">Resume</a>
-          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
         </div>
       </section>
 
+      {/* Projects */}
       <section id="projects" className="section">
         <h2>Projects</h2>
 
+        {/* Honeypot Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            High-interaction honeypot deployment using Cowrie and Dionaea, with real-time analysis via ELK Stack.
+            Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("honeypot")}>View Details</button>
-            {activeProject === "honeypot" && <button onClick={closeProject}>Close</button>}
+            {activeProject === "honeypot" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
           </div>
 
           {activeProject === "honeypot" && (
             <div className="project-details">
-              <img src={honeypotImg} alt="Honeypot Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
+              <img
+                src={honeypotImg}
+                alt="Proof of Honeypot Setup"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
               <p className="muted">
-                <strong>Project Summary:</strong> Designed a high-interaction honeypot lab using T-Pot (includes Cowrie, Dionaea) on a hardened Ubuntu server.
-                Configured firewalls, logging pipelines, and monitored live attacker behavior with Kibana visualizations.
+                <strong>Project Summary:</strong> Deployed a honeypot system using T-Pot
+                (Cowrie, Dionaea), monitored attacker interactions, and visualized logs in
+                real-time using the ELK stack. Captured attacker IPs, SSH brute force attempts,
+                and malware payloads.
               </p>
               <p className="muted">
-                <strong>Key Features:</strong> SSH brute-force logging, malware payload capture, real-time SIEM dashboarding.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, Elasticsearch, Kibana,
+                Logstash, Ubuntu Server.
               </p>
               <p className="muted">
-                <strong>Keywords:</strong> Honeypot, ELK Stack, Cyber Threat Intelligence, MITRE ATT&CK, Syslog, SIEM, Logstash, SSH Logging, IDS.
+                <strong>Purpose:</strong> Demonstrate incident detection, threat intelligence, and
+                log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
+                framework.
               </p>
             </div>
           )}
         </div>
 
+        {/* Malicious URL Detector Project */}
         <div className="panel">
-          <h3>Malicious URL Scanner (VirusTotal API)</h3>
+          <h3>Malicious URL Detection with VirusTotal API</h3>
           <p>
-            Python-based CLI tool that integrates with VirusTotal’s public API to scan URLs and classify threats based on 70+ antivirus engines.
+            Python-based URL scanner that leverages the VirusTotal API to assess URL safety using threat intelligence.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
-            {activeProject === "urlscanner" && <button onClick={closeProject}>Close</button>}
+            <button onClick={() => toggleProject("urlscan")}>View Details</button>
+            {activeProject === "urlscan" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
           </div>
 
-          {activeProject === "urlscanner" && (
+          {activeProject === "urlscan" && (
             <div className="project-details">
-              <img src={urlScan1} alt="Malicious URL Scan Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
-              <img src={urlScan2} alt="YouTube Scan Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
+              <img
+                src={urlScan1}
+                alt="Malicious URL Scan Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
+              <img
+                src={urlScan2}
+                alt="YouTube Safe URL Scan Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
               <p className="muted">
-                <strong>Project Summary:</strong> Developed a Python CLI app that programmatically submits suspicious URLs to VirusTotal for analysis.
-                Results are parsed and summarized locally, then saved to a secure JSON log for auditing and traceability.
+                <strong>Project Summary:</strong> Built a Python application that integrates with
+                the VirusTotal API to analyze the threat level of user-submitted URLs.
+                Developed detailed logic to extract and parse detection engines’ results, classify
+                URLs as malicious/safe, and provide user feedback.
               </p>
               <p className="muted">
-                <strong>Tech Stack:</strong> Python, requests, VirusTotal API, JSON, CLI.
+                <strong>Security Focus:</strong> This scanner supports URL reputation analysis,
+                blacklisting intelligence, and integrates threat enrichment practices used in
+                modern SOCs. Demonstrates Python automation, API handling, and secure I/O logic.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Threat Intelligence Automation, Public API Integration, Response Normalization, Logging & Artifact Handling.
-              </p>
-              <p className="muted">
-                <strong>Keywords:</strong> VirusTotal, URL Scanner, Threat Intelligence, API Security, Malware Classification, SOC Automation, IOC Enrichment.
+                <strong>Buzzwords:</strong> Threat Intelligence, VirusTotal API, Python Automation,
+                URL Reputation, Open Source Intelligence (OSINT), InfoSec Scripting, API Security.
               </p>
             </div>
           )}
         </div>
       </section>
 
+      {/* Skills */}
       <section id="skills" className="section">
         <h2>Skills</h2>
         <div className="panel">
@@ -173,6 +208,7 @@ export default function App() {
         </div>
       </section>
 
+      {/* Resume Embedded */}
       <section id="resume" className="section">
         <h2>Resume</h2>
         <iframe
@@ -181,6 +217,7 @@ export default function App() {
         />
       </section>
 
+      {/* Contact */}
       <section id="contact" className="section">
         <h2>Contact</h2>
         <div className="panel">
