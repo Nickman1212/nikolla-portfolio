@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import honeypotScreenshot from "./assets/honeypot.jpg";
+import honeypotProof from "./assets/honeypot.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -15,6 +15,7 @@ const profile = {
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -55,35 +56,86 @@ export default function App() {
           smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#skills">View Skills</a>
-          <a className="btn" href="#resume">Resume</a>
-          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
         </div>
       </section>
 
       <section id="projects" className="section">
         <h2>Projects</h2>
         <div className="panel">
-          <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
-          <p>
-            Built a multi-layered honeypot lab using <strong>T-Pot</strong> on Proxmox, integrating
-            high-interaction services like <strong>Cowrie</strong> and <strong>Dionaea</strong> to simulate real
-            attack surfaces. Monitored real-time attacker behavior via Kibana + Logstash in the <strong>ELK stack</strong>.
-          </p>
-          <ul>
-            <li>Captured brute-force SSH attempts and malware dropper activity</li>
-            <li>Logged attacker IPs, session duration, and file uploads for analysis</li>
-            <li>Mapped activity using <strong>MITRE ATT&CK</strong> (TA0001 - TA0006) and <strong>Kill Chain</strong> stages</li>
-          </ul>
-          <h4>Proof Screenshot</h4>
-          <img src={honeypotScreenshot} alt="Honeypot Kibana Log Screenshot" style={{ maxWidth: "100%", border: "1px solid #444", borderRadius: "8px" }} />
-          <h4>README / Explainer for Recruiters</h4>
-          <p>
-            This project simulates a real-world production environment under attack. It uses a full
-            honeypot suite to attract threat actors, records their TTPs (Tactics, Techniques, Procedures),
-            and routes their logs to a centralized SIEM stack. It demonstrates my skills in firewall
-            configuration, virtualization, log analysis, and incident detection.
-          </p>
+          <h4>Honeypot-Based Intrusion Detection System</h4>
+          <div className="project-buttons">
+            <button
+              className="btn"
+              onClick={() => setSelectedProject("readme")}
+            >
+              README
+            </button>
+            <button
+              className="btn"
+              onClick={() => setSelectedProject("proof")}
+            >
+              Screenshot Proof
+            </button>
+            <button
+              className="btn"
+              onClick={() => setSelectedProject("details")}
+            >
+              Technical Details
+            </button>
+          </div>
+
+          <div className="project-content">
+            {selectedProject === "readme" && (
+              <div>
+                <p>
+                  This project deploys a honeypot environment using Cowrie and
+                  Dionaea on T-Pot with ELK stack for real-time logging and threat
+                  intelligence.
+                </p>
+                <ul>
+                  <li>High-interaction honeypots for SSH, Telnet, and malware traps</li>
+                  <li>Real-time event monitoring via Kibana dashboards</li>
+                  <li>Captured logs include attacker IPs, commands, and malware binaries</li>
+                </ul>
+              </div>
+            )}
+
+            {selectedProject === "proof" && (
+              <div>
+                <img
+                  src={honeypotProof}
+                  alt="Kibana Dashboard Screenshot"
+                  style={{ width: "100%", borderRadius: "12px" }}
+                />
+              </div>
+            )}
+
+            {selectedProject === "details" && (
+              <div>
+                <p>
+                  <strong>Tools & Technologies:</strong>
+                </p>
+                <ul>
+                  <li>T-Pot Honeypot Platform</li>
+                  <li>Cowrie (SSH/Telnet), Dionaea (malware capture)</li>
+                  <li>ELK Stack (Elasticsearch, Logstash, Kibana)</li>
+                </ul>
+                <p>
+                  The system logs attacker behavior and forwards them to Kibana for
+                  visualization and correlation.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
