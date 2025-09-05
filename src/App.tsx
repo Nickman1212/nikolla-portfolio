@@ -18,7 +18,6 @@ const profile = {
 export default function App() {
   const [activeProject, setActiveProject] = useState<null | string>(null);
 
-  // Force dark mode once on page load
   useEffect(() => {
     document.documentElement.dataset.theme = "dark";
   }, []);
@@ -43,7 +42,6 @@ export default function App() {
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
-        {/* Light/Dark toggle removed */}
       </header>
 
       <section className="hero">
@@ -78,11 +76,7 @@ export default function App() {
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot),
-            Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash,
-            Kibana) on an Ubuntu VM. Configured Suricata rules for advanced
-            network-based detection and integrated firewall hardening for
-            east-west and north-south traffic inspection.
+            Built a comprehensive high-interaction honeypot lab leveraging the T-Pot platform which includes multiple preconfigured honeypots such as Cowrie (SSH/Telnet), Dionaea (malware collection), and Elastic Stack (for log correlation and visualization). The system was deployed on an Ubuntu virtual machine and hardened with customized Suricata rules for deep packet inspection. Network segmentation and port mirroring allowed for simulated east-west and north-south traffic monitoring.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("honeypot")}>View Details</button>
@@ -98,33 +92,26 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Technical Execution:</strong> Configured Docker-based
-                honeypots inside a DMZ, set up port mirroring, captured SSH
-                brute-force attempts, malware hashes, and payloads. Logged
-                attacker TTPs (Tactics, Techniques, Procedures) aligned with
-                MITRE ATT&CK.
+                <strong>Screenshot Explanation:</strong> This image showcases the T-Pot web interface and live attacker session logs, demonstrating real-time SSH brute-force attempts being captured and logged. It confirms full operational deployment of all honeypot services.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense,
-                Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
+                <strong>Technical Execution:</strong> Used Docker containers for honeypots inside a segmented DMZ. Integrated pfSense firewall and mirrored inbound traffic for Suricata-based IDS inspection. Captured real-world attacker payloads and behavior aligned with MITRE ATT&CK tactics.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Real-time visibility into adversary
-                behavior, centralized log correlation via ELK, actionable SIEM
-                alerts, and detection of lateral movement or privilege escalation
-                patterns.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
+              </p>
+              <p className="muted">
+                <strong>Objective:</strong> To gather adversary tactics, techniques, and procedures (TTPs), collect malware samples, and improve threat intelligence through central log correlation and actionable SIEM alerts.
               </p>
             </div>
           )}
         </div>
 
-        {/* Unified URL Scanner */}
+        {/* URL Scanner */}
         <div className="panel">
           <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
           <p>
-            Engineered a Python CLI application that integrates with the
-            VirusTotal API and YouTube Data API v3 to validate URL legitimacy and
-            classify URLs as safe, suspicious, or malicious.
+            Designed and implemented an advanced threat intelligence tool in Python that performs security validation on any given URL, including shortened links and embedded YouTube URLs. The CLI tool queries VirusTotal's multi-engine scanning results for known malicious signatures and further integrates with YouTube's Data API to assess content metadata for suspicious or abusive indicators.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("urlscanner")}>View Details</button>
@@ -139,31 +126,28 @@ export default function App() {
                 alt="Malicious URL Detection"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
+              <p className="muted">
+                <strong>Screenshot Explanation (1):</strong> This screenshot captures the terminal-based interface scanning a potentially harmful URL. It shows how the tool flags suspicious URLs using VirusTotal results, including detected engines and threat labels (e.g., phishing, trojan).
+              </p>
               <img
                 src={urlScanImg2}
                 alt="YouTube Safe URL Scan"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Key Features:</strong> Parses user-provided URLs,
-                cross-references them with VirusTotal’s multi-engine antivirus
-                scans, applies regex validation, and utilizes YouTube’s API to
-                flag suspicious descriptions, keywords, or metadata abuse.
+                <strong>Screenshot Explanation (2):</strong> This demonstrates the YouTube URL validation process where the video metadata, title, and description are parsed to detect social engineering attempts or links to malicious download sites.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Implements secure API token
-                storage, rate-limiting, error handling, and API key rotation
-                logic. Emphasizes threat intelligence enrichment and real-time
-                phishing detection capabilities.
+                <strong>Key Features:</strong> URL format validation, multi-AV engine consensus from VirusTotal, YouTube video metadata analysis, alert severity categorization, and safe/unsafe verdict display. Also logs results for later auditing.
               </p>
               <p className="muted">
-                <strong>Technologies Used:</strong> Python, VirusTotal API,
-                YouTube API, JSON, Requests, Regex, OSINT methodologies.
+                <strong>Security Techniques:</strong> Secure API token storage via environment variables, dynamic rate limiting based on usage quota, API key rotation module, and robust exception/error handling.
               </p>
               <p className="muted">
-                <strong>Purpose:</strong> Enables blue teams and SOC analysts to
-                proactively scan inbound URLs for malicious indicators before
-                incident escalation.
+                <strong>Technologies Used:</strong> Python, VirusTotal API, YouTube Data API v3, OSINT, Requests, Regex, JSON, CLI UX design.
+              </p>
+              <p className="muted">
+                <strong>Purpose:</strong> To empower blue teams and SOC analysts with a reliable tool for automated threat assessment of incoming URLs—detecting phishing lures and malicious redirectors before an incident response is required.
               </p>
             </div>
           )}
