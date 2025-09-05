@@ -1,207 +1,81 @@
-import { useEffect, useState } from "react";
-import honeypotProof from "./assets/honeypot.jpg";
+import React, { useState } from "react";
+import HoneypotImg from "./assets/Honeypot.JPG";
 
-const profile = {
-  name: "Nikolla Nickolov",
-  tagline: "Cybersecurity • Systems • Applied Data",
-  location: "Tampa Bay, FL",
-  email: "Nickman477@gmail.com",
-  phone: "727-307-8538",
-  linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
-  resumeUrl: "/NIKOLLA_NICKOLOV.pdf",
-  headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
-  availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
-};
-
-export default function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+function App() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
-
   return (
-    <div className="wrap">
-      <header className="topbar">
-        <div className="brand">
-          <img className="avatar" src={profile.headshot} alt="Headshot" />
+    <div className="min-h-screen bg-gray-100 p-4">
+      <h1 className="text-4xl font-bold mb-6 text-center">Nikolla Nickolov - Cybersecurity Portfolio</h1>
+
+      {/* Project Buttons */}
+      <div className="flex justify-center gap-4 mb-8">
+        <button onClick={() => setSelectedProject("suricata")} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Suricata IDS</button>
+        <button onClick={() => setSelectedProject("phishing")} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Phishing Detector</button>
+        <button onClick={() => setSelectedProject("honeypot")} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cowrie Honeypot</button>
+      </div>
+
+      {/* Suricata IDS */}
+      {selectedProject === "suricata" && (
+        <div className="bg-white rounded-lg p-6 shadow-md max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4">Suricata-Based Intrusion Detection System</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Designed and deployed Suricata in a home lab to monitor live network traffic.</li>
+            <li>Created custom rules to detect port scans, brute-force attempts, malware, and data exfiltration.</li>
+            <li>Used tools like tcpdump and Wireshark to verify alerts and tune rulesets.</li>
+            <li>Logged alerts to a dedicated directory and parsed them with Python scripts for automated response.</li>
+          </ul>
+        </div>
+      )}
+
+      {/* Phishing Detector */}
+      {selectedProject === "phishing" && (
+        <div className="bg-white rounded-lg p-6 shadow-md max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4">Phishing URL Detection with VirusTotal API</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Built a Python script that submits URLs to VirusTotal and evaluates risk based on returned results.</li>
+            <li>Integrated reputation scoring from multiple vendors to identify malicious indicators.</li>
+            <li>Logged results with timestamps and categorized URLs as phishing/safe/suspicious.</li>
+            <li>Used in tandem with threat intel feeds to support incident response workflows.</li>
+          </ul>
+        </div>
+      )}
+
+      {/* Honeypot Project */}
+      {selectedProject === "honeypot" && (
+        <div className="bg-white rounded-lg p-6 shadow-md max-w-4xl mx-auto space-y-6">
+          <h2 className="text-2xl font-semibold">Cowrie Honeypot Project</h2>
+
+          {/* README Section */}
           <div>
-            <div className="brand-name">{profile.name}</div>
-            <div className="brand-sub">{profile.tagline}</div>
-          </div>
-        </div>
-        <nav className="nav">
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#resume">Resume</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button
-          className="btn ghost"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
-        </button>
-      </header>
-
-      <section className="hero">
-        <div className="badges">
-          <span className="badge">Based in {profile.location}</span>
-          <span className="badge">{profile.availability}</span>
-        </div>
-        <h1>Cybersecurity solutions with clarity, automation, and resilience.</h1>
-        <p className="lead">
-          Hands-on cybersecurity projects, clear technical documentation, and
-          smart automation are at the core of how I deliver value.
-        </p>
-        <div className="cta">
-          <a className="btn primary" href="#skills">
-            View Skills
-          </a>
-          <a className="btn" href="#resume">
-            Resume
-          </a>
-          <a className="btn" href={profile.linkedin} target="_blank">
-            LinkedIn
-          </a>
-        </div>
-      </section>
-
-      <section id="projects" className="section">
-        <h2>Projects</h2>
-        <div className="panel">
-          <h4>Honeypot-Based Intrusion Detection System</h4>
-          <div className="project-buttons">
-            <button
-              className="btn"
-              onClick={() => setSelectedProject("readme")}
-            >
-              README
-            </button>
-            <button
-              className="btn"
-              onClick={() => setSelectedProject("proof")}
-            >
-              Screenshot Proof
-            </button>
-            <button
-              className="btn"
-              onClick={() => setSelectedProject("details")}
-            >
-              Technical Details
-            </button>
+            <h3 className="text-xl font-semibold mb-2">README</h3>
+            <p>
+              This project involved deploying a Cowrie honeypot on a Docker container inside a Parrot OS environment. The goal was to capture and log unauthorized SSH and Telnet access attempts for behavioral analysis. Logs are stored in JSON and text format, which provide visibility into attacker commands and IPs.
+            </p>
           </div>
 
-          <div className="project-content">
-            {selectedProject === "readme" && (
-              <div>
-                <p>
-                  This project deploys a honeypot environment using Cowrie and
-                  Dionaea on T-Pot with ELK stack for real-time logging and threat
-                  intelligence.
-                </p>
-                <ul>
-                  <li>High-interaction honeypots for SSH, Telnet, and malware traps</li>
-                  <li>Real-time event monitoring via Kibana dashboards</li>
-                  <li>Captured logs include attacker IPs, commands, and malware binaries</li>
-                </ul>
-              </div>
-            )}
+          {/* Screenshot Section */}
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Screenshot</h3>
+            <img src={HoneypotImg} alt="Cowrie Honeypot Screenshot" className="rounded shadow-md w-full max-w-2xl mx-auto" />
+          </div>
 
-            {selectedProject === "proof" && (
-              <div>
-                <img
-                  src={honeypotProof}
-                  alt="Kibana Dashboard Screenshot"
-                  style={{ width: "100%", borderRadius: "12px" }}
-                />
-              </div>
-            )}
-
-            {selectedProject === "details" && (
-              <div>
-                <p>
-                  <strong>Tools & Technologies:</strong>
-                </p>
-                <ul>
-                  <li>T-Pot Honeypot Platform</li>
-                  <li>Cowrie (SSH/Telnet), Dionaea (malware capture)</li>
-                  <li>ELK Stack (Elasticsearch, Logstash, Kibana)</li>
-                </ul>
-                <p>
-                  The system logs attacker behavior and forwards them to Kibana for
-                  visualization and correlation.
-                </p>
-              </div>
-            )}
+          {/* Technical Details Section */}
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Technical Details</h3>
+            <ul className="list-disc list-inside space-y-2">
+              <li>Used the official Cowrie Docker image: <code>cowrie/cowrie:latest</code></li>
+              <li>Exposed ports 2222 and 2223 for SSH and Telnet simulation.</li>
+              <li>Logged and tailed JSON output from <code>/cowrie/cowrie-git/var/log/cowrie/cowrie.json</code>.</li>
+              <li>Deployed and validated attack emulation within isolated test VM environment.</li>
+              <li>Aligned project activity with MITRE ATT&CK techniques (e.g., T1021.001: Remote Services).</li>
+              <li>Mapped honeypot response phases to the Cyber Kill Chain lifecycle.</li>
+            </ul>
           </div>
         </div>
-      </section>
-
-      <section id="skills" className="section">
-        <h2>Skills</h2>
-        <div className="panel">
-          <h4>Cybersecurity & Networking</h4>
-          <ul>
-            <li>Nmap, Masscan (network scanning)</li>
-            <li>Wireshark, tcpdump (packet analysis)</li>
-            <li>Suricata, Snort (IDS/IPS)</li>
-            <li>OPNsense, pfSense, iptables (firewalls)</li>
-            <li>Nessus, OpenVAS (vulnerability scanning)</li>
-            <li>Metasploit, Hydra, SQLMap (exploitation)</li>
-            <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
-          </ul>
-
-          <h4>Programming & Automation</h4>
-          <ul>
-            <li>Python, Flask (automation & web apps)</li>
-            <li>C, C#, JavaScript / Node.js</li>
-            <li>Bash, PowerShell scripting</li>
-            <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
-          </ul>
-
-          <h4>Systems & Platforms</h4>
-          <ul>
-            <li>Linux: Kali, Parrot OS, Ubuntu</li>
-            <li>Windows Server: AD, DHCP, DNS, Group Policy</li>
-            <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
-            <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
-          </ul>
-
-          <h4>Security Concepts</h4>
-          <ul>
-            <li>PKI, TLS/SSL, Key Exchange</li>
-            <li>Kerberos, LDAP, MFA</li>
-            <li>Graylog, ELK Stack (SIEM & logging)</li>
-            <li>Incident Response workflows</li>
-            <li>Encryption: AES, RSA, MD5/SHA hashing</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="resume" className="section">
-        <h2>Resume</h2>
-        <iframe
-          src={profile.resumeUrl}
-          style={{ width: "100%", height: "1000px", border: "none" }}
-        />
-      </section>
-
-      <section id="contact" className="section">
-        <h2>Contact</h2>
-        <div className="panel">
-          <p className="muted">
-            Email: {profile.email} <br />
-            Phone: {profile.phone} <br />
-            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
-          </p>
-        </div>
-      </section>
-
-      <footer className="footer">
-        © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
-      </footer>
+      )}
     </div>
   );
 }
+
+export default App;
