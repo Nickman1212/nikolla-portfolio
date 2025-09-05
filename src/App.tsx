@@ -1,100 +1,182 @@
-import { useState } from "react";
-import honeypotProof from "./assets/honeypot.jpg";
+import { useEffect, useState } from "react";
+import honeypotImg from "./assets/honeypot.jpg";
+
+const profile = {
+  name: "Nikolla Nickolov",
+  tagline: "Cybersecurity • Systems • Applied Data",
+  location: "Tampa Bay, FL",
+  email: "Nickman477@gmail.com",
+  phone: "727-307-8538",
+  linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf",
+  headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
+  availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
+};
 
 export default function App() {
-  const [selectedSection, setSelectedSection] = useState("readme");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [activeProject, setActiveProject] = useState<null | string>(null);
 
-  const renderSection = () => {
-    switch (selectedSection) {
-      case "readme":
-        return (
-          <div className="space-y-2">
-            <p>
-              This Honeypot-Based IDS project leverages the T-Pot distribution to deploy high-interaction honeypots
-              such as Cowrie and Dionaea across multiple containers.
-            </p>
-            <p>
-              These honeypots emulate vulnerable services and are integrated with the ELK Stack to monitor and
-              analyze attacker behavior in real time. Logs are enriched with GeoIP and threat intelligence sources.
-            </p>
-            <p>
-              Ideal for practicing threat hunting, understanding attacker TTPs, and demonstrating detection engineering
-              skills mapped to the MITRE ATT&CK Framework and cyber kill chain.
-            </p>
-          </div>
-        );
-      case "proof":
-        return (
-          <div className="mt-4">
-            <img
-              src={honeypotProof}
-              alt="Screenshot showing honeypot project"
-              className="rounded-lg shadow-md w-full"
-            />
-            <p className="text-sm mt-2 text-gray-400">Screenshot of the working honeypot system.</p>
-          </div>
-        );
-      case "details":
-        return (
-          <div className="space-y-2 mt-4">
-            <ul className="list-disc list-inside text-gray-300">
-              <li>🌹 T-Pot 2304 with containers: Cowrie, Dionaea, Heralding, ELK stack, and more
-              </li>
-              <li>🩤 Cowrie SSH honeypot simulates full shell interaction & file downloads</li>
-              <li>🪂 Dionaea emulates SMB, HTTP, FTP for malware capture</li>
-              <li>📊 Real-time event visualization via Kibana dashboards</li>
-              <li>🌍 Integrated GeoIP & abuse.ch threat intel enrichment</li>
-              <li>🧠 ATT&CK mapping and lifecycle visibility for attacker behavior</li>
-            </ul>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans p-6">
-      <h1 className="text-4xl font-bold text-center mb-8">Nikolla Nickolov – Cybersecurity Portfolio</h1>
+    <div className="wrap">
+      {/* Top Bar */}
+      <header className="topbar">
+        <div className="brand">
+          <img className="avatar" src={profile.headshot} alt="Headshot" />
+          <div>
+            <div className="brand-name">{profile.name}</div>
+            <div className="brand-sub">{profile.tagline}</div>
+          </div>
+        </div>
+        <nav className="nav">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          className="btn ghost"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        </button>
+      </header>
 
-      <div className="max-w-4xl mx-auto bg-zinc-900 p-6 rounded-lg shadow-lg space-y-6">
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">📡 Honeypot-Based Intrusion Detection System
-          </h2>
-          <div className="flex space-x-4 mb-4">
-            <button
-              className={`px-4 py-2 rounded ${
-                selectedSection === "readme" ? "bg-white text-black" : "bg-zinc-800"
-              }`}
-              onClick={() => setSelectedSection("readme")}
-            >
-              README
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                selectedSection === "proof" ? "bg-white text-black" : "bg-zinc-800"
-              }`}
-              onClick={() => setSelectedSection("proof")}
-            >
-              Screenshot
-            </button>
-            <button
-              className={`px-4 py-2 rounded ${
-                selectedSection === "details" ? "bg-white text-black" : "bg-zinc-800"
-              }`}
-              onClick={() => setSelectedSection("details")}
-            >
-              Technical Details
-            </button>
+      {/* Hero */}
+      <section className="hero">
+        <div className="badges">
+          <span className="badge">Based in {profile.location}</span>
+          <span className="badge">{profile.availability}</span>
+        </div>
+        <h1>
+          Cybersecurity solutions with clarity, automation, and resilience.
+        </h1>
+        <p className="lead">
+          Hands-on cybersecurity projects, clear technical documentation, and
+          smart automation are at the core of how I deliver value.
+        </p>
+        <div className="cta">
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="section">
+        <h2>Projects</h2>
+
+        <div className="panel">
+          <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
+          <p>
+            Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => setActiveProject("honeypot")}>View Details</button>
           </div>
 
-          {renderSection()}
+          {activeProject === "honeypot" && (
+            <div className="project-details">
+              <img
+                src={honeypotImg}
+                alt="Proof of Honeypot Setup"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
+              <p className="muted">
+                <strong>Project Summary:</strong> Deployed a honeypot system using T-Pot
+                (Cowrie, Dionaea), monitored attacker interactions, and visualized logs in
+                real-time using the ELK stack. Captured attacker IPs, SSH brute force attempts,
+                and malware payloads.
+              </p>
+              <p className="muted">
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, Elasticsearch, Kibana,
+                Logstash, Ubuntu Server.
+              </p>
+              <p className="muted">
+                <strong>Purpose:</strong> Demonstrate incident detection, threat intelligence, and
+                log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
+                framework.
+              </p>
+            </div>
+          )}
         </div>
-      </div>
+      </section>
 
-      <footer className="mt-12 text-center text-sm text-gray-400">
-        <p>Connect with me: <a href="https://www.linkedin.com/in/nikolla-nickolov-1a46a2290" target="_blank" className="underline">LinkedIn</a></p>
-        <p>Skills: Suricata, T-Pot, Cowrie, Dionaea, ELK Stack, Kibana, MITRE ATT&CK, Threat Hunting, Incident Response</p>
+      {/* Skills */}
+      <section id="skills" className="section">
+        <h2>Skills</h2>
+        <div className="panel">
+          <h4>Cybersecurity & Networking</h4>
+          <ul>
+            <li>Nmap, Masscan (network scanning)</li>
+            <li>Wireshark, tcpdump (packet analysis)</li>
+            <li>Suricata, Snort (IDS/IPS)</li>
+            <li>OPNsense, pfSense, iptables (firewalls)</li>
+            <li>Nessus, OpenVAS (vulnerability scanning)</li>
+            <li>Metasploit, Hydra, SQLMap (exploitation)</li>
+            <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
+          </ul>
+
+          <h4>Programming & Automation</h4>
+          <ul>
+            <li>Python, Flask (automation & web apps)</li>
+            <li>C, C#, JavaScript / Node.js</li>
+            <li>Bash, PowerShell scripting</li>
+            <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
+          </ul>
+
+          <h4>Systems & Platforms</h4>
+          <ul>
+            <li>Linux: Kali, Parrot OS, Ubuntu</li>
+            <li>Windows Server: AD, DHCP, DNS, Group Policy</li>
+            <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
+            <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
+          </ul>
+
+          <h4>Security Concepts</h4>
+          <ul>
+            <li>PKI, TLS/SSL, Key Exchange</li>
+            <li>Kerberos, LDAP, MFA</li>
+            <li>Graylog, ELK Stack (SIEM & logging)</li>
+            <li>Incident Response workflows</li>
+            <li>Encryption: AES, RSA, MD5/SHA hashing</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Resume Embedded */}
+      <section id="resume" className="section">
+        <h2>Resume</h2>
+        <iframe
+          src={profile.resumeUrl}
+          style={{ width: "100%", height: "1000px", border: "none" }}
+        />
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="section">
+        <h2>Contact</h2>
+        <div className="panel">
+          <p className="muted">
+            Email: {profile.email} <br />
+            Phone: {profile.phone} <br />
+            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
+          </p>
+        </div>
+      </section>
+
+      <footer className="footer">
+        © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
       </footer>
     </div>
   );
