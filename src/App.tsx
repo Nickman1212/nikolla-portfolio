@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
+import maliciousScanImg from "./assets/Malicious URL Scan.JPG";
+import youtubeScanImg from "./assets/YouTube Safe URL Scan.JPG";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -80,6 +82,7 @@ export default function App() {
       <section id="projects" className="section">
         <h2>Projects</h2>
 
+        {/* Honeypot Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
@@ -111,6 +114,41 @@ export default function App() {
                 log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
                 framework.
               </p>
+            </div>
+          )}
+        </div>
+
+        {/* URL Scanner Project */}
+        <div className="panel">
+          <h3>Malicious URL Scanner</h3>
+          <p>
+            A Python-based threat intelligence tool using VirusTotal API to identify malicious links.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
+          </div>
+
+          {activeProject === "urlscanner" && (
+            <div className="project-details">
+              <img
+                src={maliciousScanImg}
+                alt="Malicious URL Detection Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "1rem" }}
+              />
+              <img
+                src={youtubeScanImg}
+                alt="YouTube Safe URL Scan Screenshot"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginBottom: "1rem" }}
+              />
+              <p className="muted">
+                <strong>Project Summary:</strong> Built a Python-based tool that scans and classifies URLs using VirusTotal. Outputs real-time results from 70+ AV engines and logs forensic-ready JSON reports.
+              </p>
+              <p className="muted">
+                <strong>Tools Used:</strong> Python, REST API, VirusTotal, Base64, dotenv, JSON
+              </p>
+              <a className="btn" href="/url-scanner.py" download>
+                ⬇️ Download Python Script
+              </a>
             </div>
           )}
         </div>
