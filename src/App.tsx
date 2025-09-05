@@ -1,96 +1,183 @@
-import { useState } from "react";
-import "./App.css";
-import honeypotImage from "./assets/honeypot_proof.png";
+import { useEffect, useState } from "react";
+import honeypotImg from "./assets/Honeypot.JPG";
 
-function App() {
-  const [selectedProject, setSelectedProject] = useState<
-    "suricata" | "phishing" | "honeypot" | null
-  >(null);
+const profile = {
+  name: "Nikolla Nickolov",
+  tagline: "Cybersecurity • Systems • Applied Data",
+  location: "Tampa Bay, FL",
+  email: "Nickman477@gmail.com",
+  phone: "727-307-8538",
+  linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf",
+  headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
+  availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
+};
 
-  const renderProjectDetails = () => {
-    switch (selectedProject) {
-      case "suricata":
-        return (
-          <div>
-            <h2>Suricata IDS Project</h2>
-            <p>
-              Designed and deployed a Suricata-based Intrusion Detection System in a home lab
-              environment. Customized Suricata rules to detect malware, brute-force attempts, and port
-              scans.
-            </p>
-            <ul>
-              <li>🔍 Real-time packet analysis using Suricata logs</li>
-              <li>📜 Custom rule scripting and signature creation</li>
-              <li>📡 Monitored multiple interfaces using `af-packet`</li>
-            </ul>
-          </div>
-        );
-      case "phishing":
-        return (
-          <div>
-            <h2>Phishing Email Detector (Python + Flask)</h2>
-            <p>
-              Engineered a machine learning web app to classify phishing emails. Integrated TF-IDF vectorization with a
-              logistic regression model.
-            </p>
-            <ul>
-              <li>📬 Live email classification using Flask backend</li>
-              <li>📊 TF-IDF feature extraction with Scikit-learn</li>
-              <li>🧪 Trained and tested on real-world phishing datasets</li>
-            </ul>
-          </div>
-        );
-      case "honeypot":
-        return (
-          <div>
-            <h2>Honeypot-based Intrusion Detection System</h2>
-            <p>
-              Deployed Cowrie Honeypot on Docker to monitor SSH/Telnet brute force attempts. Captured
-              attacker behavior, generated logs, and analyzed threat patterns.
-            </p>
-            <ul>
-              <li>🐍 Cowrie running inside Docker container</li>
-              <li>🪝 Simulated SSH service on port 2222</li>
-              <li>📁 Logs reviewed via `cowrie.json` for threat intelligence</li>
-            </ul>
+export default function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [activeProject, setActiveProject] = useState<null | string>(null);
 
-            <h3>📸 Proof of Work:</h3>
-            <img
-              src={honeypotImage}
-              alt="Cowrie Honeypot Proof Screenshot"
-              style={{ maxWidth: "100%", border: "2px solid #ccc", borderRadius: "10px" }}
-            />
-
-            <h3>📘 README Section</h3>
-            <p>
-              This screenshot shows Cowrie Honeypot running on port 2222 inside a Docker container on
-              Kali Linux. The logs are accessed through the command line, verifying that the
-              honeypot is capturing interaction attempts from malicious users.
-            </p>
-            <p>
-              I use this setup to collect behavioral data from attackers in a simulated environment,
-              which helps improve my incident response and log analysis skills.
-            </p>
-          </div>
-        );
-      default:
-        return <p>Select a project above to view its details.</p>;
-    }
-  };
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   return (
-    <div className="App">
-      <h1>📁 Nikolla Nickolov – Cybersecurity Projects</h1>
+    <div className="wrap">
+      {/* Top Bar */}
+      <header className="topbar">
+        <div className="brand">
+          <img className="avatar" src={profile.headshot} alt="Headshot" />
+          <div>
+            <div className="brand-name">{profile.name}</div>
+            <div className="brand-sub">{profile.tagline}</div>
+          </div>
+        </div>
+        <nav className="nav">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          className="btn ghost"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        </button>
+      </header>
 
-      <div className="button-group">
-        <button onClick={() => setSelectedProject("suricata")}>Suricata IDS</button>
-        <button onClick={() => setSelectedProject("phishing")}>Phishing Detector</button>
-        <button onClick={() => setSelectedProject("honeypot")}>Honeypot IDS</button>
-      </div>
+      {/* Hero */}
+      <section className="hero">
+        <div className="badges">
+          <span className="badge">Based in {profile.location}</span>
+          <span className="badge">{profile.availability}</span>
+        </div>
+        <h1>
+          Cybersecurity solutions with clarity, automation, and resilience.
+        </h1>
+        <p className="lead">
+          Hands-on cybersecurity projects, clear technical documentation, and
+          smart automation are at the core of how I deliver value.
+        </p>
+        <div className="cta">
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
+        </div>
+      </section>
 
-      <div className="project-details">{renderProjectDetails()}</div>
+      {/* Projects */}
+      <section id="projects" className="section">
+        <h2>Projects</h2>
+
+        <div className="panel">
+          <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
+          <p>
+            Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => setActiveProject("honeypot")}>View Details</button>
+          </div>
+
+          {activeProject === "honeypot" && (
+            <div className="project-details">
+              <img
+                src={honeypotImg}
+                alt="Proof of Honeypot Setup"
+                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
+              />
+              <p className="muted">
+                <strong>Project Summary:</strong> Deployed a honeypot system using T-Pot
+                (Cowrie, Dionaea), monitored attacker interactions, and visualized logs in
+                real-time using the ELK stack. Captured attacker IPs, SSH brute force attempts,
+                and malware payloads.
+              </p>
+              <p className="muted">
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, Elasticsearch, Kibana,
+                Logstash, Ubuntu Server.
+              </p>
+              <p className="muted">
+                <strong>Purpose:</strong> Demonstrate incident detection, threat intelligence, and
+                log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
+                framework.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="section">
+        <h2>Skills</h2>
+        <div className="panel">
+          <h4>Cybersecurity & Networking</h4>
+          <ul>
+            <li>Nmap, Masscan (network scanning)</li>
+            <li>Wireshark, tcpdump (packet analysis)</li>
+            <li>Suricata, Snort (IDS/IPS)</li>
+            <li>OPNsense, pfSense, iptables (firewalls)</li>
+            <li>Nessus, OpenVAS (vulnerability scanning)</li>
+            <li>Metasploit, Hydra, SQLMap (exploitation)</li>
+            <li>Burp Suite, OWASP ZAP, DVWA (web app security)</li>
+          </ul>
+
+          <h4>Programming & Automation</h4>
+          <ul>
+            <li>Python, Flask (automation & web apps)</li>
+            <li>C, C#, JavaScript / Node.js</li>
+            <li>Bash, PowerShell scripting</li>
+            <li>SQL: Microsoft SQL Server, SQLite, MySQL</li>
+          </ul>
+
+          <h4>Systems & Platforms</h4>
+          <ul>
+            <li>Linux: Kali, Parrot OS, Ubuntu</li>
+            <li>Windows Server: AD, DHCP, DNS, Group Policy</li>
+            <li>Virtualization: VMware, VirtualBox, Hyper-V</li>
+            <li>AWS (IAM, EC2, S3), Azure Fundamentals</li>
+          </ul>
+
+          <h4>Security Concepts</h4>
+          <ul>
+            <li>PKI, TLS/SSL, Key Exchange</li>
+            <li>Kerberos, LDAP, MFA</li>
+            <li>Graylog, ELK Stack (SIEM & logging)</li>
+            <li>Incident Response workflows</li>
+            <li>Encryption: AES, RSA, MD5/SHA hashing</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Resume Embedded */}
+      <section id="resume" className="section">
+        <h2>Resume</h2>
+        <iframe
+          src={profile.resumeUrl}
+          style={{ width: "100%", height: "1000px", border: "none" }}
+        />
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="section">
+        <h2>Contact</h2>
+        <div className="panel">
+          <p className="muted">
+            Email: {profile.email} <br />
+            Phone: {profile.phone} <br />
+            LinkedIn: <a href={profile.linkedin} target="_blank">{profile.linkedin}</a>
+          </p>
+        </div>
+      </section>
+
+      <footer className="footer">
+        © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
+      </footer>
     </div>
   );
 }
-
-export default App;
