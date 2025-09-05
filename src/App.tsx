@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
 import maliciousUrlScan from "./assets/malicious-url-scan.jpg";
-import youtubeSafeScan from "./assets/youtube-safe-url-scan.jpg";
+import youtubeSafeUrlScan from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -82,6 +82,7 @@ export default function App() {
       <section id="projects" className="section">
         <h2>Projects</h2>
 
+        {/* Honeypot Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
@@ -113,14 +114,21 @@ export default function App() {
                 log analysis using high-interaction honeypots aligned with the MITRE ATT&CK
                 framework.
               </p>
+              <p className="muted">
+                <strong>Steps Taken:</strong> Installed T-Pot ISO on a VM, configured networking for
+                port exposure, customized Cowrie for SSH honeypot interactions, verified attacker
+                payloads, and used Kibana to visualize live logs. Ensured ELK stack was linked to
+                honeypot sensors and observed real-world exploit attempts in a controlled lab.
+              </p>
             </div>
           )}
         </div>
 
+        {/* Malicious URL Detector */}
         <div className="panel">
-          <h3>Malicious URL Detector (VirusTotal API)</h3>
+          <h3>Malicious URL Detector with VirusTotal API</h3>
           <p>
-            Python-based CLI scanner that checks URLs against VirusTotal’s threat intelligence engine.
+            Python-based tool that checks if a URL is malicious using VirusTotal's threat intel platform.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("urlscanner")}>View Details</button>
@@ -134,19 +142,24 @@ export default function App() {
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <img
-                src={youtubeSafeScan}
-                alt="Safe URL Scan Screenshot"
+                src={youtubeSafeUrlScan}
+                alt="YouTube Safe URL Scan Screenshot"
                 style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
               />
               <p className="muted">
-                <strong>Project Summary:</strong> Built a command-line tool in Python that takes
-                in user-submitted URLs and uses the VirusTotal API to determine malicious or suspicious behavior.
+                <strong>Project Summary:</strong> Developed a command-line Python scanner that submits URLs to VirusTotal’s API, retrieves scan results, and classifies URLs based on threat categories.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, VirusTotal API, JSON, CLI, VS Code.
+                <strong>Tools Used:</strong> Python 3, VirusTotal Public API, JSON parsing, Terminal UX.
               </p>
               <p className="muted">
-                <strong>Purpose:</strong> Identify phishing links and track down unsafe domains using threat intel.
+                <strong>Purpose:</strong> Evaluate unknown URLs for phishing or malware using community and vendor-sourced threat intelligence.
+              </p>
+              <p className="muted">
+                <strong>How It Works:</strong> The tool prompts the user to input a URL. It submits the URL to VirusTotal and waits for analysis to complete. Once complete, it fetches categorized results including number of malicious, suspicious, and harmless reports. The tool also logs results in a JSON file for tracking.
+              </p>
+              <p className="muted">
+                <strong>Steps Taken:</strong> Registered for a VirusTotal API key → Wrote Python script to send POST/GET requests → Parsed responses using the `requests` and `json` libraries → Implemented error handling for 400/404 issues → Created test cases using real phishing and safe links → Captured screenshots from terminal for visual proof.
               </p>
             </div>
           )}
