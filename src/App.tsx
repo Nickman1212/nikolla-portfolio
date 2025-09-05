@@ -21,6 +21,10 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
+  const toggleProject = (project: string) => {
+    setActiveProject((prev) => (prev === project ? null : project));
+  };
+
   return (
     <div className="wrap">
       {/* Top Bar */}
@@ -82,7 +86,7 @@ export default function App() {
             Interactive demonstration of deploying Cowrie, Dionaea, and ELK stack to monitor and analyze attacks.
           </p>
           <div className="project-buttons">
-            <button onClick={() => setActiveProject("honeypot")}>View Details</button>
+            <button onClick={() => toggleProject("honeypot")}>View Details</button>
           </div>
 
           {activeProject === "honeypot" && (
