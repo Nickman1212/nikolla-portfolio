@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
-import urlScanImg1 from "./assets/malicious-url-scan.jpg";
-import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
+import maliciousImg from "./assets/malicious-url-scan.jpg";
+import youtubeImg from "./assets/youtube-safe-url-scan.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -23,8 +23,12 @@ export default function App() {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
-  const toggleProject = (project: string) => {
-    setActiveProject((prev) => (prev === project ? null : project));
+  const openProject = (project: string) => {
+    setActiveProject(project);
+  };
+
+  const closeProject = () => {
+    setActiveProject(null);
   };
 
   return (
@@ -43,10 +47,7 @@ export default function App() {
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
-        <button
-          className="btn ghost"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
+        <button className="btn ghost" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
         </button>
       </header>
@@ -56,97 +57,85 @@ export default function App() {
           <span className="badge">Based in {profile.location}</span>
           <span className="badge">{profile.availability}</span>
         </div>
-        <h1>
-          Cybersecurity solutions with clarity, automation, and resilience.
-        </h1>
+        <h1>Cybersecurity solutions with clarity, automation, and resilience.</h1>
         <p className="lead">
-          Hands-on cybersecurity projects, clear technical documentation, and
-          smart automation are at the core of how I deliver value.
+          Hands-on cybersecurity projects, clear technical documentation, and smart automation are at the core of how I deliver value.
         </p>
         <div className="cta">
-          <a className="btn primary" href="#skills">
-            View Skills
-          </a>
-          <a className="btn" href="#resume">
-            Resume
-          </a>
-          <a className="btn" href={profile.linkedin} target="_blank">
-            LinkedIn
-          </a>
+          <a className="btn primary" href="#skills">View Skills</a>
+          <a className="btn" href="#resume">Resume</a>
+          <a className="btn" href={profile.linkedin} target="_blank">LinkedIn</a>
         </div>
       </section>
 
       <section id="projects" className="section">
         <h2>Projects</h2>
 
-        {/* Honeypot IDS */}
+        {/* Honeypot IDS Project */}
         <div className="panel">
           <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
           <p>
-            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot), Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash, Kibana) on an Ubuntu VM.
-            Configured Suricata rules for advanced network-based detection and integrated firewall hardening for east-west and north-south traffic inspection.
+            Full-stack deployment of deceptive high-interaction honeypots (Cowrie, Dionaea) with centralized SIEM analytics via the ELK Stack.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("honeypot")}>View Details</button>
-            {activeProject === "honeypot" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
+            {activeProject !== "honeypot" ? (
+              <button onClick={() => openProject("honeypot")}>View Details</button>
+            ) : (
+              <button onClick={closeProject}>Close</button>
             )}
           </div>
+
           {activeProject === "honeypot" && (
             <div className="project-details">
-              <img
-                src={honeypotImg}
-                alt="Proof of Honeypot Setup"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
-              />
+              <img src={honeypotImg} alt="Honeypot Screenshot" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
               <p className="muted">
-                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ, set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads. Logged attacker TTPs (Tactics, Techniques, Procedures) aligned with MITRE ATT&CK.
+                <strong>Project Overview:</strong> This high-interaction Honeypot IDS emulates vulnerable services using Cowrie (SSH) and Dionaea (SMB/HTTP) to lure real-world attackers. Attacker telemetry is captured, normalized, and ingested into a centralized ELK stack (Elasticsearch, Logstash, Kibana) for real-time forensic analysis and visualization.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
+                <strong>Deployment Workflow:</strong> 
+                1. Configured Ubuntu Server with Docker Compose and T-Pot Framework. 
+                2. Deployed Cowrie & Dionaea containers on isolated network bridge. 
+                3. Set up centralized ELK logging (Logstash parsers, Kibana dashboards).
+                4. Captured attacker TTPs (IP, username/password combos, malware payloads).
+                5. Enriched threat intelligence via custom Suricata rules and GeoIP tagging.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized log correlation via ELK, actionable SIEM alerts, and detection of lateral movement or privilege escalation patterns.
+                <strong>Skills Demonstrated:</strong> Blue Team defense, Network Threat Monitoring, Log Analysis, Security Automation, Docker Networking, MITRE ATT&CK Alignment.
               </p>
             </div>
           )}
         </div>
 
-        {/* Malicious URL + YouTube Scan Project */}
+        {/* Secure URL Scanner (Combined Project) */}
         <div className="panel">
-          <h3>Secure URL Scanner – Malicious URL + YouTube Threat Detection Tool</h3>
+          <h3>Secure URL Scanner (Malicious + YouTube Safe URL Tool)</h3>
           <p>
-            Engineered a Python CLI application that integrates with the VirusTotal API and YouTube Data API v3 to validate URL legitimacy and classify URLs as safe, suspicious, or malicious.
+            Command-line and Flask-based tools to analyze and classify URLs for malicious indicators using the VirusTotal API and YouTube Data API.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
-            {activeProject === "urlscanner" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
+            {activeProject !== "urlscanner" ? (
+              <button onClick={() => openProject("urlscanner")}>View Details</button>
+            ) : (
+              <button onClick={closeProject}>Close</button>
             )}
           </div>
+
           {activeProject === "urlscanner" && (
             <div className="project-details">
-              <img
-                src={urlScanImg1}
-                alt="Malicious URL Detection"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
-              />
-              <img
-                src={urlScanImg2}
-                alt="YouTube Safe URL Scan"
-                style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }}
-              />
+              <img src={maliciousImg} alt="Malicious URL Scan" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
+              <img src={youtubeImg} alt="YouTube Safe URL Scan" style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "1rem" }} />
               <p className="muted">
-                <strong>Key Features:</strong> Parses user-provided URLs, cross-references them with VirusTotal’s multi-engine antivirus scans, applies regex validation, and utilizes YouTube’s API to flag suspicious descriptions, keywords, or metadata abuse.
+                <strong>Project Overview:</strong> This toolset detects malicious or deceptive URLs in real-time by integrating VirusTotal threat intelligence and YouTube content validation. It includes a CLI and Flask web interface for broader accessibility.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Implements secure API token storage, rate-limiting, error handling, and API key rotation logic. Emphasizes threat intelligence enrichment and real-time phishing detection capabilities.
+                <strong>Implementation Details:</strong> 
+                1. Developed Python scripts to call VirusTotal API and analyze threat scores across multiple AV engines. 
+                2. Integrated YouTube Data API to validate channel authenticity, keyword usage, and spammy patterns. 
+                3. Constructed Flask front-end with dynamic URL scanning capability and threat score outputs. 
+                4. Added error handling, input sanitization, and response caching.
               </p>
               <p className="muted">
-                <strong>Technologies Used:</strong> Python, VirusTotal API, YouTube API, JSON, Requests, Regex, OSINT methodologies.
-              </p>
-              <p className="muted">
-                <strong>Purpose:</strong> Enables blue teams and SOC analysts to proactively scan inbound URLs for malicious indicators before incident escalation.
+                <strong>Skills Demonstrated:</strong> Secure API integration, Threat Intelligence Automation, Flask development, JSON parsing, URL sanitization, Cyber Threat Intelligence (CTI), Security Tooling.
               </p>
             </div>
           )}
@@ -196,10 +185,7 @@ export default function App() {
 
       <section id="resume" className="section">
         <h2>Resume</h2>
-        <iframe
-          src={profile.resumeUrl}
-          style={{ width: "100%", height: "1000px", border: "none" }}
-        />
+        <iframe src={profile.resumeUrl} style={{ width: "100%", height: "1000px", border: "none" }} />
       </section>
 
       <section id="contact" className="section">
