@@ -16,12 +16,11 @@ const profile = {
 };
 
 export default function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [activeProject, setActiveProject] = useState<null | string>(null);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
+    document.documentElement.dataset.theme = "dark";
+  }, []);
 
   const toggleProject = (project: string) => {
     setActiveProject((prev) => (prev === project ? null : project));
@@ -43,12 +42,6 @@ export default function App() {
           <a href="#resume">Resume</a>
           <a href="#contact">Contact</a>
         </nav>
-        <button
-          className="btn ghost"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
-        </button>
       </header>
 
       <section className="hero">
@@ -114,7 +107,7 @@ export default function App() {
 
         {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>Advanced Threat Intelligence URL Scanne</h3>
+          <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
           <p>
             Engineered a Python CLI application that integrates with the VirusTotal API and YouTube Data API v3 to validate URL legitimacy and classify URLs as safe, suspicious, or malicious.
           </p>
