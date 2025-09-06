@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
 import urlScanImg1 from "./assets/malicious-url-scan.jpg";
 import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
-import phishImg1 from "./assets/phish.jpg";
-import phishImg2 from "./assets/phish2.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -128,7 +126,9 @@ export default function App() {
 
         {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
+          <h3>
+            Unified Malicious URL & YouTube Safety Assessment Tool
+          </h3>
           <p>
             Engineered a Python CLI application that integrates with the
             VirusTotal API and YouTube Data API v3 to validate URL legitimacy
@@ -161,74 +161,25 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Technical Execution:</strong> Integrated VirusTotal’s
-                multi-engine AV scans with YouTube API metadata analysis.
-                Detected malicious links in descriptions, suspicious keywords,
-                and phishing patterns in embedded URLs.
+                <strong>Key Features:</strong> Parses user-provided URLs,
+                cross-references them with VirusTotal’s multi-engine antivirus
+                scans, applies regex validation, and utilizes YouTube’s API to
+                flag suspicious descriptions, keywords, or metadata abuse.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, VirusTotal API, YouTube API,
-                Regex, Requests, JSON, OSINT methodologies.
+                <strong>Security Techniques:</strong> Implements secure API
+                token storage, rate-limiting, error handling, and API key
+                rotation logic. Emphasizes threat intelligence enrichment and
+                real-time phishing detection capabilities.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Provide SOC analysts a quick triage
-                tool for vetting inbound URLs and YouTube links before
-                escalation.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Phishing Email Detector */}
-        <div className="panel">
-          <h3>Phishing Email Detector with ML & SIEM Integration</h3>
-          <p>
-            Built a phishing detection pipeline in Kali Linux: parsed raw email
-            files, engineered security features, trained a machine learning
-            model, exposed a Flask API for classification, and integrated JSON
-            logs with SIEM platforms for real-time monitoring.
-          </p>
-          <div className="project-buttons">
-            <button onClick={() => toggleProject("phishing")}>View Details</button>
-            {activeProject === "phishing" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
-            )}
-          </div>
-          {activeProject === "phishing" && (
-            <div className="project-details">
-              <img
-                src={phishImg1}
-                alt="Phishing Detector API in Action"
-                style={{
-                  maxWidth: "100%",
-                  borderRadius: "8px",
-                  marginTop: "1rem",
-                }}
-              />
-              <img
-                src={phishImg2}
-                alt="Phishing Logs ready for SIEM ingestion"
-                style={{
-                  maxWidth: "100%",
-                  borderRadius: "8px",
-                  marginTop: "1rem",
-                }}
-              />
-              <p className="muted">
-                <strong>Technical Execution:</strong> Parsed <code>.eml</code> files,
-                extracted SPF/DKIM/DMARC headers, homoglyph checks, punycode,
-                risky attachments, and URL/TLD analysis. Trained an SVM model
-                with scikit-learn and exposed predictions via Flask API.
+                <strong>Technologies Used:</strong> Python, VirusTotal API,
+                YouTube API, JSON, Requests, Regex, OSINT methodologies.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, Flask, scikit-learn,
-                Pandas, Regex, JSON, Curl, ELK Stack (Elasticsearch, Logstash,
-                Kibana).
-              </p>
-              <p className="muted">
-                <strong>Objective:</strong> Automate detection of phishing emails,
-                provide SOC-ready API endpoints, and generate NDJSON logs
-                ingestible by ELK/Graylog/Splunk for real-time monitoring.
+                <strong>Purpose:</strong> Enables blue teams and SOC analysts to
+                proactively scan inbound URLs for malicious indicators before
+                incident escalation.
               </p>
             </div>
           )}
