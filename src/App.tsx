@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
 import urlScanImg1 from "./assets/malicious-url-scan.jpg";
 import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
+import phishImg1 from "./assets/phish.jpg";
+import phishImg2 from "./assets/phish2.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -103,6 +105,7 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+
               <p className="muted">
                 <strong>Technical Execution:</strong> Configured Docker-based
                 honeypots inside a DMZ, set up port mirroring, captured SSH
@@ -120,6 +123,23 @@ export default function App() {
                 alerts, and detection of lateral movement or privilege
                 escalation patterns.
               </p>
+
+              {/* NEW: Step-by-step + Screenshot notes */}
+              <div className="panel" style={{ marginTop: "10px" }}>
+                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
+                <ul>
+                  <li>Isolated a DMZ network in pfSense; forwarded only honeypot ports.</li>
+                  <li>Deployed T-Pot (Docker) with Cowrie + Dionaea enabled.</li>
+                  <li>Captured brute-force creds, commands, and payload hashes.</li>
+                  <li>Ran Suricata (af-packet) with community + custom rules.</li>
+                  <li>Shipped Cowrie/Dionaea/Suricata logs to Logstash → Elasticsearch.</li>
+                  <li>Built Kibana dashboards: top IPs, usernames, alert severities.</li>
+                </ul>
+                <p className="muted" style={{ marginTop: "6px" }}>
+                  <strong>Screenshot shown:</strong> Kibana showing Cowrie events, Suricata alerts,
+                  and attacker IP geolocation — demonstrates real adversary telemetry + correlation.
+                </p>
+              </div>
             </div>
           )}
         </div>
@@ -160,6 +180,7 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+
               <p className="muted">
                 <strong>Key Features:</strong> Parses user-provided URLs,
                 cross-references them with VirusTotal’s multi-engine antivirus
@@ -181,6 +202,101 @@ export default function App() {
                 proactively scan inbound URLs for malicious indicators before
                 incident escalation.
               </p>
+
+              {/* NEW: Step-by-step + Screenshot notes */}
+              <div className="panel" style={{ marginTop: "10px" }}>
+                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
+                <ul>
+                  <li>Normalize inputs and validate with strict regex + parsing.</li>
+                  <li>Query VirusTotal → collect detections/tags for the domain/URL.</li>
+                  <li>Heuristics: homoglyph/punycode checks, TLD risk, path keywords.</li>
+                  <li>If YouTube URL, fetch channel/video metadata; flag anomalies.</li>
+                  <li>Rate-limit + token security with env vars and backoff.</li>
+                  <li>Output human-readable summary + JSON for SIEM if needed.</li>
+                </ul>
+                <p className="muted" style={{ marginTop: "6px" }}>
+                  <strong>Screenshot #1:</strong> VT-enriched verdict on a suspicious URL (engines
+                  flagged, risky TLD/keywords).<br />
+                  <strong>Screenshot #2:</strong> Benign YouTube link with normal channel history and
+                  no malicious indicators.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Phishing Email Detector */}
+        <div className="panel">
+          <h3>Phishing Email Detector with ML & SIEM Integration</h3>
+          <p>
+            Built a phishing detection pipeline in Kali Linux: parsed raw email
+            files, engineered security features, trained a machine learning
+            model, exposed a Flask API for classification, and integrated JSON
+            logs with SIEM platforms for real-time monitoring.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => toggleProject("phishing")}>View Details</button>
+            {activeProject === "phishing" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
+          </div>
+          {activeProject === "phishing" && (
+            <div className="project-details">
+              <img
+                src={phishImg1}
+                alt="Phishing Detector API in Action"
+                style={{
+                  maxWidth: "100%",
+                  borderRadius: "8px",
+                  marginTop: "1rem",
+                }}
+              />
+              <img
+                src={phishImg2}
+                alt="Phishing Logs ready for SIEM ingestion"
+                style={{
+                  maxWidth: "100%",
+                  borderRadius: "8px",
+                  marginTop: "1rem",
+                }}
+              />
+
+              <p className="muted">
+                <strong>Technical Execution:</strong> Parsed <code>.eml</code> files,
+                extracted SPF/DKIM/DMARC headers, homoglyph checks, punycode,
+                risky attachments, and URL/TLD analysis. Trained an SVM model
+                with scikit-learn and exposed predictions via Flask API.
+              </p>
+              <p className="muted">
+                <strong>Tools Used:</strong> Python, Flask, scikit-learn,
+                Pandas, Regex, JSON, Curl, ELK Stack (Elasticsearch, Logstash,
+                Kibana).
+              </p>
+              <p className="muted">
+                <strong>Objective:</strong> Automate detection of phishing emails,
+                provide SOC-ready API endpoints, and generate NDJSON logs
+                ingestible by ELK/Graylog/Splunk for real-time monitoring.
+              </p>
+
+              {/* NEW: Step-by-step + Screenshot notes */}
+              <div className="panel" style={{ marginTop: "10px" }}>
+                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
+                <ul>
+                  <li>Parse raw <code>.eml</code> → extract From/Reply-To/Subject/Body/Headers/URLs.</li>
+                  <li>Engineer signals: DMARC/SPF/DKIM, homoglyphs, punycode, URL counts/TLD risk, risky attachments.</li>
+                  <li>Train LinearSVC combining TF-IDF text features + structured signals.</li>
+                  <li>Serve via Flask <code>/predict</code>; accept file uploads; return JSON verdict + features.</li>
+                  <li>Log each prediction as a single NDJSON line with request_id/IP/UA/signals.</li>
+                  <li>Forward logs to ELK/Graylog (Filebeat/Sidecar) for dashboards and alerting.</li>
+                </ul>
+                <p className="muted" style={{ marginTop: "6px" }}>
+                  <strong>Screenshot #1:</strong> cURL calls posting <code>.eml</code> to the API; JSON
+                  shows <em>prediction</em> (spam/ham) and signals (e.g., <code>auth_dmarc=fail</code>,
+                  <code>homoglyphs=1</code>, <code>url_count=1</code>).<br />
+                  <strong>Screenshot #2:</strong> Structured JSON logs (NDJSON) with <code>event=prediction</code>,
+                  <code>request_id</code>, <code>client_ip</code>, <code>user_agent</code>, and all features — SIEM-ready.
+                </p>
+              </div>
             </div>
           )}
         </div>
