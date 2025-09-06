@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
 import urlScanImg1 from "./assets/malicious-url-scan.jpg";
 import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
-/* NEW: phishing screenshots */
 import phishImg1 from "./assets/phish.jpg";
 import phishImg2 from "./assets/phish2.jpg";
 
@@ -162,39 +161,32 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Key Features:</strong> Parses user-provided URLs,
-                cross-references them with VirusTotal’s multi-engine antivirus
-                scans, applies regex validation, and utilizes YouTube’s API to
-                flag suspicious descriptions, keywords, or metadata abuse.
+                <strong>Technical Execution:</strong> Integrated VirusTotal’s
+                multi-engine AV scans with YouTube API metadata analysis.
+                Detected malicious links in descriptions, suspicious keywords,
+                and phishing patterns in embedded URLs.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Implements secure API
-                token storage, rate-limiting, error handling, and API key
-                rotation logic. Emphasizes threat intelligence enrichment and
-                real-time phishing detection capabilities.
+                <strong>Tools Used:</strong> Python, VirusTotal API, YouTube API,
+                Regex, Requests, JSON, OSINT methodologies.
               </p>
               <p className="muted">
-                <strong>Technologies Used:</strong> Python, VirusTotal API,
-                YouTube API, JSON, Requests, Regex, OSINT methodologies.
-              </p>
-              <p className="muted">
-                <strong>Purpose:</strong> Enables blue teams and SOC analysts to
-                proactively scan inbound URLs for malicious indicators before
-                incident escalation.
+                <strong>Objective:</strong> Provide SOC analysts a quick triage
+                tool for vetting inbound URLs and YouTube links before
+                escalation.
               </p>
             </div>
           )}
         </div>
 
-        {/* NEW: Phishing Email Detector */}
+        {/* Phishing Email Detector */}
         <div className="panel">
-          <h3>Phishing Email Detector (Parser → Features → ML → API → SIEM)</h3>
+          <h3>Phishing Email Detector with ML & SIEM Integration</h3>
           <p>
-            End-to-end phishing detection in Kali Linux: parsed raw <code>.eml</code>{" "}
-            files, engineered security features (SPF/DKIM/DMARC, homoglyph/punycode,
-            suspicious TLD ratios, risky attachments), trained a scikit-learn SVM,
-            exposed a Flask API for verdicts, and generated SIEM-ready NDJSON logs
-            for ELK/Graylog.
+            Built a phishing detection pipeline in Kali Linux: parsed raw email
+            files, engineered security features, trained a machine learning
+            model, exposed a Flask API for classification, and integrated JSON
+            logs with SIEM platforms for real-time monitoring.
           </p>
           <div className="project-buttons">
             <button onClick={() => toggleProject("phishing")}>View Details</button>
@@ -206,7 +198,7 @@ export default function App() {
             <div className="project-details">
               <img
                 src={phishImg1}
-                alt="API classifying spam and ham from .eml via curl"
+                alt="Phishing Detector API in Action"
                 style={{
                   maxWidth: "100%",
                   borderRadius: "8px",
@@ -215,7 +207,7 @@ export default function App() {
               />
               <img
                 src={phishImg2}
-                alt="SIEM-ready JSON logs (NDJSON) with signals and metadata"
+                alt="Phishing Logs ready for SIEM ingestion"
                 style={{
                   maxWidth: "100%",
                   borderRadius: "8px",
@@ -223,18 +215,20 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Pipeline:</strong> <em>parse_eml.py</em> → <em>featurize.py</em> →{" "}
-                <em>train.py</em> (LinearSVC) → <em>api.py</em> (Flask) → JSON logging
-                (NDJSON).
+                <strong>Technical Execution:</strong> Parsed <code>.eml</code> files,
+                extracted SPF/DKIM/DMARC headers, homoglyph checks, punycode,
+                risky attachments, and URL/TLD analysis. Trained an SVM model
+                with scikit-learn and exposed predictions via Flask API.
               </p>
               <p className="muted">
-                <strong>Signals:</strong> DMARC/SPF/DKIM, from/reply mismatch, homoglyphs,
-                punycode, URL count & TLD risk, risky attachment extensions.
+                <strong>Tools Used:</strong> Python, Flask, scikit-learn,
+                Pandas, Regex, JSON, Curl, ELK Stack (Elasticsearch, Logstash,
+                Kibana).
               </p>
               <p className="muted">
-                <strong>Ops/SIEM:</strong> Each prediction logs request_id, client_ip,
-                user_agent, subject/from, prediction, and signals—ingest-ready for
-                ELK/Graylog/Splunk.
+                <strong>Objective:</strong> Automate detection of phishing emails,
+                provide SOC-ready API endpoints, and generate NDJSON logs
+                ingestible by ELK/Graylog/Splunk for real-time monitoring.
               </p>
             </div>
           )}
