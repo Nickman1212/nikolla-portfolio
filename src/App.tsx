@@ -105,6 +105,11 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> Kibana dashboard showing Cowrie SSH brute-force attempts,
+                Suricata alerts, and attacker IP geolocation. Demonstrates live adversary telemetry being
+                correlated across multiple sensors.
+              </p>
 
               <p className="muted">
                 <strong>Technical Execution:</strong> Configured Docker-based
@@ -123,32 +128,13 @@ export default function App() {
                 alerts, and detection of lateral movement or privilege
                 escalation patterns.
               </p>
-
-              {/* NEW: Step-by-step + Screenshot notes */}
-              <div className="panel" style={{ marginTop: "10px" }}>
-                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
-                <ul>
-                  <li>Isolated a DMZ network in pfSense; forwarded only honeypot ports.</li>
-                  <li>Deployed T-Pot (Docker) with Cowrie + Dionaea enabled.</li>
-                  <li>Captured brute-force creds, commands, and payload hashes.</li>
-                  <li>Ran Suricata (af-packet) with community + custom rules.</li>
-                  <li>Shipped Cowrie/Dionaea/Suricata logs to Logstash → Elasticsearch.</li>
-                  <li>Built Kibana dashboards: top IPs, usernames, alert severities.</li>
-                </ul>
-                <p className="muted" style={{ marginTop: "6px" }}>
-                  <strong>Screenshot shown:</strong> Kibana showing Cowrie events, Suricata alerts,
-                  and attacker IP geolocation — demonstrates real adversary telemetry + correlation.
-                </p>
-              </div>
             </div>
           )}
         </div>
 
         {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>
-            Unified Malicious URL & YouTube Safety Assessment Tool
-          </h3>
+          <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
           <p>
             Engineered a Python CLI application that integrates with the
             VirusTotal API and YouTube Data API v3 to validate URL legitimacy
@@ -171,6 +157,11 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> CLI output of a suspicious URL flagged by VirusTotal
+                with detections, risky TLD, and suspicious keywords.
+              </p>
+
               <img
                 src={urlScanImg2}
                 alt="YouTube Safe URL Scan"
@@ -180,6 +171,10 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> CLI output of a benign YouTube link showing no detections,
+                normal channel metadata, and safe classification.
+              </p>
 
               <p className="muted">
                 <strong>Key Features:</strong> Parses user-provided URLs,
@@ -198,29 +193,10 @@ export default function App() {
                 YouTube API, JSON, Requests, Regex, OSINT methodologies.
               </p>
               <p className="muted">
-                <strong>Purpose:</strong> Enables blue teams and SOC analysts to
+                <strong>Objective:</strong> Enables blue teams and SOC analysts to
                 proactively scan inbound URLs for malicious indicators before
                 incident escalation.
               </p>
-
-              {/* NEW: Step-by-step + Screenshot notes */}
-              <div className="panel" style={{ marginTop: "10px" }}>
-                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
-                <ul>
-                  <li>Normalize inputs and validate with strict regex + parsing.</li>
-                  <li>Query VirusTotal → collect detections/tags for the domain/URL.</li>
-                  <li>Heuristics: homoglyph/punycode checks, TLD risk, path keywords.</li>
-                  <li>If YouTube URL, fetch channel/video metadata; flag anomalies.</li>
-                  <li>Rate-limit + token security with env vars and backoff.</li>
-                  <li>Output human-readable summary + JSON for SIEM if needed.</li>
-                </ul>
-                <p className="muted" style={{ marginTop: "6px" }}>
-                  <strong>Screenshot #1:</strong> VT-enriched verdict on a suspicious URL (engines
-                  flagged, risky TLD/keywords).<br />
-                  <strong>Screenshot #2:</strong> Benign YouTube link with normal channel history and
-                  no malicious indicators.
-                </p>
-              </div>
             </div>
           )}
         </div>
@@ -251,6 +227,11 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> API tested with cURL: spam and ham emails classified.
+                JSON shows prediction (“spam” vs “ham”) with signals like DMARC=fail, homoglyph=1, url_count=1.
+              </p>
+
               <img
                 src={phishImg2}
                 alt="Phishing Logs ready for SIEM ingestion"
@@ -260,6 +241,10 @@ export default function App() {
                   marginTop: "1rem",
                 }}
               />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> Structured JSON logs (NDJSON format) generated per request.
+                Includes request_id, client_ip, user_agent, subject, prediction, and signals — SIEM-ready for ELK/Graylog.
+              </p>
 
               <p className="muted">
                 <strong>Technical Execution:</strong> Parsed <code>.eml</code> files,
@@ -277,26 +262,6 @@ export default function App() {
                 provide SOC-ready API endpoints, and generate NDJSON logs
                 ingestible by ELK/Graylog/Splunk for real-time monitoring.
               </p>
-
-              {/* NEW: Step-by-step + Screenshot notes */}
-              <div className="panel" style={{ marginTop: "10px" }}>
-                <h4 style={{ margin: 0 }}>How it works (step by step)</h4>
-                <ul>
-                  <li>Parse raw <code>.eml</code> → extract From/Reply-To/Subject/Body/Headers/URLs.</li>
-                  <li>Engineer signals: DMARC/SPF/DKIM, homoglyphs, punycode, URL counts/TLD risk, risky attachments.</li>
-                  <li>Train LinearSVC combining TF-IDF text features + structured signals.</li>
-                  <li>Serve via Flask <code>/predict</code>; accept file uploads; return JSON verdict + features.</li>
-                  <li>Log each prediction as a single NDJSON line with request_id/IP/UA/signals.</li>
-                  <li>Forward logs to ELK/Graylog (Filebeat/Sidecar) for dashboards and alerting.</li>
-                </ul>
-                <p className="muted" style={{ marginTop: "6px" }}>
-                  <strong>Screenshot #1:</strong> cURL calls posting <code>.eml</code> to the API; JSON
-                  shows <em>prediction</em> (spam/ham) and signals (e.g., <code>auth_dmarc=fail</code>,
-                  <code>homoglyphs=1</code>, <code>url_count=1</code>).<br />
-                  <strong>Screenshot #2:</strong> Structured JSON logs (NDJSON) with <code>event=prediction</code>,
-                  <code>request_id</code>, <code>client_ip</code>, <code>user_agent</code>, and all features — SIEM-ready.
-                </p>
-              </div>
             </div>
           )}
         </div>
