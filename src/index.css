@@ -8,8 +8,8 @@
 :root {
   --bg-1: #0b1020;     /* deep navy */
   --bg-2: #0f172a;     /* slate-900 */
-  --panel: rgba(255,255,255,0.05);
-  --panel-stroke: rgba(255,255,255,0.08);
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-stroke: rgba(255, 255, 255, 0.08);
   --text: #e5e7eb;     /* zinc-200 */
   --muted: #9ca3af;    /* gray-400 */
   --brand: #60a5fa;    /* blue-400 */
@@ -19,19 +19,25 @@
   --danger: #f87171;   /* red-400 */
 
   --radius: 16px;
-  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
-html[data-theme="dark"], body {
-  background: radial-gradient(1200px 800px at 80% -10%, #172554 0%, transparent 60%),
-              radial-gradient(1000px 600px at -10% 20%, #0ea5e9 0%, transparent 55%),
-              linear-gradient(135deg, var(--bg-1), var(--bg-2));
+html[data-theme="dark"],
+body {
+  background:
+    radial-gradient(1200px 800px at 80% -10%, #172554 0%, transparent 60%),
+    radial-gradient(1000px 600px at -10% 20%, #0ea5e9 0%, transparent 55%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji";
   line-height: 1.5;
   margin: 0;
 }
@@ -42,8 +48,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(transparent 95%, rgba(255,255,255,0.06) 96%),
-    linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.06) 96%);
+    linear-gradient(transparent 95%, rgba(255, 255, 255, 0.06) 96%),
+    linear-gradient(90deg, transparent 95%, rgba(255, 255, 255, 0.06) 96%);
   background-size: 24px 24px, 24px 24px;
   pointer-events: none;
   opacity: 0.25;
@@ -63,7 +69,7 @@ body::before {
   justify-content: space-between;
   gap: 16px;
   padding: 14px 18px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--panel-stroke);
   border-radius: var(--radius);
   backdrop-filter: blur(10px);
@@ -118,7 +124,7 @@ body::before {
   position: relative;
   padding: 60px 24px;
   background:
-    linear-gradient(to bottom, rgba(2,6,23,0.65), rgba(2,6,23,0.85)),
+    linear-gradient(to bottom, rgba(2, 6, 23, 0.65), rgba(2, 6, 23, 0.85)),
     url("./assets/hero-bg.jpg") center/cover no-repeat;
   border: 1px solid var(--panel-stroke);
   box-shadow: var(--shadow);
@@ -129,7 +135,11 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(800px 400px at 70% -20%, transparent 0%, rgba(0,0,0,0.55) 60%);
+  background: radial-gradient(
+    800px 400px at 70% -20%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 60%
+  );
   pointer-events: none;
 }
 
@@ -141,11 +151,15 @@ body::before {
 }
 
 .badge {
-  background: linear-gradient(180deg, rgba(96,165,250,0.25), rgba(34,211,238,0.25));
+  background: linear-gradient(
+    180deg,
+    rgba(96, 165, 250, 0.25),
+    rgba(34, 211, 238, 0.25)
+  );
   color: #e2e8f0;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 12px;
   letter-spacing: 0.2px;
 }
@@ -154,7 +168,7 @@ body::before {
   margin: 6px 0 10px;
   font-size: clamp(26px, 5vw, 40px);
   line-height: 1.15;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .lead {
@@ -163,4 +177,130 @@ body::before {
 }
 
 .cta {
-  display: fl
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+/* ========== Buttons ========== */
+.btn {
+  appearance: none;
+  border: 1px solid var(--panel-stroke);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn.primary {
+  border-color: rgba(96, 165, 250, 0.45);
+  background: linear-gradient(
+    180deg,
+    rgba(96, 165, 250, 0.18),
+    rgba(34, 211, 238, 0.18)
+  );
+}
+
+.btn.ghost {
+  background: transparent;
+}
+
+/* ========== Sections & Panels ========== */
+.section {
+  margin-top: 36px;
+  position: relative;
+}
+
+/* Decorative image near Projects title (optional) */
+#projects::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  width: 86px;
+  height: 86px;
+  background: url("./assets/decor-laptop.png") center/contain no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+}
+
+.section h2 {
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  margin: 0 0 12px 2px;
+  color: #e2e8f0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-stroke);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.project-details {
+  margin-top: 12px;
+  color: #cbd5e1;
+}
+
+.project-details .muted {
+  color: var(--muted);
+}
+
+/* Images inside details */
+.project-details img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ========== Resume iframe ========== */
+#resume iframe {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  border: 1px solid var(--panel-stroke);
+}
+
+/* ========== Footer ========== */
+.footer {
+  margin: 28px 0 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 720px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero {
+    padding: 42px 18px;
+  }
+  #projects::after {
+    display: none; /* Hide decorative image on very small screens */
+  }
+}
