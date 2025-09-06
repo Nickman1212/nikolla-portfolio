@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import honeypotImg from "./assets/honeypot.jpg";
 import urlScanImg1 from "./assets/malicious-url-scan.jpg";
 import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
+/* NEW: phishing screenshots */
+import phishImg1 from "./assets/phish.jpg";
+import phishImg2 from "./assets/phish2.jpg";
 
 const profile = {
   name: "Nikolla Nickolov",
@@ -126,9 +129,7 @@ export default function App() {
 
         {/* Malicious URL + YouTube Scan Project */}
         <div className="panel">
-          <h3>
-            Unified Malicious URL & YouTube Safety Assessment Tool
-          </h3>
+          <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
           <p>
             Engineered a Python CLI application that integrates with the
             VirusTotal API and YouTube Data API v3 to validate URL legitimacy
@@ -180,6 +181,60 @@ export default function App() {
                 <strong>Purpose:</strong> Enables blue teams and SOC analysts to
                 proactively scan inbound URLs for malicious indicators before
                 incident escalation.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* NEW: Phishing Email Detector */}
+        <div className="panel">
+          <h3>Phishing Email Detector (Parser → Features → ML → API → SIEM)</h3>
+          <p>
+            End-to-end phishing detection in Kali Linux: parsed raw <code>.eml</code>{" "}
+            files, engineered security features (SPF/DKIM/DMARC, homoglyph/punycode,
+            suspicious TLD ratios, risky attachments), trained a scikit-learn SVM,
+            exposed a Flask API for verdicts, and generated SIEM-ready NDJSON logs
+            for ELK/Graylog.
+          </p>
+          <div className="project-buttons">
+            <button onClick={() => toggleProject("phishing")}>View Details</button>
+            {activeProject === "phishing" && (
+              <button onClick={() => setActiveProject(null)}>Close</button>
+            )}
+          </div>
+          {activeProject === "phishing" && (
+            <div className="project-details">
+              <img
+                src={phishImg1}
+                alt="API classifying spam and ham from .eml via curl"
+                style={{
+                  maxWidth: "100%",
+                  borderRadius: "8px",
+                  marginTop: "1rem",
+                }}
+              />
+              <img
+                src={phishImg2}
+                alt="SIEM-ready JSON logs (NDJSON) with signals and metadata"
+                style={{
+                  maxWidth: "100%",
+                  borderRadius: "8px",
+                  marginTop: "1rem",
+                }}
+              />
+              <p className="muted">
+                <strong>Pipeline:</strong> <em>parse_eml.py</em> → <em>featurize.py</em> →{" "}
+                <em>train.py</em> (LinearSVC) → <em>api.py</em> (Flask) → JSON logging
+                (NDJSON).
+              </p>
+              <p className="muted">
+                <strong>Signals:</strong> DMARC/SPF/DKIM, from/reply mismatch, homoglyphs,
+                punycode, URL count & TLD risk, risky attachment extensions.
+              </p>
+              <p className="muted">
+                <strong>Ops/SIEM:</strong> Each prediction logs request_id, client_ip,
+                user_agent, subject/from, prediction, and signals—ingest-ready for
+                ELK/Graylog/Splunk.
               </p>
             </div>
           )}
