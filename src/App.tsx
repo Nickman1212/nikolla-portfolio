@@ -107,26 +107,32 @@ export default function App() {
               />
               <p className="muted">
                 <strong>Screenshot explanation:</strong> Kibana dashboard showing Cowrie SSH brute-force attempts,
-                Suricata alerts, and attacker IP geolocation. Demonstrates live adversary telemetry being
-                correlated across multiple sensors.
+                Suricata alerts, and attacker IP geolocation.
               </p>
 
               <p className="muted">
-                <strong>Technical Execution:</strong> Configured Docker-based
-                honeypots inside a DMZ, set up port mirroring, captured SSH
-                brute-force attempts, malware hashes, and payloads. Logged
-                attacker TTPs (Tactics, Techniques, Procedures) aligned with
-                MITRE ATT&CK.
+                <strong>Step by Step:</strong>
+              </p>
+              <ul className="muted">
+                <li>Isolated a DMZ in pfSense; forwarded honeypot ports only.</li>
+                <li>Deployed T-Pot with Cowrie + Dionaea honeypots.</li>
+                <li>Captured brute-force credentials, commands, and payload hashes.</li>
+                <li>Ran Suricata with community + custom IDS rules.</li>
+                <li>Shipped events into ELK and built Kibana dashboards.</li>
+              </ul>
+
+              <p className="muted">
+                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ,
+                set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads.
+                Logged attacker TTPs aligned with MITRE ATT&CK.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense,
-                Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash,
+                Kibana, Docker, Elasticsearch.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Real-time visibility into adversary
-                behavior, centralized log correlation via ELK, actionable SIEM
-                alerts, and detection of lateral movement or privilege
-                escalation patterns.
+                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized
+                log correlation via ELK, actionable SIEM alerts, and detection of lateral movement.
               </p>
             </div>
           )}
@@ -158,7 +164,7 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> CLI output of a suspicious URL flagged by VirusTotal
+                <strong>Screenshot explanation:</strong> CLI scan of a suspicious URL flagged by VirusTotal
                 with detections, risky TLD, and suspicious keywords.
               </p>
 
@@ -172,30 +178,31 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> CLI output of a benign YouTube link showing no detections,
+                <strong>Screenshot explanation:</strong> CLI scan of a benign YouTube link showing no detections,
                 normal channel metadata, and safe classification.
               </p>
 
               <p className="muted">
-                <strong>Key Features:</strong> Parses user-provided URLs,
-                cross-references them with VirusTotal’s multi-engine antivirus
-                scans, applies regex validation, and utilizes YouTube’s API to
-                flag suspicious descriptions, keywords, or metadata abuse.
+                <strong>Step by Step:</strong>
+              </p>
+              <ul className="muted">
+                <li>Validated and normalized URL inputs with regex.</li>
+                <li>Queried VirusTotal for multi-engine detection results.</li>
+                <li>Applied heuristics: homoglyphs, punycode, TLD risk scoring.</li>
+                <li>Queried YouTube API for video/channel metadata.</li>
+                <li>Generated output in both human-readable and JSON formats.</li>
+              </ul>
+
+              <p className="muted">
+                <strong>Technical Execution:</strong> Integrated VirusTotal and YouTube APIs, applied regex
+                validation and heuristics, and provided SOC analysts with automated link triage.
               </p>
               <p className="muted">
-                <strong>Security Techniques:</strong> Implements secure API
-                token storage, rate-limiting, error handling, and API key
-                rotation logic. Emphasizes threat intelligence enrichment and
-                real-time phishing detection capabilities.
+                <strong>Tools Used:</strong> Python, VirusTotal API, YouTube API, Regex, Requests, JSON.
               </p>
               <p className="muted">
-                <strong>Technologies Used:</strong> Python, VirusTotal API,
-                YouTube API, JSON, Requests, Regex, OSINT methodologies.
-              </p>
-              <p className="muted">
-                <strong>Objective:</strong> Enables blue teams and SOC analysts to
-                proactively scan inbound URLs for malicious indicators before
-                incident escalation.
+                <strong>Objective:</strong> Provide SOC analysts a quick tool to vet URLs and YouTube links
+                for malicious indicators before escalation.
               </p>
             </div>
           )}
@@ -228,8 +235,8 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> API tested with cURL: spam and ham emails classified.
-                JSON shows prediction (“spam” vs “ham”) with signals like DMARC=fail, homoglyph=1, url_count=1.
+                <strong>Screenshot explanation:</strong> API tested with cURL: spam and ham emails classified,
+                JSON shows prediction with signals like DMARC fail, homoglyph flag, and URL count.
               </p>
 
               <img
@@ -242,25 +249,32 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> Structured JSON logs (NDJSON format) generated per request.
-                Includes request_id, client_ip, user_agent, subject, prediction, and signals — SIEM-ready for ELK/Graylog.
+                <strong>Screenshot explanation:</strong> Structured JSON logs (NDJSON) with request_id, IP,
+                subject, prediction, and all signals — SIEM-ready for ingestion.
               </p>
 
               <p className="muted">
-                <strong>Technical Execution:</strong> Parsed <code>.eml</code> files,
-                extracted SPF/DKIM/DMARC headers, homoglyph checks, punycode,
-                risky attachments, and URL/TLD analysis. Trained an SVM model
-                with scikit-learn and exposed predictions via Flask API.
+                <strong>Step by Step:</strong>
+              </p>
+              <ul className="muted">
+                <li>Parsed raw <code>.eml</code> files with mailparser.</li>
+                <li>Extracted signals: SPF/DKIM/DMARC, homoglyphs, punycode, risky attachments.</li>
+                <li>Vectorized subject/body with TF-IDF and combined features.</li>
+                <li>Trained LinearSVC model and saved with joblib.</li>
+                <li>Served predictions via Flask API endpoint.</li>
+                <li>Logged structured JSON (NDJSON) for SIEM pipelines.</li>
+              </ul>
+
+              <p className="muted">
+                <strong>Technical Execution:</strong> Created end-to-end ML pipeline from parsing to serving,
+                combining security headers with text features, exposed via Flask, and integrated into SIEM workflows.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, Flask, scikit-learn,
-                Pandas, Regex, JSON, Curl, ELK Stack (Elasticsearch, Logstash,
-                Kibana).
+                <strong>Tools Used:</strong> Python, Flask, scikit-learn, Pandas, Regex, ELK Stack.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Automate detection of phishing emails,
-                provide SOC-ready API endpoints, and generate NDJSON logs
-                ingestible by ELK/Graylog/Splunk for real-time monitoring.
+                <strong>Objective:</strong> Automate phishing detection with an explainable ML pipeline,
+                deliver SOC-ready API endpoints, and provide SIEM-friendly logs.
               </p>
             </div>
           )}
