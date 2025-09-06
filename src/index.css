@@ -116,29 +116,36 @@ body::before {
   color: var(--brand-2);
 }
 
-/* ========== Hero ========== */
+/* ========== Hero (Brightened) ========== */
 .hero {
   margin-top: 28px;
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
   padding: 60px 24px;
+
+  /* Brighter gradient background */
   background:
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)),
+    linear-gradient(
+      to bottom,
+      rgba(96, 165, 250, 0.25),   /* blue glow */
+      rgba(34, 211, 238, 0.25)    /* cyan glow */
+    ),
     url("./assets/hero-bg.jpg") center/cover no-repeat;
-  border: 1px solid var(--panel-stroke);
-  box-shadow: var(--shadow);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.4); /* cyan outer glow */
 }
 
-/* Softer vignette/overlay for readability */
+/* Lighter vignette overlay */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    800px 400px at 70% -20%,
-    transparent 0%,
-    rgba(0, 0, 0, 0.35) 60%
+    1000px 600px at 70% -20%,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
   );
   pointer-events: none;
 }
@@ -168,7 +175,7 @@ body::before {
   margin: 6px 0 10px;
   font-size: clamp(26px, 5vw, 40px);
   line-height: 1.15;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.65); /* glow effect */
 }
 
 .lead {
@@ -221,7 +228,6 @@ body::before {
   position: relative;
 }
 
-/* Decorative image near Projects title (optional) */
 #projects::after {
   content: "";
   position: absolute;
@@ -267,7 +273,6 @@ body::before {
   color: var(--muted);
 }
 
-/* Images inside details */
 .project-details img {
   display: block;
   width: 100%;
@@ -301,6 +306,6 @@ body::before {
     padding: 42px 18px;
   }
   #projects::after {
-    display: none; /* Hide decorative image on very small screens */
+    display: none;
   }
 }
