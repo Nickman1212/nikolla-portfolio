@@ -34,7 +34,7 @@ export default function App() {
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
-          <div>
+        <div>
             <div className="brand-name">{profile.name}</div>
             <div className="brand-sub">{profile.tagline}</div>
           </div>
@@ -134,6 +134,12 @@ export default function App() {
                 <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized
                 log correlation via ELK, actionable SIEM alerts, and detection of lateral movement.
               </p>
+              <p className="muted">
+                <strong>Career & Learning Impact:</strong> Strengthened my ability to design segmented
+                network environments and analyze adversary behavior using SIEM platforms. Gained
+                practical experience with deception technology and improved detection engineering
+                skills directly applicable to SOC and threat hunting roles.
+              </p>
             </div>
           )}
         </div>
@@ -203,6 +209,12 @@ export default function App() {
               <p className="muted">
                 <strong>Objective:</strong> Provide SOC analysts a quick tool to vet URLs and YouTube links
                 for malicious indicators before escalation.
+              </p>
+              <p className="muted">
+                <strong>Career & Learning Impact:</strong> Improved my Python automation and API integration
+                skills while learning how OSINT and reputation analysis support threat intelligence workflows.
+                Prepared me to build practical triage tools and sharpened my ability to spot phishing and
+                malicious link campaigns.
               </p>
             </div>
           )}
@@ -275,6 +287,12 @@ export default function App() {
               <p className="muted">
                 <strong>Objective:</strong> Automate phishing detection with an explainable ML pipeline,
                 deliver SOC-ready API endpoints, and provide SIEM-friendly logs.
+              </p>
+              <p className="muted">
+                <strong>Career & Learning Impact:</strong> Reinforced my understanding of SPF/DKIM/DMARC and how
+                they factor into phishing detection. Building/serving the model taught me to bridge cybersecurity
+                and data science, while the SIEM logging improved my operational security skills for enterprise
+                environments.
               </p>
             </div>
           )}
