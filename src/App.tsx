@@ -34,7 +34,7 @@ export default function App() {
       <header className="topbar">
         <div className="brand">
           <img className="avatar" src={profile.headshot} alt="Headshot" />
-        <div>
+          <div>
             <div className="brand-name">{profile.name}</div>
             <div className="brand-sub">{profile.tagline}</div>
           </div>
@@ -89,9 +89,13 @@ export default function App() {
             east-west and north-south traffic inspection.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("honeypot")}>View Details</button>
+            <button className="view-btn" onClick={() => toggleProject("honeypot")}>
+              View Details
+            </button>
             {activeProject === "honeypot" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
+              <button className="close-btn" onClick={() => setActiveProject(null)}>
+                Close
+              </button>
             )}
           </div>
           {activeProject === "honeypot" && (
@@ -153,9 +157,13 @@ export default function App() {
             and classify URLs as safe, suspicious, or malicious.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("urlscanner")}>View Details</button>
+            <button className="view-btn" onClick={() => toggleProject("urlscanner")}>
+              View Details
+            </button>
             {activeProject === "urlscanner" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
+              <button className="close-btn" onClick={() => setActiveProject(null)}>
+                Close
+              </button>
             )}
           </div>
           {activeProject === "urlscanner" && (
@@ -230,9 +238,13 @@ export default function App() {
             logs with SIEM platforms for real-time monitoring.
           </p>
           <div className="project-buttons">
-            <button onClick={() => toggleProject("phishing")}>View Details</button>
+            <button className="view-btn" onClick={() => toggleProject("phishing")}>
+              View Details
+            </button>
             {activeProject === "phishing" && (
-              <button onClick={() => setActiveProject(null)}>Close</button>
+              <button className="close-btn" onClick={() => setActiveProject(null)}>
+                Close
+              </button>
             )}
           </div>
           {activeProject === "phishing" && (
