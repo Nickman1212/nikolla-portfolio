@@ -282,4 +282,65 @@ body::before {
 }
 
 .project-buttons button:last-of-type {
-  background: linear-gradien
+  background: linear-gradient(135deg, var(--danger), var(--accent));
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.project-buttons button:last-of-type:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.project-details {
+  margin-top: 12px;
+  color: #cbd5e1;
+}
+
+.project-details .muted {
+  color: var(--muted);
+}
+
+.project-details img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ========== Resume iframe ========== */
+#resume iframe {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  border: 1px solid var(--panel-stroke);
+}
+
+/* ========== Footer ========== */
+.footer {
+  margin: 28px 0 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 720px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hero {
+    padding: 42px 18px;
+  }
+  #projects::after {
+    display: none;
+  }
+}
