@@ -325,6 +325,17 @@ body::before {
   border: 1px solid var(--panel-stroke);
 }
 
+/* ========== Contact LinkedIn Link ========== */
+#contact a {
+  color: #9acbfa; /* softer blue */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#contact a:hover {
+  color: var(--brand-2); /* cyan hover for visibility */
+}
+
 /* ========== Footer ========== */
 .footer {
   margin: 28px 0 12px;
