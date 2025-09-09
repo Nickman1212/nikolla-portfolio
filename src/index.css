@@ -1,328 +1,192 @@
-/* ========== CSS Reset + Base ========== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+import { useEffect, useState } from "react";
+import honeypotImg from "./assets/honeypot.jpg";
+import urlScanImg1 from "./assets/malicious-url-scan.jpg";
+import urlScanImg2 from "./assets/youtube-safe-url-scan.jpg";
+import phishImg1 from "./assets/phish.jpg";
+import phishImg2 from "./assets/phish2.jpg";
 
-:root {
-  --bg-1: #0b1020;     /* deep navy */
-  --bg-2: #0f172a;     /* slate-900 */
-  --panel: rgba(255, 255, 255, 0.05);
-  --panel-stroke: rgba(255, 255, 255, 0.08);
-  --text: #e5e7eb;     /* zinc-200 */
-  --muted: #9ca3af;    /* gray-400 */
-  --brand: #60a5fa;    /* blue-400 */
-  --brand-2: #22d3ee;  /* cyan-400 */
-  --accent: #a78bfa;   /* violet-400 */
-  --success: #34d399;  /* emerald-400 */
-  --danger: #f87171;   /* red-400 */
+const profile = {
+  name: "Nikolla Nickolov",
+  tagline: "Cybersecurity • Systems • Applied Data",
+  location: "Tampa Bay, FL",
+  email: "Nickman477@gmail.com",
+  phone: "727-307-8538",
+  linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
+  resumeUrl: "/NIKOLLA_NICKOLOV.pdf",
+  headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
+  availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
+};
 
-  --radius: 16px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
+export default function App() {
+  const [activeProject, setActiveProject] = useState<null | string>(null);
 
-html,
-body,
-#root {
-  height: 100%;
-}
+  useEffect(() => {
+    document.documentElement.dataset.theme = "dark";
+  }, []);
 
-html[data-theme="dark"],
-body {
-  background:
-    radial-gradient(1200px 800px at 80% -10%, #172554 0%, transparent 60%),
-    radial-gradient(1000px 600px at -10% 20%, #0ea5e9 0%, transparent 55%),
-    linear-gradient(135deg, var(--bg-1), var(--bg-2));
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji";
-  line-height: 1.5;
-  margin: 0;
-}
+  const toggleProject = (project: string) => {
+    setActiveProject((prev) => (prev === project ? null : project));
+  };
 
-/* Subtle grid overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(transparent 95%, rgba(255, 255, 255, 0.06) 96%),
-    linear-gradient(90deg, transparent 95%, rgba(255, 255, 255, 0.06) 96%);
-  background-size: 24px 24px, 24px 24px;
-  pointer-events: none;
-  opacity: 0.25;
-}
+  return (
+    <div className="wrap">
+      {/* Top Bar */}
+      <header className="topbar">
+        <div className="brand">
+          <img className="avatar" src={profile.headshot} alt="Headshot" />
+          <div>
+            <div className="brand-name">{profile.name}</div>
+            <div className="brand-sub">{profile.tagline}</div>
+          </div>
+        </div>
+        <nav className="nav">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-/* ========== Layout Wrappers ========== */
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px;
-}
+      {/* Hero */}
+      <section className="hero">
+        <div className="badges">
+          <span className="badge">Based in {profile.location}</span>
+          <span className="badge">{profile.availability}</span>
+        </div>
+        <h1>
+          Applied Cybersecurity and IT: Threat Detection, Automation, and
+          Incident Response
+        </h1>
+        <p className="lead">
+          Hands-on cybersecurity projects, clear technical documentation, and
+          smart automation are at the core of how I deliver value.
+        </p>
+        <div className="cta">
+          <a className="btn primary" href="#skills">
+            View Skills
+          </a>
+          <a className="btn" href="#resume">
+            Resume
+          </a>
+          <a className="btn" href={profile.linkedin} target="_blank">
+            LinkedIn
+          </a>
+        </div>
+      </section>
 
-/* ========== Topbar ========== */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 18px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--panel-stroke);
-  border-radius: var(--radius);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow);
-}
+      {/* Projects */}
+      <section id="projects" className="section">
+        <h2>Projects</h2>
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+        {/* Honeypot IDS */}
+        <div className="panel">
+          <h3>Honeypot-Based Intrusion Detection System (IDS)</h3>
+          <p>
+            Deployed T-Pot platform integrating Cowrie (SSH/Telnet honeypot),
+            Dionaea (malware collector), and ELK Stack (Elasticsearch, Logstash,
+            Kibana) on an Ubuntu VM. Configured Suricata rules for advanced
+            network-based detection and integrated firewall hardening for
+            east-west and north-south traffic inspection.
+          </p>
+          <div className="project-buttons">
+            <button className="view-btn" onClick={() => toggleProject("honeypot")}>
+              View Details
+            </button>
+            {activeProject === "honeypot" && (
+              <button className="close-btn" onClick={() => setActiveProject(null)}>
+                Close
+              </button>
+            )}
+          </div>
+          {activeProject === "honeypot" && (
+            <div className="project-details">
+              <img
+                src={honeypotImg}
+                alt="Proof of Honeypot Setup"
+                style={{
+                  maxWidth: "100%",
+                  borderRadius: "8px",
+                  marginTop: "1rem",
+                }}
+              />
+              <p className="muted">
+                <strong>Screenshot explanation:</strong> Kibana dashboard showing Cowrie SSH brute-force attempts,
+                Suricata alerts, and attacker IP geolocation.
+              </p>
 
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--panel-stroke);
-}
+              <p className="muted">
+                <strong>Step by Step:</strong>
+              </p>
+              <ul className="muted">
+                <li>Isolated a DMZ in pfSense; forwarded honeypot ports only.</li>
+                <li>Deployed T-Pot with Cowrie + Dionaea honeypots.</li>
+                <li>Captured brute-force credentials, commands, and payload hashes.</li>
+                <li>Ran Suricata with community + custom IDS rules.</li>
+                <li>Shipped events into ELK and built Kibana dashboards.</li>
+              </ul>
 
-.brand-name {
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
+              <p className="muted">
+                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ,
+                set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads.
+                Logged attacker TTPs aligned with MITRE ATT&CK.
+              </p>
+              <p className="muted">
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash,
+                Kibana, Docker, Elasticsearch.
+              </p>
+              <p className="muted">
+                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized
+                log correlation via ELK, actionable SIEM alerts, and detection of lateral movement.
+              </p>
+              <p className="muted">
+                <strong>Career & Learning Impact:</strong> Strengthened my ability to design segmented
+                network environments and analyze adversary behavior using SIEM platforms. Gained
+                practical experience with deception technology and improved detection engineering
+                skills directly applicable to SOC and threat hunting roles.
+              </p>
+            </div>
+          )}
+        </div>
 
-.brand-sub {
-  color: var(--muted);
-  font-size: 13px;
-}
+        {/* Other projects remain unchanged */}
+        {/* ... */}
+      </section>
 
-.nav {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+      {/* Skills */}
+      <section id="skills" className="section">
+        <h2>Skills</h2>
+        <div className="panel">
+          {/* skills unchanged */}
+        </div>
+      </section>
 
-.nav a {
-  color: var(--text);
-  text-decoration: none;
-  opacity: 0.9;
-}
+      {/* Resume Embedded */}
+      <section id="resume" className="section">
+        <h2>Resume</h2>
+        <iframe
+          src={profile.resumeUrl}
+          style={{ width: "100%", height: "1000px", border: "none" }}
+        />
+      </section>
 
-.nav a:hover {
-  opacity: 1;
-  color: var(--brand-2);
-}
+      {/* Contact */}
+      <section id="contact" className="section">
+        <h2>Contact</h2>
+        <div className="panel">
+          <p className="muted">
+            Email: {profile.email} <br />
+            Phone: {profile.phone} <br />
+            LinkedIn:{" "}
+            <a href={profile.linkedin} target="_blank">
+              {profile.linkedin}
+            </a>
+          </p>
+        </div>
+      </section>
 
-/* ========== Hero (Brighter, Clean) ========== */
-.hero {
-  margin-top: 28px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-  padding: 60px 24px;
-
-  /* Brighter background overlay */
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.1),   /* subtle light */
-      rgba(15, 23, 42, 0.6)       /* soft dark */
-    ),
-    url("./assets/hero-bg.jpg") center/cover no-repeat;
-
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow);
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    1000px 600px at 70% -20%,
-    rgba(255, 255, 255, 0.05) 0%,
-    transparent 70%
+      <footer className="footer">
+        © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
+      </footer>
+    </div>
   );
-  pointer-events: none;
-}
-
-.hero .badges {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.badge {
-  background: linear-gradient(
-    180deg,
-    rgba(96, 165, 250, 0.25),
-    rgba(34, 211, 238, 0.25)
-  );
-  color: #e2e8f0;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 12px;
-  letter-spacing: 0.2px;
-}
-
-.hero h1 {
-  margin: 6px 0 10px;
-  font-size: clamp(32px, 6vw, 48px); /* bigger font */
-  line-height: 1.2;
-}
-
-.lead {
-  color: #d1d5db; /* lighter gray */
-  max-width: 70ch;
-}
-
-.cta {
-  display: flex;
-  gap: 12px;
-  margin-top: 18px;
-  flex-wrap: wrap;
-}
-
-/* ========== Buttons ========== */
-.btn {
-  appearance: none;
-  border: 1px solid var(--panel-stroke);
-  border-radius: 10px;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  cursor: pointer;
-  transition: transform 0.08s ease, background 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.btn.primary {
-  border-color: rgba(96, 165, 250, 0.45);
-  background: linear-gradient(
-    180deg,
-    rgba(96, 165, 250, 0.18),
-    rgba(34, 211, 238, 0.18)
-  );
-}
-
-.btn.ghost {
-  background: transparent;
-}
-
-/* ========== Sections & Panels ========== */
-.section {
-  margin-top: 36px;
-  position: relative;
-}
-
-#projects::after {
-  content: "";
-  position: absolute;
-  top: -12px;
-  right: 12px;
-  width: 86px;
-  height: 86px;
-  background: url("./assets/decor-laptop.png") center/contain no-repeat;
-  opacity: 0.25;
-  pointer-events: none;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
-}
-
-.section h2 {
-  font-size: 22px;
-  letter-spacing: 0.4px;
-  margin: 0 0 12px 2px;
-  color: #e2e8f0;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--panel-stroke);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-  margin-bottom: 16px;
-}
-
-.project-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 10px 0;
-}
-
-/* Modernized View Details / Close buttons */
-.project-buttons button {
-  background: linear-gradient(135deg, var(--brand), var(--brand-2));
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-
-.project-buttons button:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-}
-
-.project-details {
-  margin-top: 12px;
-  color: #cbd5e1;
-}
-
-.project-details .muted {
-  color: var(--muted);
-}
-
-.project-details img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-}
-
-/* ========== Resume iframe ========== */
-#resume iframe {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
-  border: 1px solid var(--panel-stroke);
-}
-
-/* ========== Footer ========== */
-.footer {
-  margin: 28px 0 12px;
-  color: var(--muted);
-  text-align: center;
-}
-
-/* ========== Responsive tweaks ========== */
-@media (max-width: 720px) {
-  .topbar {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .hero {
-    padding: 42px 18px;
-  }
-  #projects::after {
-    display: none;
-  }
 }
