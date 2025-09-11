@@ -11,7 +11,7 @@ const profile = {
   location: "Tampa Bay, FL",
   email: "Nickman477@gmail.com",
   phone: "727-307-8538",
-  linkedin: "https://www.linkedin.com/in/nikolla-nickolov-1a46a2290/",
+  linkedin: "https://www.linkedin.com/in/nikollanickolov/",
   resumeUrl: "/NIKOLLA_NICKOLOV_3.pdf",   // ✅ updated here
   headshot: "https://avatars.githubusercontent.com/u/9919?s=200",
   availability: "Open to Cybersecurity / SecOps / IT Ops roles (onsite/hybrid).",
