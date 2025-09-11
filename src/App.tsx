@@ -89,11 +89,17 @@ export default function App() {
             east-west and north-south traffic inspection.
           </p>
           <div className="project-buttons">
-            <button className="view-btn" onClick={() => toggleProject("honeypot")}>
+            <button
+              className="view-btn"
+              onClick={() => toggleProject("honeypot")}
+            >
               View Details
             </button>
             {activeProject === "honeypot" && (
-              <button className="close-btn" onClick={() => setActiveProject(null)}>
+              <button
+                className="close-btn"
+                onClick={() => setActiveProject(null)}
+              >
                 Close
               </button>
             )}
@@ -110,8 +116,9 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> Kibana dashboard showing Cowrie SSH brute-force attempts,
-                Suricata alerts, and attacker IP geolocation.
+                <strong>Screenshot explanation:</strong> Kibana dashboard
+                showing Cowrie SSH brute-force attempts, Suricata alerts, and
+                attacker IP geolocation.
               </p>
 
               <p className="muted">
@@ -126,42 +133,52 @@ export default function App() {
               </ul>
 
               <p className="muted">
-                <strong>Technical Execution:</strong> Configured Docker-based honeypots inside a DMZ,
-                set up port mirroring, captured SSH brute-force attempts, malware hashes, and payloads.
-                Logged attacker TTPs aligned with MITRE ATT&CK.
+                <strong>Technical Execution:</strong> Configured Docker-based
+                honeypots inside a DMZ, set up port mirroring, captured SSH
+                brute-force attempts, malware hashes, and payloads. Logged
+                attacker TTPs aligned with MITRE ATT&CK.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense, Ubuntu, Logstash,
-                Kibana, Docker, Elasticsearch.
+                <strong>Tools Used:</strong> Cowrie, Dionaea, Suricata, pfSense,
+                Ubuntu, Logstash, Kibana, Docker, Elasticsearch.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Real-time visibility into adversary behavior, centralized
-                log correlation via ELK, actionable SIEM alerts, and detection of lateral movement.
+                <strong>Objective:</strong> Real-time visibility into adversary
+                behavior, centralized log correlation via ELK, actionable SIEM
+                alerts, and detection of lateral movement.
               </p>
               <p className="muted">
-                <strong>Career & Learning Impact:</strong> Strengthened my ability to design segmented
-                network environments and analyze adversary behavior using SIEM platforms. Gained
-                practical experience with deception technology and improved detection engineering
-                skills directly applicable to SOC and threat hunting roles.
+                <strong>Career & Learning Impact:</strong> Strengthened my
+                ability to design segmented network environments and analyze
+                adversary behavior using SIEM platforms. Gained practical
+                experience with deception technology and improved detection
+                engineering skills directly applicable to SOC and threat hunting
+                roles.
               </p>
             </div>
           )}
         </div>
 
-        {/* Malicious URL + YouTube Scan Project */}
+        {/* Secure URL Scanner */}
         <div className="panel">
-          <h3>Unified Malicious URL & YouTube Safety Assessment Tool</h3>
+          <h3>Secure URL Scanner</h3>
           <p>
             Engineered a Python CLI application that integrates with the
             VirusTotal API and YouTube Data API v3 to validate URL legitimacy
             and classify URLs as safe, suspicious, or malicious.
           </p>
           <div className="project-buttons">
-            <button className="view-btn" onClick={() => toggleProject("urlscanner")}>
+            <button
+              className="view-btn"
+              onClick={() => toggleProject("urlscanner")}
+            >
               View Details
             </button>
             {activeProject === "urlscanner" && (
-              <button className="close-btn" onClick={() => setActiveProject(null)}>
+              <button
+                className="close-btn"
+                onClick={() => setActiveProject(null)}
+              >
                 Close
               </button>
             )}
@@ -178,8 +195,9 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> CLI scan of a suspicious URL flagged by VirusTotal
-                with detections, risky TLD, and suspicious keywords.
+                <strong>Screenshot explanation:</strong> CLI scan of a
+                suspicious URL flagged by VirusTotal with detections, risky TLD,
+                and suspicious keywords.
               </p>
 
               <img
@@ -192,8 +210,9 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> CLI scan of a benign YouTube link showing no detections,
-                normal channel metadata, and safe classification.
+                <strong>Screenshot explanation:</strong> CLI scan of a benign
+                YouTube link showing no detections, normal channel metadata, and
+                safe classification.
               </p>
 
               <p className="muted">
@@ -208,21 +227,25 @@ export default function App() {
               </ul>
 
               <p className="muted">
-                <strong>Technical Execution:</strong> Integrated VirusTotal and YouTube APIs, applied regex
-                validation and heuristics, and provided SOC analysts with automated link triage.
+                <strong>Technical Execution:</strong> Integrated VirusTotal and
+                YouTube APIs, applied regex validation and heuristics, and
+                provided SOC analysts with automated link triage.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, VirusTotal API, YouTube API, Regex, Requests, JSON.
+                <strong>Tools Used:</strong> Python, VirusTotal API, YouTube
+                API, Regex, Requests, JSON.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Provide SOC analysts a quick tool to vet URLs and YouTube links
-                for malicious indicators before escalation.
+                <strong>Objective:</strong> Provide SOC analysts a quick tool to
+                vet URLs and YouTube links for malicious indicators before
+                escalation.
               </p>
               <p className="muted">
-                <strong>Career & Learning Impact:</strong> Improved my Python automation and API integration
-                skills while learning how OSINT and reputation analysis support threat intelligence workflows.
-                Prepared me to build practical triage tools and sharpened my ability to spot phishing and
-                malicious link campaigns.
+                <strong>Career & Learning Impact:</strong> Improved my Python
+                automation and API integration skills while learning how OSINT
+                and reputation analysis support threat intelligence workflows.
+                Prepared me to build practical triage tools and sharpened my
+                ability to spot phishing and malicious link campaigns.
               </p>
             </div>
           )}
@@ -238,11 +261,17 @@ export default function App() {
             logs with SIEM platforms for real-time monitoring.
           </p>
           <div className="project-buttons">
-            <button className="view-btn" onClick={() => toggleProject("phishing")}>
+            <button
+              className="view-btn"
+              onClick={() => toggleProject("phishing")}
+            >
               View Details
             </button>
             {activeProject === "phishing" && (
-              <button className="close-btn" onClick={() => setActiveProject(null)}>
+              <button
+                className="close-btn"
+                onClick={() => setActiveProject(null)}
+              >
                 Close
               </button>
             )}
@@ -259,8 +288,9 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> API tested with cURL: spam and ham emails classified,
-                JSON shows prediction with signals like DMARC fail, homoglyph flag, and URL count.
+                <strong>Screenshot explanation:</strong> API tested with cURL:
+                spam and ham emails classified, JSON shows prediction with
+                signals like DMARC fail, homoglyph flag, and URL count.
               </p>
 
               <img
@@ -273,37 +303,51 @@ export default function App() {
                 }}
               />
               <p className="muted">
-                <strong>Screenshot explanation:</strong> Structured JSON logs (NDJSON) with request_id, IP,
-                subject, prediction, and all signals — SIEM-ready for ingestion.
+                <strong>Screenshot explanation:</strong> Structured JSON logs
+                (NDJSON) with request_id, IP, subject, prediction, and all
+                signals — SIEM-ready for ingestion.
               </p>
 
               <p className="muted">
                 <strong>Step by Step:</strong>
               </p>
               <ul className="muted">
-                <li>Parsed raw <code>.eml</code> files with mailparser.</li>
-                <li>Extracted signals: SPF/DKIM/DMARC, homoglyphs, punycode, risky attachments.</li>
-                <li>Vectorized subject/body with TF-IDF and combined features.</li>
+                <li>
+                  Parsed raw <code>.eml</code> files with mailparser.
+                </li>
+                <li>
+                  Extracted signals: SPF/DKIM/DMARC, homoglyphs, punycode, risky
+                  attachments.
+                </li>
+                <li>
+                  Vectorized subject/body with TF-IDF and combined features.
+                </li>
                 <li>Trained LinearSVC model and saved with joblib.</li>
                 <li>Served predictions via Flask API endpoint.</li>
                 <li>Logged structured JSON (NDJSON) for SIEM pipelines.</li>
               </ul>
 
               <p className="muted">
-                <strong>Technical Execution:</strong> Created end-to-end ML pipeline from parsing to serving,
-                combining security headers with text features, exposed via Flask, and integrated into SIEM workflows.
+                <strong>Technical Execution:</strong> Created end-to-end ML
+                pipeline from parsing to serving, combining security headers
+                with text features, exposed via Flask, and integrated into SIEM
+                workflows.
               </p>
               <p className="muted">
-                <strong>Tools Used:</strong> Python, Flask, scikit-learn, Pandas, Regex, ELK Stack.
+                <strong>Tools Used:</strong> Python, Flask, scikit-learn,
+                Pandas, Regex, ELK Stack.
               </p>
               <p className="muted">
-                <strong>Objective:</strong> Automate phishing detection with an explainable ML pipeline,
-                deliver SOC-ready API endpoints, and provide SIEM-friendly logs.
+                <strong>Objective:</strong> Automate phishing detection with an
+                explainable ML pipeline, deliver SOC-ready API endpoints, and
+                provide SIEM-friendly logs.
               </p>
               <p className="muted">
-                <strong>Career & Learning Impact:</strong> Reinforced my understanding of SPF/DKIM/DMARC and how
-                they factor into phishing detection. Building/serving the model taught me to bridge cybersecurity
-                and data science, while the SIEM logging improved my operational security skills for enterprise
+                <strong>Career & Learning Impact:</strong> Reinforced my
+                understanding of SPF/DKIM/DMARC and how they factor into
+                phishing detection. Building/serving the model taught me to
+                bridge cybersecurity and data science, while the SIEM logging
+                improved my operational security skills for enterprise
                 environments.
               </p>
             </div>
